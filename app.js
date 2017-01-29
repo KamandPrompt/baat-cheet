@@ -24,6 +24,10 @@ io.on('connection', function(socket) {
 		}
 	});
 
+	socket.on('msg', function(data){
+		io.sockets.emit('new message', data);
+	});
+
 	//When user disconnets remove user from users
 	socket.on('disconnect', function() {
 		var index = users.indexOf(socket.username);
