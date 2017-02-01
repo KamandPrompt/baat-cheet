@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+*{
+    margin: 0;
+    padding:0;
+}
+body{
+    font-family: 'roboto',sans-serif;
+    background: rgba(158, 158, 158, 0.13);
+}
+#navigation{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:7%;
+    background: #03a9f4;
+    box-shadow:0 0 10px #03a9f4;
+}
+.icon {
+    display: inline-block;
+
+    padding:5px;
+    cursor: pointer;
+    font-weight:500;
+}
+#toggler{
+    position: absolute;;
+    color: white;
+    top: 20%;
+    left:1.5%;
+}
+
+#username{
+    position: absolute;
+    top:25%;
+    color: #fff;
+    left:85%;
+    font-size:1.2vw;
+}
+#notif{
+    position: absolute;
+    color: white;
+    left:97%;
+    top:30%;
+}
+
+#chatroom{
+    position: absolute;
+    top:7%;
+    left:0;
+    width:100%;
+    height:7%;
+    font-size: .7vw;
+    color: #fff;
+    background: #313B45;
+}
+#chatroom >h1{
+    padding: 10px;
+    font-weight: 100;
+    display: inline-block;
+}
+#arrows{
+    position:absolute;
+    left:90%;
+    top:32%;
+    font-size: 1vw;
+}
+#container{
+    display: flex;
+    top: 14%;
+    left:15%;
+    z-index: -1;
+    position: absolute;
+    width:85%;
+    text-align: center;
+    height: auto;
+}
+#rooms{
+    width:20%;
+    height:100%;
+    filter :drop-shadow(0 0 2px rgba(0,0,0,0.2));
+    border-radius: 20px;
+    background-clip: padding-box;
+}
+.userIMG{
+    border-radius: 50%;
+    width:17%;
+    height:6%;
+}
+.room{
+    background: #E9EEF1;
+    padding: 10px;
+    text-align: left;
+}
+.active {
+    background: #fff;
+}
+
+.latestMessage{
+    font-weight:300;
+    position: relative;
+    bottom: 15px;
+    left:25%;
+}
+.roomName{
+    position: relative;
+    bottom: 15px;
+    left:5%;
+    font-weight: 500;
+}
+#preload{
+    display: none;
+}
+#uname{
+    margin-top: 20%;
+    width:40%;
+    padding:10px;
+}
+#lobby{
+    display: none;
+    background-color: #F6F6F8;
+    box-shadow:0 0 1px grey;
+    flex-direction: column;
+    text-align: left;
+
+    height: auto;
+    width: 40%;
+}
+#lobby > *{
+    flex-wrap:  nowrap;
+    flex : 1 100%;
+    height: auto;
+    margin-bottom: 5px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.me {
+    width: 100px;
+    padding:5px;
+    margin-right: 13px;
+    color: #fff;
+    background: #3297DF;
+    align-self: flex-end;
+    -webkit-border-radius: 10%;
+    border-radius: 13px;
+}
+.me:after{
+    content: '';
+    position: relative;
+    left:85%;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #3297DF;
+    display: inline-block;
+    top:2px;
+}
+.opp{
+    box-shadow:0 0 2px rgba(0,0,0,0.3);
+    margin-left: 13px;
+    background: #F2FAFD;
+    width: 100px;
+    padding:5px;
+    z-index: 1;
+    border-radius: 13px;
+    align-self: flex-start;
+}
+
+.opp:before{
+    content: '';
+    filter: drop-shadow(0 0 1px rgba(0,0,0,0.3));
+    z-index: -3;
+    position: relative;
+    top:2px;
+    right:15%;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #F2FAFD;
+    display: inline-block;
+}
+.type{
+    background: #fff;
+
+}

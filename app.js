@@ -2,10 +2,18 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
-
-app.get('/', function(req, res) {
-	res.sendFile(path.join(__dirname, 'index.html'));
+var bodyParser = require('body-parser');
+var index = require('./serve/index.js');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    'extended':false
+}));
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
+app.set('view options', {
+    layout: false
 });
+app.use('/',index);
 
 var users = [];
 
@@ -17,7 +25,7 @@ io.on('connection', function(socket) {
 			users.push(name.trim());
 			socket.emit('user set', name);
 			socket.username = name;
-		}	
+		}
 		//username taken
 		else {
 			socket.emit('user exists', name);

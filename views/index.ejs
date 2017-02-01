@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <title>Chat room</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Baat Cheet is an anonymous chat app">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style2.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+
+        function setUsername() {
+            socket.emit('set username', document.getElementById('username').value);
+        };
+        socket.on('user exists', function (data) {
+            document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
+        });
+        socket.on('user set', function (data) {
+            $("#user").fadeOut();
+            $("#after").fadeIn();
+            setTimeout(function(){
+                document.getElementById('after').innerHTML = 'Your username is ' + data;
+            }, 500);
+        });
+    </script>
+</head>
+<noscript>Javascript is disabled. Please download a javascript enabled browser.</noscript>
+<body>
+<div class="viewport">
+    <div id="user" class="container">
+        <h1>Baat Cheet</h1>
+        <input type="text" placeholder="Enter Username" id="userN" name="username">
+        <p id="error_response"></p>
+    </div>
+    <div id="after" class="container">
+    </div>
+</div>
+
+<div id="navigation">
+    <span id="opp">Other User</span>
+    <span id="username">Username</span>
+</div>
+<div id="lobby">
+
+    <ol class="chat">
+        <li class="other">
+            <div class="avatar"><img src="/user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>Hi!</p>
+                <p>Some message
+
+                </p>
+                <time>20:17</time>
+            </div>
+        </li>
+        <li class="self">
+            <div class="avatar"><img src="/user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>Hii.....</p>
+                <p>Another message
+
+                </p>
+
+                <time>20:18</time>
+            </div>
+        </li>
+        <li class="other">
+            <div class="avatar"><img src="user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>How is the app
+
+                </p>
+                <time>20:18</time>
+            </div>
+        </li>
+        <li class="self">
+            <div class="avatar"><img src="/user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>Incomplete. :p</p>
+
+                <time>20:18</time>
+            </div>
+        </li>
+        <li class="other">
+            <div class="avatar"><img src="/user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>
+                    lorem ipsum dolar sit amet
+                </p>
+                <time>20:18</time>
+            </div>
+        </li>
+        <li class="self">
+            <div class="avatar"><img src="user.png" draggable="false"/></div>
+            <div class="msg">
+                <p>Idea for the gui...</p>
+                <img src="/gui.jpg" draggable="false"/>
+                <time>20:19</time>
+            </div>
+        </li>
+
+    </ol>
+    <input class="textarea" type="text" placeholder="Type here!"/>
+    <div class="emojis"></div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#username").on("keypress",function(val){
+            if(val.which==13){
+                setUsername();
+//          $("#user").fadeOut();
+                //        $("#navigation").fadeIn();
+                //          $("#lobby").fadeIn();
+            }
+        });
+    });
+</script>
+</body>
+</html>
