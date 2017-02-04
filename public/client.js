@@ -13,8 +13,12 @@ socket.on('user exists', function (data) {
 });
 
 socket.on('user set', function (data) {
+    var date = new Date()
     $("#user").fadeOut();
     $(".wrapper").fadeIn();
+    $(".chat[data-chat='person1']").append("<div class='conversation-start'>\
+                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
+                                            </div>")
     socket.username = data;
 });
 
@@ -27,6 +31,7 @@ socket.on('user left', function(data) {
 });
 
 socket.on('Display Message', function(data) {
+    console.log(data);
     var today = new Date();
     var class_name;
     if(socket.username == data.user) {
@@ -35,15 +40,9 @@ socket.on('Display Message', function(data) {
     else {
         class_name = 'others'
     }
-    $('.chat').append("<div class=\"conversation-start\">\
-                <span>"+today.Date() +"</span>\
-            </div>\
-            <div class=\"bubble " + class_name + " \">\
-                "+data.msg+"\
-            </div>\
-            ");
-            $(".chat[data-chat=username").html(socket.username +  ":  " +data.msg);
-
-
+    $(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
+                            " + data.msg + "<br>\
+                            <span class='info'>" + data.user + "</span>\
+                       </div>")
 
 });
