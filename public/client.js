@@ -1,17 +1,21 @@
 var socket = io();
 
+//sets client username
 function setUsername() {
     socket.emit('set username', $('#userN').val());
 };
 
+//sends a message
 function sendMessage() {
     socket.emit('Message Request', $('#textarea').val());
 }
 
+//if server emits user exists, propmt for changing username
 socket.on('user exists', function (data) {
     document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
 });
 
+//if server emits user set, display rooms to user
 socket.on('user set', function (data) {
     var date = new Date()
     $("#user").fadeOut();
@@ -22,14 +26,17 @@ socket.on('user set', function (data) {
     socket.username = data;
 });
 
+//notifies users in room that someone joined
 socket.on('user joined', function(data) {
     $.notify(data + " just joined", "info");
 });
 
+//notifies users in room that someone left
 socket.on('user left', function(data) {
     $.notify(data + " just left", "error");
 });
 
+//displays message to users
 socket.on('Display Message', function(data) {
     console.log(data);
     var today = new Date();
