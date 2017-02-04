@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 router.get('/', function(req, res) {
     res.render('index', {
-        title : 'Chat room',
+        title : 'Baat Cheet',
     });
 });
 module.exports = router;
