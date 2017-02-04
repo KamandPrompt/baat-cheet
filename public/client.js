@@ -7,7 +7,9 @@ function setUsername() {
 
 //sends a message
 function sendMessage() {
-    socket.emit('Message Request', $('#textarea').val());
+    msg = $('#textarea').val(); 
+    msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    socket.emit('Message Request', msg);
 }
 
 //if server emits user exists, propmt for changing username
