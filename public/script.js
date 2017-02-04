@@ -14,8 +14,8 @@ $(document).ready(function(){
     })
 
 
-$('.chat[data-chat=person2]').addClass('active-chat');
-$('.person[data-chat=person2]').addClass('active');
+$('.chat[data-chat=person1]').addClass('active-chat');
+$('.person[data-chat=person1]').addClass('active');
 
 $('.left .person').mousedown(function(){
     if ($(this).hasClass('active')) {
