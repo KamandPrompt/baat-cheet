@@ -3,12 +3,7 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
-var bodyParser = require('body-parser');
 var index = require('./serve/index.js');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    'extended':false
-}));
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('view options', {

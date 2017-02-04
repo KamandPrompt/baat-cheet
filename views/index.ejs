@@ -1,78 +1,15 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html>
 <head>
-    <title>Chat room</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Baat Cheet is an anonymous chat app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
     <link rel="stylesheet" href="/style2.css">
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        var socket = io();
-
-        function setUsername() {
-            socket.emit('set username', $('#userN').val());
-        };
-
-        function sendMessage() {
-            socket.emit('Message Request', $('#textarea').val());
-        }
-
-        socket.on('user exists', function (data) {
-            document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
-        });
-
-        socket.on('user set', function (data) {
-            $("#user").fadeOut();
-            $("#lobby").fadeIn();
-            socket.username = data;
-            // setTimeout(function(){
-            //     document.getElementById('after').innerHTML = 'Your username is ' + data;
-            // }, 500);
-        });
-
-        socket.on('user joined', function(data) {
-            $.notify(data + " just joined", "info");
-        });
-
-        socket.on('user left', function(data) {
-            $.notify(data + " just left", "error");
-        });
-
-        socket.on('Display Message', function(data) {
-            var today = new Date();
-            console.log(data);
-            var class_name;
-            if(socket.username == data.user) {
-                class_name = 'self';
-            }
-            else {
-                class_name = 'other'
-            }
-            // may be a better approach
-            // var li = $('<li>')
-            //     .attr('class', class_name)
-            //     .append($'<div>')
-            //         .attr('class', 'avatar')
-            //         .append($'<img>')
-            //             .attr({src: '/user.png', draggabe:'false'})
-            $('ol').append("<li class= " + class_name + ">\
-                                <div class='avatar'><img src='/user.png' draggable='false'/></div>\
-                                <div class='msg'>\
-                                    <p>" + data.msg + "</p>\
-                                    <time>" + today.getHours() + ":" + today.getMinutes() +"</time>\
-                                </div>\
-                            </li>");
-            $('html, body').animate({scrollTop: $('#lobby').height()}, 1000);
-
-        });
-    </script>
-</head>
+    <script src="/script.js"></script>
+    </head>
 <noscript>Javascript is disabled. Please download a javascript enabled browser.</noscript>
 <body>
 <div class="viewport">
@@ -109,7 +46,7 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/notify.min.js"></script>
-<script type="text/javascript">
+<script>
     $(document).ready(function(){
         $("#userN").on("keypress", function(val) {
             if(val.which == 13) {
