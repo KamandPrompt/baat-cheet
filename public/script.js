@@ -14,6 +14,20 @@ $(document).ready(function(){
     })
 
 
+function newRoom(){
+    $(".wrapper").fadeOut();
+    $("#room").fadeIn();
+};
+
+function submitRoom(){
+    createRoom(); // used in client.js to pass details to app.js
+    //copy the following to the createRoom if creating room is successfull
+    $("#room").fadeOut();
+    $(".wrapper").fadeIn();
+    $('#roomName').val("");
+    $('#description').val("");  
+};
+
 $('.chat[data-chat=person1]').addClass('active-chat');
 $('.person[data-chat=person1]').addClass('active');
 
