@@ -56,7 +56,6 @@ io.on('connection', function(socket) {
 
 		//if message is valid
 		if(data.msg) {
-
 			//display message to all clients in room including sender
 			io.sockets["in"](data.room).emit('Display Message', {msg: data.msg, user: socket.username, room: data.room});
 		}
@@ -85,6 +84,7 @@ io.on('connection', function(socket) {
 
 		//room not taken so insert into room array 
 		rooms.push([data.room_name, 1]);
+		socket.join(data.room_name);
 		io.sockets.emit('room created', data);
 		
 	});
@@ -146,7 +146,7 @@ io.on('connection', function(socket) {
 
 				//if number of users become 0 in some room, destroy/delete that room
 				if(rooms[i][1] == 0 && rooms[i][0] != 'lobby') {
-					io.sockets.emit('destroy room', room);
+					io.sockets.emit('destroy room', rooms[i][0]);
 					rooms.splice(i, 1);
 				}
 			}

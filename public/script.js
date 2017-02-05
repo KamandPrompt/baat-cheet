@@ -8,7 +8,7 @@ $(document).ready(function(){
         $('#textarea').on("keypress", function(val) {
             if(val.which == 13) {
                 sendMessage();
-                $('#textarea').val("");
+                $(this).val("");
             }
         });
     })
@@ -21,26 +21,18 @@ function newRoom(){
 
 function submitRoom(){
     createRoom(); // used in client.js to pass details to app.js
-    //copy the following to the createRoom if creating room is successfull
-    // $("#room").fadeOut();
-    // $(".wrapper").fadeIn();
-    // $('#roomName').val("");
-    // $('#description').val("");  
+};
+
+function showRoom(name){
+    var current = $(".active").attr("id");
+    $("#"+current+"-msg").css("display", "none"); 
+    $(".active").removeClass('active');
+    $(".active-area").removeClass('active-area');
+    var room = name.id;
+    $("#"+room).addClass('active');
+    $("#"+room+"-msg").css("display", "inherit");
+    $("#"+room+"-msg").find("#textarea").addClass('active-area');
 };
 
 $('.chat[data-chat=person1]').addClass('active-chat');
 $('.person[data-chat=person1]').addClass('active');
-
-$('.left .person').mousedown(function(){
-    if ($(this).hasClass('active')) {
-        return false;
-    } else {
-        var findChat = $(this).attr('data-chat');
-        var personName = $(this).find('.name').text();
-        $('.right .top .name').html(personName);
-        $('.chat').removeClass('active-chat');
-        $('.left .person').removeClass('active');
-        $(this).addClass('active');
-        $('.chat[data-chat = '+findChat+']').addClass('active-chat');
-    }
-});

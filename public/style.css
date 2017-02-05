@@ -251,23 +251,24 @@ body {
   display: -webkit-flex;
   display: flex;
 }
-.container .right .write {
+ .write {
+  z-index: 10;
   position: absolute;
   bottom: 29px;
-  left: 30px;
+  left: 40%;
   height: 42px;
   padding-left: 8px;
   border: 1px solid #e6e6e6;
   background-color: #eceff1;
-  width: -moz-calc(100% - 58px);
-  width: -webkit-calc(100% - 58px);
-  width: -o-calc(100% - 58px);
-  width: calc(100% - 58px);
+  width: -moz-calc(55%);
+  width: -webkit-calc(55%);
+  width: -o-calc(55%);
+  width: calc(55% );
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
-.container .right .write input {
+.write input {
   font-size: 16px;
   float: left;
   width: 347px;
@@ -276,11 +277,11 @@ body {
   color: #1a1a1a;
   border: 0;
   outline: none;
-  background-color: #eceff1;
+  background-color: transparent;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }
-.container .right .write .write-link.attach:before {
+.write .write-link.attach:before {
   display: inline-block;
   float: left;
   width: 20px;
@@ -290,7 +291,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-.container .right .write .write-link.smiley:before {
+.write .write-link.smiley:before {
   display: inline-block;
   float: left;
   width: 20px;
@@ -300,7 +301,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-.container .right .write .write-link.send:before {
+.write .write-link.send:before {
   display: inline-block;
   float: left;
   width: 20px;

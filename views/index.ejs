@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="/style.css">
     <script src="/socket.io/socket.io.js"></script>
     <script src="/client.js"></script>
-    </head>
+</head>
 <body>
-<div id="user">
+    <div id="user">
       <div>
         <h1 id="bc"><%= title %></h1>
         <input type="text" placeholder="Enter Username" id="userN" name="username">
@@ -27,24 +27,23 @@
                 <a href="javascript:;" class="search"></a>
             </div>
             <ul class="people">
-                <li class="person" data-chat="person1">
+                <li class="person" data-chat="person1" id="lobby" onclick="showRoom(this)">
 
                     <span class="name">Lobby</span><br>
                     <span class="time">2:09 PM</span>
-                    <span class="preview">What should we display here....</span>
+                    <span class="preview">Central Lobby</span>
                 </li>
             </ul>
         </div>
-        <div class="right">
-            <div class="top"><center><span>Welcome to <span class="name">Baat-cheet</span>, an anonymous chat site!</span></center></div>
+        <div class="right" id="lobby-msg">
+            <div class="top"><center><span>Lobby Room</span></center></div>
             <div class="chat" data-chat="person1"></div>
-
-            <div class="write">
-                <a href="javascript:;" class="write-link attach"></a>
-                <input type="text" id="textarea"/>
-                <a href="javascript:;" class="write-link smiley"></a>
-                <a href="javascript:;" class="write-link send"></a>
-            </div>
+        </div>
+        <div class="write">
+            <a href="javascript:;" class="write-link attach"></a>
+            <input type="text" id="textarea" data-active="lobby"/>
+            <a href="javascript:;" class="write-link smiley"></a>
+            <a href="javascript:;" class="write-link send"></a>
         </div>
     </div>
     <button onclick="newRoom()" id="newRoom">New Room</button>
@@ -54,7 +53,7 @@
     <div>
         <input type="text" placeholder="Room Name" id="roomName" name="roomName"><br>
         <textarea placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
-    	<button onclick="submitRoom()">Submit</button>
+        <button onclick="submitRoom()">Submit</button>
     </div>
     <span id='roomError'></span>
 </div>

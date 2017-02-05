@@ -8,12 +8,15 @@ function setUsername() {
 //sends a message
 function sendMessage() {
     msg = $('#textarea').val(); 
+    //alert(msg);
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    socket.emit('Message Request', {msg: msg, room: 'lobby'});
+    room_name = $(".active").attr("id");
+    socket.emit('Message Request', {msg: msg, room: room_name});
 }
 
 //creates a room
 function createRoom() {
+    if($("#roomName").val()=='') return ; 
     socket.emit('create room', {room_name: $('#roomName').val(), description: $('#description').val()});
 }
 
@@ -35,17 +38,17 @@ socket.on('user set', function (data) {
 
 //notifies users in room that someone joined
 socket.on('user joined', function(data) {
-    $.notify(data + " just joined", "info");
+    $.notify(data.username + " just joined", "info");
 });
 
 //notifies users in room that someone left
 socket.on('user left', function(data) {
-    $.notify(data + " just left", "error");
+    $.notify(data.username + " just left", "error");
 });
 
 //displays message to users
 socket.on('Display Message', function(data) {
-    console.log(data);
+    console.log(data.room);
     var today = new Date();
     var class_name;
     if(socket.username == data.user) {
@@ -54,7 +57,7 @@ socket.on('Display Message', function(data) {
     else {
         class_name = 'others'
     }
-    $(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
+    $("#"+data.room+"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
                             " + data.msg + "<br>\
                             <span class='info'>" + data.user + "</span>\
                        </div>")
@@ -68,11 +71,19 @@ socket.on('room exists', function(data) {
 
 //displays room to the users
 socket.on('room created', function(data) {
-    $('.people').append("<li class='person' data-chat=" + data.room_name + "\
+    var date = new Date();
+    $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                             <span class='name'>" + data.room_name + "</span><br>\
                             <span class='time'>2:09 PM</span>\
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
+    $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' style='display:none;'>\
+            <div class='top'><center><span>" + data.room_name + " Room</span></center></div>\
+                            <div class='chat active-chat' data-chat='person1'></div>\
+        </div>");
+     $("#"+data.room_name+"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
+                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
+                                            </div>");
     $("#room").fadeOut();
     $(".wrapper").fadeIn();
     $('#roomName').val("");
