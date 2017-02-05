@@ -9,7 +9,12 @@ function setUsername() {
 function sendMessage() {
     msg = $('#textarea').val(); 
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    socket.emit('Message Request', msg);
+    socket.emit('Message Request', {msg: msg, room: 'lobby'});
+}
+
+//creates a room
+function createRoom() {
+    socket.emit('create room', {room_name: $('#roomName').val(), description: $('#description').val()});
 }
 
 //if server emits user exists, propmt for changing username
@@ -24,7 +29,7 @@ socket.on('user set', function (data) {
     $(".wrapper").fadeIn();
     $(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                            </div>")
+                                            </div>");
     socket.username = data;
 });
 
@@ -54,4 +59,22 @@ socket.on('Display Message', function(data) {
                             <span class='info'>" + data.user + "</span>\
                        </div>")
 
+});
+
+//if room exists, then prompt for another room name
+socket.on('room exists', function(data) {
+    $('#roomError').text(data + ' room already exists! Try another room name');
+});
+
+//displays room to the users
+socket.on('room created', function(data) {
+    $('.people').append("<li class='person' data-chat=" + data.room_name + "\
+                            <span class='name'>" + data.room_name + "</span><br>\
+                            <span class='time'>2:09 PM</span>\
+                            <span class='preview'>" + data.description + "</span>\
+                        </li>");
+    $("#room").fadeOut();
+    $(".wrapper").fadeIn();
+    $('#roomName').val("");
+    $('#description').val(""); 
 });
