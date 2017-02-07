@@ -27,11 +27,19 @@ function showRoom(name){
     var current = $(".active").attr("id");
     $("#"+current+"-msg").css("display", "none"); 
     $(".active").removeClass('active');
-    $(".active-area").removeClass('active-area');
     var room = name.id;
     $("#"+room).addClass('active');
     $("#"+room+"-msg").css("display", "inherit");
-    $("#"+room+"-msg").find("#textarea").addClass('active-area');
+    if($("#"+room+"-msg").attr("data-joined") == 0){
+        $(".error").css("display","inherit");
+        $(".error").html("<span id='error'>You haven't joined this room yet. <input type='button' onclick='joinRoom(" + room + ")' value='Join' id='joinBtn'/> to see the conversation.</span>");
+        $("#"+room+"-msg,.write").hide();
+    }else {
+        $(".error").hide();
+        $(".write").css("display","inital");
+    }
+    
+
 };
 
 $('.chat[data-chat=person1]').addClass('active-chat');

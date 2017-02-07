@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
-    <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="/client.js"></script>
 </head>
 <body>
@@ -27,24 +27,28 @@
                 <a href="javascript:;" class="search"></a>
             </div>
             <ul class="people">
-                <li class="person" data-chat="person1" id="lobby" onclick="showRoom(this)">
-
+                <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
                     <span class="name">Lobby</span><br>
                     <span class="time">2:09 PM</span>
                     <span class="preview">Central Lobby</span>
                 </li>
             </ul>
         </div>
-        <div class="right" id="lobby-msg">
-            <div class="top"><center><span>Lobby Room</span></center></div>
-            <div class="chat" data-chat="person1"></div>
+        <div class="right" id="lobby-msg" data-joined="1">
+            
+            <div class="top" data-chat="person1"><center><span>Lobby Room</span></center></div>
+            <div class="chat" data-chat="person1" >
+                
+            </div>
         </div>
-        <div class="write">
+        <div class="error"></div>
+        <div class="write" id="write">
             <a href="javascript:;" class="write-link attach"></a>
             <input type="text" id="textarea" data-active="lobby"/>
             <a href="javascript:;" class="write-link smiley"></a>
             <a href="javascript:;" class="write-link send"></a>
         </div>
+        
     </div>
     <button onclick="newRoom()" id="newRoom">New Room</button>
 </div>
