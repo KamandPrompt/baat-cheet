@@ -96,7 +96,7 @@ socket.on('room created self', function(data) {
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
     $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
-            <div class='top'><center><span>" + data.room_name + " Room</span></center></div>\
+            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
      $("#"+data.room_name+"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
@@ -116,8 +116,8 @@ socket.on('room created other', function(data) {
                             <span class='time'>2:09 PM</span>\
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
-    $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='0' style='display:none;'>\
-            <div class='top'><center><span>" + data.room_name + " Room</span></center></div>\
+    $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
+            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
      $("#"+data.room_name+"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\

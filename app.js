@@ -131,7 +131,8 @@ io.on('connection', function(socket) {
 		}
 
 		//notify other users in room that someone left
-		socket["to"](room).broadcast.emit('user left room', {username: socket.username, room: room});
+		socket["to"](room).broadcast.emit('user left room', {username: socket.username, room: room.name});
+		console.log(socket.username + " left the room "+room.name);
 	});
 
 	//When user disconnets remove user from users
