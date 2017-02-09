@@ -54,14 +54,22 @@ socket.on('user set', function (data) {
     socket.username = data;
 });
 
-//notifies users in room that someone joined
+//notifies users that someone joined baat-cheet
 socket.on('user joined', function(data) {
     $.notify(data.username + " just joined", "info");
 });
 
-//notifies users in room that someone left
+//notifies users that someone left
 socket.on('user left', function(data) {
     $.notify(data.username + " just left", "error");
+});
+
+
+//notifies users that someone joined a room
+socket.on('user join', function(data) {
+    if(data.room!="lobby"){
+        $.notify(data.username + " just joined " + data.room + " room!", "info");
+    }
 });
 
 //displays message to users

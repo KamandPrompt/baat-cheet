@@ -47,6 +47,10 @@ io.on('connection', function(socket) {
 			//notify all users (except sender) that user joined
 			socket.broadcast.emit('user joined', {username: name, num_users: rooms[0][1]});
 			socket.username = name;
+
+			for (var i = 1; i < rooms.length; i++) {
+				socket.emit('room created other', {room_name: rooms[i][0]});
+			}
 		}
 		//if username is taken
 		else {
@@ -112,7 +116,7 @@ io.on('connection', function(socket) {
 
 	//When user requests to leave the room
 	socket.on('leave room', function(room) {
-		socket.leave(room);
+		socket.leave(room.name);
 
 		var num_rooms = rooms.length;
 
