@@ -47,6 +47,7 @@ socket.on('user exists', function (data) {
 socket.on('user set', function (data) {
     var date = new Date()
     $("#user").fadeOut();
+    $("body").css("background-color","#f8f8f8");
     $(".wrapper").fadeIn();
     $(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
