@@ -15,9 +15,12 @@ $(document).ready(function(){
 
 
 function newRoom(){
-    $(".wrapper").fadeOut();
-    $("#room").fadeIn();
+    $("#room").css("display","block");
 };
+
+$("#cancel").click(function() {
+$(this).parent().parent().hide();
+});
 
 function submitRoom(){
     createRoom(); // used in client.js to pass details to app.js
