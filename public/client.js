@@ -137,3 +137,22 @@ socket.on('room created other', function(data) {
     $('#roomName').val("");
     $('#description').val(""); 
 });
+
+//destroys room because there are no users in it
+socket.on('destroy room', function(data) {
+    //redirect user to lobby if the active room is to be destroyed
+    if($(".active").attr("id") == data) {
+        $("#lobby").addClass('active');
+        $("#lobby-msg").css("display", "inherit");
+    }
+
+    $(".error").hide();
+    $(".write").css("display","initial");
+    $('#' + data).remove();
+    $('#' + data + '-msg').remove();
+});
+
+//notifies when user leaves the room
+socket.on('user left room', function(data) {
+    $.notify(data.username + " just left room " + data.room, "error");
+});

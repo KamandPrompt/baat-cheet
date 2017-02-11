@@ -129,13 +129,14 @@ io.on('connection', function(socket) {
 				if(rooms[i].num_users == 0) {
 					io.sockets.emit('destroy room', room.name);
 					rooms.splice(i, 1);
+					return;
 				}
 				break;
 			}
 		}
 
 		//notify other users in room that someone left
-		socket["to"](room).broadcast.emit('user left room', {username: socket.username, room: room.name});
+		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name});
 		console.log(socket.username + " left the room "+room.name);
 	});
 
