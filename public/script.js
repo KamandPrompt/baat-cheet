@@ -36,7 +36,7 @@ function showRoom(name){
         $("#"+room+"-msg,.write").hide();
     }else {
         $(".error").hide();
-        $(".write").css("display","inital");
+        $(".write").css("display","initial");
     }
     
 
