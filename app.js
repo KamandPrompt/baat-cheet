@@ -21,7 +21,7 @@ app.use(function(err,req,res,next){
 var users = [];
 
 //list of rooms and number of users in particular room (default: lobby)
-var rooms = [['lobby', 0]];	
+var rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0}];	
 
 io.on('connection', function(socket) {
 
@@ -42,14 +42,14 @@ io.on('connection', function(socket) {
 
 			//by default, user joins lobby
 			socket.join('lobby');
-			rooms[0][1]++;
+			rooms[0].num_users++;
 
 			//notify all users (except sender) that user joined
-			socket.broadcast.emit('user joined', {username: name, num_users: rooms[0][1]});
+			socket.broadcast.emit('user joined', {username: name, num_users: rooms[0].num_users});
 			socket.username = name;
 
 			for (var i = 1; i < rooms.length; i++) {
-				socket.emit('room created other', {room_name: rooms[i][0]});
+				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description});
 			}
 		}
 		//if username is taken
@@ -83,14 +83,14 @@ io.on('connection', function(socket) {
 		for(var i = 0; i<num_rooms; ++i) {
 
 			//if room name is taken
-			if(rooms[i][0] == data.room_name) {
+			if(rooms[i].name == data.room_name) {
 				socket.emit('room exists', data.room_name);
 				return;
 			}
 		}
 
 		//room not taken so insert into room array 
-		rooms.push([data.room_name, 1]);
+		rooms.push({name: data.room_name, description: data.description, num_users: 1});
 		socket.join(data.room_name);
 		socket.emit('room created self', data);
 		socket.broadcast.emit('room created other', data);		
@@ -104,8 +104,8 @@ io.on('connection', function(socket) {
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
-			if(room.name == rooms[i][0]) {
-				rooms[i][1]++;
+			if(room.name == rooms[i].name) {
+				rooms[i].num_users++;
 				break;
 			}
 		}
@@ -122,11 +122,11 @@ io.on('connection', function(socket) {
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
-			if(room.name == rooms[i][0]) {
-				rooms[i][1]--;
+			if(room.name == rooms[i].name) {
+				rooms[i].num_users--;
 
 				//if users become 0, destroy/delete the room
-				if(rooms[i][1] == 0) {
+				if(rooms[i].num_users == 0) {
 					io.sockets.emit('destroy room', room.name);
 					rooms.splice(i, 1);
 				}
@@ -146,15 +146,15 @@ io.on('connection', function(socket) {
 
 		//update number of users in rooms 
 		for(var i = 0; i < num_rooms; i++) {
-			if(socket.rooms[rooms[i][0]]) {	
-				rooms[i][1]--;
+			if(socket.rooms[rooms[i].name]) {	
+				rooms[i].num_users--;
 
 				//notify other users in room that user left
-				socket["to"](rooms[i][0]).broadcast.emit('user left', {username: socket.username, room: rooms[i][0]});
+				socket["to"](rooms[i].name).broadcast.emit('user left', {username: socket.username, room: rooms[i].name});
 
 				//if number of users become 0 in some room, destroy/delete that room
-				if(rooms[i][1] == 0 && rooms[i][0] != 'lobby') {
-					io.sockets.emit('destroy room', rooms[i][0]);
+				if(rooms[i].num_users == 0 && rooms[i].name != 'lobby') {
+					io.sockets.emit('destroy room', rooms[i].name);
 					rooms.splice(i, 1);
 				}
 			}
