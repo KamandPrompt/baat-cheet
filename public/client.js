@@ -89,6 +89,9 @@ socket.on('Display Message', function(data) {
                             <span class='info'>" + data.user + "</span>\
                        </div>");
 
+    var height = $("#"+$(".active").attr("id")+"-msg").children(".chat")[0].scrollHeight;
+    $("#"+$(".active").attr("id")+"-msg").children(".chat").scrollTop(height);
+
 });
 
 //if room exists, then prompt for another room name

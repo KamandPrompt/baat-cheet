@@ -258,19 +258,23 @@ body {
 .container .right .chat {
   position: relative;
   display: none;
-  overflow: hidden;
+  overflow: auto;
   padding: 0 35px 92px;
+  padding-bottom: 0; 
   border-width: 1px 1px 1px 0;
   border-style: solid;
+  border-bottom: none;
   border-color: #e6e6e6;
-  height: -moz-calc(100% - 48px);
-  height: -webkit-calc(100% - 48px);
-  height: -o-calc(100% - 48px);
-  height: calc(100% - 48px);
-  -webkit-justify-content: flex-end;
-  justify-content: flex-end;
+  height: -moz-calc(90% - 70px);
+  height: -webkit-calc(90% - 70px);
+  height: -o-calc(90% - 70px);
+  height: calc(90% - 70px);
+  flex-flow: column nowrap;
   -webkit-flex-direction: column;
   flex-direction: column;
+}
+.container .right .chat > :first-child{
+  margin-top: auto !important;
 }
 .container .right .chat.active-chat {
   display: block;
