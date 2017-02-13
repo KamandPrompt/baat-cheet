@@ -19,7 +19,7 @@ function newRoom(){
 };
 
 $("#cancel").click(function() {
-$(this).parent().parent().hide();
+    $(this).parent().parent().hide();
 });
 
 function submitRoom(){
@@ -27,16 +27,17 @@ function submitRoom(){
 };
 
 function showRoom(name){
-    var current = $(".active").attr("id");
-    $("#"+current+"-msg").css("display", "none"); 
+    var current_room_id = convertIntoId($(".active").attr("id"));
+    $("#"+ current_room_id +"-msg").css("display", "none"); 
     $(".active").removeClass('active');
     var room = name.id;
-    $("#"+room).addClass('active');
-    $("#"+room+"-msg").css("display", "inherit");
-    if($("#"+room+"-msg").attr("data-joined") == 0){
+    var room_id = convertIntoId(room);
+    $("#" + room_id).addClass('active');
+    $("#" + room_id + "-msg").css("display", "inherit");
+    if($("#" + room_id + "-msg").attr("data-joined") == 0){
         $(".error").css("display","inherit");
-        $(".error").html("<span id='error'>You haven't joined this room yet. <input type='button' onclick='joinRoom(" + room + ")' value='Join' id='joinBtn'/> to see the conversation.</span>");
-        $("#"+room+"-msg,.write").hide();
+        $(".error").html('<span id="error">You havent joined this room yet. <input type="button" onclick="joinRoom(\'' + name.id + '\')" value="Join" id="joinBtn"/> to see the conversation.</span>');
+        $("#" + room_id + "-msg,.write").hide();
     }else {
         $(".error").hide();
         $(".write").css("display","initial");

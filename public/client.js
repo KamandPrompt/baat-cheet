@@ -20,22 +20,33 @@ function createRoom() {
     socket.emit('create room', {room_name: $('#roomName').val(), description: $('#description').val()});
 }
 
+//requests server to join a room
 function joinRoom(room){
     //if(room == '') return ;
-    console.log("request to join" + room.id);
-    socket.emit('join room', {name:room.id} );
+    console.log(room);
+    var room_id = convertIntoId(room);
+    socket.emit('join room', {name:room} );
     $(".error").hide();
-    $("#"+room.id+"-msg").attr("data-joined",1);
-    $("#"+room.id+"-msg,.write").show();
+    $("#" + room_id + "-msg").attr("data-joined",1);
+    $("#" + room_id + "-msg,.write").show();
 }
+
+//requests server to leave a room
 function leaveRoom(room){
     //if(room == '') return ; 
+    console.log(room);
+    var room_id = convertIntoId(room.id);
     socket.emit('leave room', {name:room.id} );
-    $(".error").html("<span id='error'>You haven't joined this room yet. <input type='button' onclick='joinRoom( " + room.id + " )' value='Join' id='joinBtn'/> to see the conversation.</span>");
+    $(".error").html('<span id="error">You havent joined this room yet. <button onclick="joinRoom( \'' + room.id + '\' )" id="joinBtn">Join<Button/> to see the conversation.</span>');
     
-    $("#"+room.id+"-msg").attr("data-joined",0);
-    $("#"+room.id+"-msg,.write").hide();
+    $("#" + room_id + "-msg").attr("data-joined",0);
+    $("#" + room_id + "-msg,.write").hide();
     $(".error").show();
+}
+
+//For handling meta-characters in jquery
+function convertIntoId(name) {
+    return name.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^{|}~ ]/g, "\\$&");
 }
 
 //if server emits user exists, propmt for changing username
@@ -84,13 +95,14 @@ socket.on('Display Message', function(data) {
         class_name = 'others'
     }
     console.log("recieve for room" + data.room);
-    $("#"+data.room+"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
+    var room_id = convertIntoId(data.room);
+    $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
                             " + data.msg + "<br>\
                             <span class='info'>" + data.user + "</span>\
                        </div>");
-
-    var height = $("#"+$(".active").attr("id")+"-msg").children(".chat")[0].scrollHeight;
-    $("#"+$(".active").attr("id")+"-msg").children(".chat").scrollTop(height);
+    var room_id = convertIntoId($(".active").attr("id"));
+    var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
+    $("#" + room_id + "-msg").children(".chat").scrollTop(height);
 
 });
 
@@ -102,6 +114,7 @@ socket.on('room exists', function(data) {
 //displays room to the creator
 socket.on('room created self', function(data) {
     var date = new Date();
+    var room_id = convertIntoId(data.room_name);
     $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                             <span class='name'>" + data.room_name + "</span><br>\
                             <span class='time'>2:09 PM</span>\
@@ -111,7 +124,7 @@ socket.on('room created self', function(data) {
             <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
-     $("#"+data.room_name+"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
+    $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
                                             </div>");
     $("#room").fadeOut();
@@ -123,6 +136,7 @@ socket.on('room created self', function(data) {
 //displays room to the others
 socket.on('room created other', function(data) {
     var date = new Date();
+    var room_id = convertIntoId(data.room_name);
     $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                             <span class='name'>" + data.room_name + "</span><br>\
                             <span class='time'>2:09 PM</span>\
@@ -132,7 +146,7 @@ socket.on('room created other', function(data) {
             <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
-     $("#"+data.room_name+"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
+     $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
                                             </div>");
     $("#room").fadeOut();
@@ -143,6 +157,7 @@ socket.on('room created other', function(data) {
 
 //destroys room because there are no users in it
 socket.on('destroy room', function(data) {
+
     //redirect user to lobby if the active room is to be destroyed
     if($(".active").attr("id") == data) {
         $("#lobby").addClass('active');
@@ -151,8 +166,10 @@ socket.on('destroy room', function(data) {
 
     $(".error").hide();
     $(".write").css("display","initial");
-    $('#' + data).remove();
-    $('#' + data + '-msg').remove();
+
+    var room_id = convertIntoId(data);
+    $('#' + room_id).remove();
+    $('#' + room_id + '-msg').remove();
 });
 
 //notifies when user leaves the room
