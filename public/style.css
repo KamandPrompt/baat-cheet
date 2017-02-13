@@ -22,6 +22,7 @@ li{
   margin: auto;
 }
 #userN{
+  display: none;
 	background-color: transparent;
   max-width: 700px;
   position: relative;
@@ -68,15 +69,16 @@ body {
   text-rendering: optimizeLegibility;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
+  overflow-y: hidden;
   background-repeat: none;
 }
 
 .wrapper {
   display: none;
-  position: relative;
+  position: absolute;
   left: 50%;
-  width: 1000px;
-  height: 800px;
+  width: 99%;
+  height: 100%;
   -moz-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   -webkit-transform: translate(-50%, 0);
@@ -84,11 +86,11 @@ body {
 }
 
 .container {
-  position: relative;
-  top: 50%;
+  position: absolute;
+  top: 48%;
   left: 50%;
-  width: 80%;
-  height: 75%;
+  width: 100%;
+  height: 99%;
   background-color: #fff;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
@@ -124,7 +126,7 @@ body {
 }
 .container .left input {
   float: left;
-  width: 188px;
+  width: 60%;
   height: 42px;
   padding: 0 15px;
   border: 1px solid #e6e6e6;
@@ -290,10 +292,10 @@ body {
   padding-left: 8px;
   border: 1px solid #e6e6e6;
   background-color: #eceff1;
-  width: -moz-calc(55%);
-  width: -webkit-calc(55%);
-  width: -o-calc(55%);
-  width: calc(55% );
+  width: -moz-calc(57%);
+  width: -webkit-calc(57%);
+  width: -o-calc(57%);
+  width: calc(57% );
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
@@ -301,7 +303,7 @@ body {
 .write input {
   font-size: 16px;
   float: left;
-  width: 347px;
+  width: 87%;
   height: 40px;
   padding: 0 10px;
   color: #1a1a1a;
@@ -444,8 +446,9 @@ body {
   right: 0;
 }
 #newRoom, #submit, #cancel{
-  margin-top: 6%;
-  font-size: 1em;
+  margin-top: 1.5%;
+  margin-left: 2%;
+  font-size: 1vw;
   padding: 1%;
   color: #1f4e9b;
   background: rgba(0,0,0,0);

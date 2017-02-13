@@ -1,8 +1,8 @@
 var socket = io();
 
 //sets client username
-function setUsername() {
-    socket.emit('set username', $('#userN').val());
+function setUsername(username) {
+    socket.emit('set username', username);
 };
 
 //sends a message
