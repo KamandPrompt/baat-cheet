@@ -137,7 +137,6 @@ io.on('connection', function(socket) {
 
 		//notify other users in room that someone left
 		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name});
-		console.log(socket.username + " left the room "+room.name);
 	});
 
 	//When user disconnets remove user from users
@@ -151,7 +150,7 @@ io.on('connection', function(socket) {
 				rooms[i].num_users--;
 
 				//notify other users in room that user left
-				socket["to"](rooms[i].name).broadcast.emit('user left', {username: socket.username, room: rooms[i].name});
+				//socket["to"](rooms[i].name).broadcast.emit('user left room', {username: socket.username, room: rooms[i].name});
 
 				//if number of users become 0 in some room, destroy/delete that room
 				if(rooms[i].num_users == 0 && rooms[i].name != 'lobby') {
@@ -161,6 +160,8 @@ io.on('connection', function(socket) {
 			}
 		}
 
+		socket.broadcast.emit('user left', {username: socket.username});
+			
 		//remove username from users array
 		var index = users.indexOf(socket.username);
 		if(index != -1) {

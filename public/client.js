@@ -1,4 +1,5 @@
 var socket = io();
+var username;
 
 //sets client username
 function setUsername() {
@@ -22,8 +23,6 @@ function createRoom() {
 
 //requests server to join a room
 function joinRoom(room){
-    //if(room == '') return ;
-    console.log(room);
     var room_id = convertIntoId(room);
     socket.emit('join room', {name:room} );
     $(".error").hide();
@@ -33,9 +32,7 @@ function joinRoom(room){
 
 //requests server to leave a room
 function leaveRoom(room){
-    console.log(room);
     var room_id = convertIntoId(room);
-    console.log('asdf');
     socket.emit('leave room', {name:room} );
     $(".error").html('<span id="error">You havent joined this room yet. <button onclick="joinRoom( \'' + room + '\' )" id="joinBtn">Join<Button/> to see the conversation.</span>');
     
@@ -56,6 +53,7 @@ socket.on('user exists', function (data) {
 
 //if server emits user set, display rooms to user
 socket.on('user set', function (data) {
+    username = data;
     var date = new Date()
     $("#user").fadeOut();
     $("body").css("background-color","#f8f8f8");
@@ -94,7 +92,6 @@ socket.on('Display Message', function(data) {
     else {
         class_name = 'others'
     }
-    console.log("recieve for room" + data.room);
     var room_id = convertIntoId(data.room);
     $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
                             " + data.msg + "<br>\
@@ -135,24 +132,22 @@ socket.on('room created self', function(data) {
 
 //displays room to the others
 socket.on('room created other', function(data) {
-    var date = new Date();
-    var room_id = convertIntoId(data.room_name);
-    $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
-                            <span class='name'>" + data.room_name + "</span><br>\
-                            <span class='time'>2:09 PM</span>\
-                            <span class='preview'>" + data.description + "</span>\
-                        </li>");
-    $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
-            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
-                            <div class='chat active-chat' data-chat='person1'></div>\
-        </div>");
-     $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                            </div>");
-    $("#room").fadeOut();
-    $(".wrapper").fadeIn();
-    $('#roomName').val("");
-    $('#description').val(""); 
+    if(username){
+        var date = new Date();
+        var room_id = convertIntoId(data.room_name);
+        $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
+                                <span class='name'>" + data.room_name + "</span><br>\
+                                <span class='time'>2:09 PM</span>\
+                                <span class='preview'>" + data.description + "</span>\
+                            </li>");
+        $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
+                <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
+                                <div class='chat active-chat' data-chat='person1'></div>\
+            </div>");
+         $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
+                                                    <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
+                                                </div>");    
+    }
 });
 
 //destroys room because there are no users in it
