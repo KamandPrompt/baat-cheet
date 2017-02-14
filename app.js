@@ -5,6 +5,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
 var index = require('./serve/index.js');
+var port = process.env.PORT || 3000;
+http.listen(port,function(){
+	console.log("Listening",http.address().port);
+});
 app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('view options', {
@@ -168,7 +172,4 @@ io.on('connection', function(socket) {
 			users.splice(index, 1);
 		}
 	});
-});
-http.listen('3000', function() {
-	console.log('listening on *3000');
 });
