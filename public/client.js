@@ -1,8 +1,8 @@
 var socket = io();
 
 //sets client username
-function setUsername(username) {
-    socket.emit('set username', username);
+function setUsername() {
+    socket.emit('set username', $('#userN').val());
 };
 
 //sends a message
@@ -33,11 +33,11 @@ function joinRoom(room){
 
 //requests server to leave a room
 function leaveRoom(room){
-    //if(room == '') return ; 
     console.log(room);
-    var room_id = convertIntoId(room.id);
-    socket.emit('leave room', {name:room.id} );
-    $(".error").html('<span id="error">You havent joined this room yet. <button onclick="joinRoom( \'' + room.id + '\' )" id="joinBtn">Join<Button/> to see the conversation.</span>');
+    var room_id = convertIntoId(room);
+    console.log('asdf');
+    socket.emit('leave room', {name:room} );
+    $(".error").html('<span id="error">You havent joined this room yet. <button onclick="joinRoom( \'' + room + '\' )" id="joinBtn">Join<Button/> to see the conversation.</span>');
     
     $("#" + room_id + "-msg").attr("data-joined",0);
     $("#" + room_id + "-msg,.write").hide();
@@ -121,7 +121,7 @@ socket.on('room created self', function(data) {
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
     $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
-            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
+            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
     $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
@@ -143,7 +143,7 @@ socket.on('room created other', function(data) {
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
     $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
-            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(" + data.room_name + ")'>Leave room</a>)</center></div>\
+            <div class='top'><center><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
      $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\

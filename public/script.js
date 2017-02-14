@@ -1,51 +1,17 @@
-function setCookie(cname,cvalue,exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires=" + d.toGMTString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-
 $(document).ready(function(){
-    var nam=getCookie("nickName");
-    if (nam != "") {
-        setUsername(nam);
-           
-    } else {
-        $("#userN").show();
-     $("#userN").on("keypress", function(val) {
-        if(val.which == 13) {
-            setCookie("nickName",$(this).val(),1);
-            setUsername($(this).val());
-        }
-    });
- }
+$("#userN").on("keypress", function(val) {
+           if(val.which == 13) {
+               setUsername();
+           }
+       });
 
-
- $('#textarea').on("keypress", function(val) {
-    if(val.which == 13) {
-        sendMessage();
-        $(this).val("");
-    }
-});
-})
-
+       $('#textarea').on("keypress", function(val) {
+           if(val.which == 13) {
+               sendMessage();
+               $(this).val("");
+           }
+       });
+    })
 
 function newRoom(){
     $("#room").css("display","block");
@@ -75,7 +41,6 @@ function showRoom(name){
         $(".error").hide();
         $(".write").css("display","initial");
     }
-    
 
 };
 
