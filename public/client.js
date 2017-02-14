@@ -114,7 +114,6 @@ socket.on('room created self', function(data) {
     var room_id = convertIntoId(data.room_name);
     $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                             <span class='name'>" + data.room_name + "</span><br>\
-                            <span class='time'>2:09 PM</span>\
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
     $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
@@ -137,7 +136,6 @@ socket.on('room created other', function(data) {
         var room_id = convertIntoId(data.room_name);
         $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                                 <span class='name'>" + data.room_name + "</span><br>\
-                                <span class='time'>2:09 PM</span>\
                                 <span class='preview'>" + data.description + "</span>\
                             </li>");
         $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
