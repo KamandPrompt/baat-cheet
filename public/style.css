@@ -162,11 +162,12 @@ body {
   width: -webkit-calc(100% + 2px);
   width: -o-calc(100% + 2px);
   width: calc(100% + 2px);
+  overflow-y: auto;
+  height:calc(100% - 120px);
 }
 .container .left .people .person {
   position: relative;
   left: -15%;
-
   width: 100%;
   text-overflow: ellipsis;
   padding: 12px 0 16px;
