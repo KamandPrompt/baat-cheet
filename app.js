@@ -42,18 +42,18 @@ io.on('connection', function(socket) {
 			users.push(name);
 
 			//username is valid so user is set
-			socket.emit('user set', name);
+			socket.emit('user set', {username: name, online: rooms[0].num_users + 1});
 
 			//by default, user joins lobby
 			socket.join('lobby');
 			rooms[0].num_users++;
 
 			//notify all users (except sender) that user joined
-			socket.broadcast.emit('user joined', {username: name, num_users: rooms[0].num_users});
+			socket.broadcast.emit('user joined', {username: name, online: rooms[0].num_users});
 			socket.username = name;
 
 			for (var i = 1; i < rooms.length; i++) {
-				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description});
+				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description, online: rooms[i].num_users});
 			}
 		}
 		//if username is taken
@@ -96,26 +96,31 @@ io.on('connection', function(socket) {
 		//room not taken so insert into room array 
 		rooms.push({name: data.room_name, description: data.description, num_users: 1});
 		socket.join(data.room_name);
-		socket.emit('room created self', data);
-		socket.broadcast.emit('room created other', data);		
+		socket.emit('room created self', {room_name: data.room_name, description: data.description, online: 1});
+		socket.broadcast.emit('room created other', {room_name: data.room_name, description: data.description});		
 	});
 
 	//When user requests to join the room
 	socket.on('join room', function(room) {
 		socket.join(room.name);
 
-		var num_rooms = rooms.length
+		var num_rooms = rooms.length;
+		var num_users;
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users++;
+				num_users = rooms[i].num_users;
 				break;
 			}
 		}
 
+		//update the user's info
+		socket.emit('room joined', {name: room.name, online: num_users});
+
 		//notify other users in room that someone joined
-		socket["to"](room.name).broadcast.emit('user join', {username: socket.username, room: room.name});
+		socket["to"](room.name).broadcast.emit('user join', {username: socket.username, room: room.name, online: num_users});
 	});
 
 	//When user requests to leave the room
@@ -123,12 +128,13 @@ io.on('connection', function(socket) {
 		socket.leave(room.name);
 
 		var num_rooms = rooms.length;
+		var num_users;
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users--;
-
+				num_users = rooms[i].num_users;
 				//if users become 0, destroy/delete the room
 				if(rooms[i].num_users == 0) {
 					io.sockets.emit('destroy room', room.name);
@@ -140,7 +146,7 @@ io.on('connection', function(socket) {
 		}
 
 		//notify other users in room that someone left
-		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name});
+		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name, online: num_users});
 	});
 
 	//When user disconnets remove user from users
@@ -164,7 +170,8 @@ io.on('connection', function(socket) {
 			}
 		}
 
-		socket.broadcast.emit('user left', {username: socket.username});
+		io.sockets.emit('user left', {username: socket.username});
+		io.sockets.emit('update info', rooms);
 			
 		//remove username from users array
 		var index = users.indexOf(socket.username);
