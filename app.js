@@ -166,6 +166,8 @@ io.on('connection', function(socket) {
 				if(rooms[i].num_users == 0 && rooms[i].name != 'lobby') {
 					io.sockets.emit('destroy room', rooms[i].name);
 					rooms.splice(i, 1);
+					i--;
+					num_rooms--;
 				}
 			}
 		}
