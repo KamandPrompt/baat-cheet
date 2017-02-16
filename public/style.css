@@ -333,7 +333,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-.write .write-link.send:before {
+.write .write-link.send {
   display: inline-block;
   float: left;
   width: 20px;
@@ -516,4 +516,23 @@ body {
   margin-top:-2%;
   font-size: 15px;
   color: #999;
+}
+#emobox{
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: #fff;
+  display: none;
+  width: 140px;
+  margin-left: -50%;
+  padding: 2px;
+  border-color: #000;
+  border: solid 1px #000;
+}
+#emobox li img{
+  width: 20px;
+}
+#emobox li{
+ float: left;
+ padding: 3px;
 }
