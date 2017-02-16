@@ -105,6 +105,7 @@ socket.on('Display Message', function(data) {
     var room_id = convertIntoId($(".active").attr("id"));
     var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
+    emojify.run();
 
 });
 
