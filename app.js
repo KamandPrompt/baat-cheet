@@ -34,7 +34,7 @@ io.on('connection', function(socket) {
 		name = name.trim()
 
 		//if name is empty(null), do nothing
-		if(name == null) {
+		if(name == "" || name == null) {
 			return;
 		}
 		//if username is not taken
