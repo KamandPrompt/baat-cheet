@@ -74,7 +74,9 @@ socket.on('user joined', function(data) {
 
 //notifies users that someone left
 socket.on('user left', function(data) {
-    $.notify(data.username + " just left", "error");
+    if(data.username) {
+        $.notify(data.username + " just left", "error");
+    }
 });
 
 
