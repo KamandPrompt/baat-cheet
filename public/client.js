@@ -1,5 +1,5 @@
 var socket = io();
-var username;
+var username, scrollDiff;
 
 //sets client username
 function setUsername() {
@@ -64,6 +64,7 @@ socket.on('user set', function (data) {
     // $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
     $(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
     socket.username = data.username;
+    scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
 
 //notifies users that someone joined baat-cheet
@@ -74,9 +75,7 @@ socket.on('user joined', function(data) {
 
 //notifies users that someone left
 socket.on('user left', function(data) {
-    if(data.username) {
-        $.notify(data.username + " just left", "error");
-    }
+    $.notify(data.username + " just left", "error");
 });
 
 
@@ -100,15 +99,20 @@ socket.on('Display Message', function(data) {
         class_name = 'others'
     }
     var room_id = convertIntoId(data.room);
-    $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
-                            " + data.msg + "<br>\
-                            <span class='info'>" + data.user + "</span>\
-                       </div>");
-    var room_id = convertIntoId($(".active").attr("id"));
-    var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
-    $("#" + room_id + "-msg").children(".chat").scrollTop(height);
-    emojify.run();
-
+    if(class_name == 'self' || ($("#" + room_id + "-msg").children(".chat")[0].scrollHeight - $("#" + room_id + "-msg").children(".chat").scrollTop() == scrollDiff)){
+        $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
+                                " + data.msg + "<br>\
+                                <span class='info'>" + data.user + "</span>\
+                           </div>");
+        var room_id = convertIntoId($(".active").attr("id"));
+        var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
+        $("#" + room_id + "-msg").children(".chat").scrollTop(height);
+    }
+    else{$("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
+                                " + data.msg + "<br>\
+                                <span class='info'>" + data.user + "</span>\
+                           </div>");
+    }
 });
 
 //if room exists, then prompt for another room name
