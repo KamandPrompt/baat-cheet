@@ -155,7 +155,8 @@ body {
   border-radius: 50%;
 }
 .container .left .people {
-  margin-left: 25px;
+  margin-left: -1px;
+  padding-left: 21%;
   border-right: 1px solid #e6e6e6;
   border-left: 1px solid #e6e6e6;
   width: -moz-calc(100% + 2px);
@@ -167,7 +168,7 @@ body {
 }
 .container .left .people .person {
   position: relative;
-  left: -15%;
+  left: -15%; 
   width: 100%;
   text-overflow: ellipsis;
   padding: 12px 0 16px;
