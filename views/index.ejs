@@ -26,7 +26,12 @@
             <div class="top">
                 <input type="text" />
                 <a href="javascript:;" class="search"></a>
-                <button onclick="newRoom()" id="newRoom">New Room</button>
+               <div class="dropdown">
+			<button class="test"></button>
+			<div class="dropdown-content">
+				<a onclick="newRoom()" id="newroom">New Room</a>
+			</div>
+		</div>
             </div>
             <ul class="people">
                 <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
