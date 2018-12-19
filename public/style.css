@@ -445,7 +445,7 @@ body {
 .container .right .conversation-start span:after {
   right: 0;
 }
-#newRoom, #submit, #cancel{
+ #submit, #cancel{
   margin-top: 1.5%;
   margin-left: 2%;
   font-size: 1vw;
@@ -455,8 +455,23 @@ body {
   border: solid 2px #1f4e9b;
   font-family: 'Roboto', sans-serif;
 }
-#newRoom{
-	padding: 0.5%;
+.test{
+background-color: white;
+background-repeat:no-repeat;
+border: none;
+overflow: hidden;
+    outline:none;
+}
+.test:after{
+content: '\2807';
+	
+  	 margin-top: 1.5%;
+  margin-left: 2%;
+height: 50px;
+  font-size: 2.7em;
+  padding: 1%;
+  color: #1f4e9b;
+
 }
 #submit{
 	margin-left: calc(45% - 100px);
@@ -470,12 +485,37 @@ body {
 	width: 100px;
 	height: 35px;
 }
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
 #newRoom:hover, #submit:hover, #cancel:hover{
   border-color: #0b2d63;
   color: #0b2d63;
   cursor: pointer;
 }
-#newRoom:active, #submit:active, #cancel:active{
+.dropdown-content a:hover {background-color: #ddd; cursor: pointer;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .test {background-color: transparent;}
+
+#newRoom:active,#submit:active, #cancel:active{
   border-color: #27496d;
   color: #27496d;
 }
