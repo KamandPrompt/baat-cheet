@@ -157,7 +157,7 @@ body {
 .container .left .icon{
   position: absolute;
   margin-left: -27px;
- width: 42px;
+  width: 42px;
   margin-top: 10px;
   z-index: 1;
   color: white;
@@ -468,17 +468,16 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 #newRoom{
-	 position: relative;
+	position: relative;
   display: inline-block;
   content: '';
   margin-left: 4.2px;
- margin-top: 5px;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 42px;
   background-image: url("/images/icons/images.jpeg");
-	background-repeat: no-repeat;
+  background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px 30px;
+  background-size: 40px 42px;
 }
 #submit{
 	margin-left: calc(45% - 100px);
