@@ -98,7 +98,7 @@ body {
 }
 .container .left {
   float: left;
-  width: 37.6%;
+  width: 30%;
   height: 100%;
   border: 1px solid #e6e6e6;
   background-color: #fff;
@@ -156,6 +156,7 @@ body {
 }
 .container .left .people {
   margin-left: -1px;
+  padding-left: 21%;
   border-right: 1px solid #e6e6e6;
   border-left: 1px solid #e6e6e6;
   width: -moz-calc(100% + 2px);
@@ -167,7 +168,7 @@ body {
 }
 .container .left .people .person {
   position: relative;
-  left: -15%;
+  left: -15%; 
   width: 100%;
   text-overflow: ellipsis;
   padding: 12px 0 16px;
@@ -239,7 +240,7 @@ body {
 .container .right {
   position: relative;
   float: left;
-  width: 62.4%;
+  width: 70%;
   height: 100%;
 }
 .container .right .top {
@@ -287,7 +288,7 @@ body {
   z-index: 10;
   position: absolute;
   bottom: 29px;
-  left: 40%;
+  left: 35%;
   height: 42px;
   padding-left: 8px;
   border: 1px solid #e6e6e6;
