@@ -154,6 +154,17 @@ body {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+.container .left .icon{
+  position: absolute;
+  margin-left: -27px;
+  width: 42px;
+  margin-top: 10px;
+  z-index: 1;
+  color: white;
+}
+.container .left a.search:hover{
+  background: #0b7dda;
+}
 .container .left .people {
   margin-left: -1px;
   padding-left: 21%;
@@ -446,7 +457,7 @@ body {
 .container .right .conversation-start span:after {
   right: 0;
 }
-#newRoom, #submit, #cancel{
+#submit, #cancel{
   margin-top: 1.5%;
   margin-left: 2%;
   font-size: 1vw;
@@ -457,7 +468,16 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 #newRoom{
-	padding: 0.5%;
+	position: relative;
+  display: inline-block;
+  content: '';
+  margin-left: 4.2px;
+  width: 40px;
+  height: 42px;
+  background-image: url("/images/icons/images.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40px 42px;
 }
 #submit{
 	margin-left: calc(45% - 100px);

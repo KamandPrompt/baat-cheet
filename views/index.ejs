@@ -8,6 +8,7 @@
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/emojify.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="/client.js"></script>
 </head>
@@ -24,9 +25,10 @@
     <div class="container">
         <div class="left">
             <div class="top">
-                <input type="text" />
+                <input type="text" placeholder="Search..."/>
                 <a href="javascript:;" class="search"></a>
-                <button onclick="newRoom()" id="newRoom">New Room</button>
+		<span class="icon"><i class="fa fa-search"></i></span>
+                <a onclick="newRoom()" id="newRoom"></a>
             </div>
             <ul class="people">
                 <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
