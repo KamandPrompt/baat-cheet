@@ -348,15 +348,15 @@ body {
 .write .write-link.send {
   display: inline-block;
   float: left;
-  width: 20px;
+  width: 42px;
   height: 42px;
-  margin-left: 11px;
+  margin-left: 5px;
   content: '';
-  background-image: url("http://s30.postimg.org/nz9dho0pp/send.png");
+  background-image: url("images/icons/send.png");
+  background-size: 38px 38px;
   background-repeat: no-repeat;
   background-position: center;
 }
-
 #joinBtn {
   cursor: pointer;
   background:#1ade1a;
