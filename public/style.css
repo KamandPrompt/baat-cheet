@@ -125,7 +125,7 @@ body {
 }
 .container .left input {
   float: left;
-  width: 60%;
+  width: 55%;
   height: 42px;
   padding: 0 15px;
   border: 1px solid #e6e6e6;
@@ -145,26 +145,25 @@ body {
   width: 42px;
   height: 42px;
   margin-left: 10px;
-  border: 1px solid #e6e6e6;
   background-color: #00b0ff;
-  background-image: url("http://s11.postimg.org/dpuahewmn/name_type.png");
-  background-repeat: no-repeat;
-  background-position: top 12px left 14px;
+  border: 1px solid #e6e6e6;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
 .container .left .icon{
   position: absolute;
-  margin-left: -27px;
-  width: 42px;
-  margin-top: 10px;
+  margin-left: 14px;
+  width: 20px;
+  margin-top: 9px;
   z-index: 1;
   color: white;
 }
 .container .left a.search:hover{
   background: #0b7dda;
 }
+
 .container .left .people {
   margin-left: -1px;
   padding-left: 21%;

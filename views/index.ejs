@@ -25,12 +25,12 @@
     <div class="container">
         <div class="left">
             <div class="top">
-                <input type="text" placeholder="Search..."/>
-                <a href="javascript:;" class="search"></a>
-		<span class="icon"><i class="fa fa-search"></i></span>
+                <input type="text" placeholder="Search..." class="searchtext"/>
+                <a href="javascript:;" class="search"><span class="icon"><i class="fa fa-search"></i></span></a>
+		
                 <a onclick="newRoom()" id="newRoom"></a>
             </div>
-            <ul class="people">
+            <ul class="people" name="people">
                 <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
                     <span class="name">Lobby</span><br>
                     <span class="preview">Central Lobby</span>

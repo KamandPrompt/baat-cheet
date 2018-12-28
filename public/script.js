@@ -16,7 +16,30 @@ $("#userN").on("keypress", function(val) {
           sendMessage();
           $('#textarea').val("");
        });
-    })
+    });
+
+$(".searchtext").on("keypress", function(val) {
+  if(val.which == 13) {
+    search();
+  }
+});
+
+$(".search").click(function(){
+    search();
+});
+
+function search()
+{
+    var $searchtext =$(".searchtext").val().toLowerCase();
+    $("ul[name='people'] li").each(function(){
+        var st = $(this).text().toLowerCase();
+        var $pt=$.trim(st);
+       if($pt.includes($searchtext))
+          $(this).show();
+        else
+          $(this).hide();
+    });
+};
 
 function newRoom(){
     $("#room").css("display","block");
