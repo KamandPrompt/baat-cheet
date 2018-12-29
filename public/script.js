@@ -18,10 +18,8 @@ $("#userN").on("keypress", function(val) {
        });
     });
 
-$(".searchtext").on("keypress", function(val) {
-  if(val.which == 13) {
-    search();
-  }
+$(".searchtext").on("keyup", function(val) {
+  search();
 });
 
 $(".search").click(function(){
@@ -32,7 +30,7 @@ function search()
 {
     var $searchtext =$(".searchtext").val().toLowerCase();
     $("ul[name='people'] li").each(function(){
-        var st = $(this).text().toLowerCase();
+        var st = $(this).children(".name").text().toLowerCase();
         var $pt=$.trim(st);
        if($pt.includes($searchtext))
           $(this).show();
