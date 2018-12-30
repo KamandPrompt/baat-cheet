@@ -256,7 +256,7 @@ body {
 .container .right .top {
   width: 100%;
   height: 47px;
-  padding: 15px 29px;
+  padding: 40px 29px;
   background-color: #eceff1;
 }
 .container .right .top span {
@@ -337,10 +337,11 @@ body {
 .write .write-link.smiley:before {
   display: inline-block;
   float: left;
-  width: 20px;
+  width: 40px;
   height: 42px;
   content: '';
-  background-image: url("http://s14.postimg.org/q2ug83h7h/smiley.png");
+  background-image: url("images/icons/emoji.png");
+  background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
 }
