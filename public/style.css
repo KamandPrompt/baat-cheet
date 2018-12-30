@@ -324,6 +324,20 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }
+@media only screen and (max-width: 2000px){
+  .write input {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 1000px){
+  .write input {
+    width: 60%;
+  }
+}@media only screen and (max-width: 500px){
+  .write input {
+    width: 40%;
+  }
+}
 .write .write-link.attach:before {
   display: inline-block;
   float: left;
@@ -356,7 +370,8 @@ body {
   background-size: 38px 38px;
   background-repeat: no-repeat;
   background-position: center;
-}
+ }
+
 #joinBtn {
   cursor: pointer;
   background:#1ade1a;
