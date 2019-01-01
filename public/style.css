@@ -256,7 +256,7 @@ body {
 .container .right .top {
   width: 100%;
   height: 47px;
-  padding: 15px 29px;
+  padding: 40px 29px;
   background-color: #eceff1;
 }
 .container .right .top span {
@@ -324,6 +324,24 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }
+@media only screen and (max-width: 2000px){
+  .write input {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 1000px){
+  .write input {
+    width: 60%;
+  }
+}@media only screen and (max-width: 500px){
+  .write input {
+    width: 40%;
+  }
+}
+
+.write-right {
+  float: right;
+}
 .write .write-link.attach:before {
   display: inline-block;
   float: left;
@@ -337,10 +355,11 @@ body {
 .write .write-link.smiley:before {
   display: inline-block;
   float: left;
-  width: 20px;
+  width: 40px;
   height: 42px;
   content: '';
-  background-image: url("http://s14.postimg.org/q2ug83h7h/smiley.png");
+  background-image: url("images/icons/emoji.png");
+  background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -355,7 +374,8 @@ body {
   background-size: 38px 38px;
   background-repeat: no-repeat;
   background-position: center;
-}
+ }
+
 #joinBtn {
   cursor: pointer;
   background:#1ade1a;
