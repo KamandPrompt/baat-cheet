@@ -338,6 +338,10 @@ body {
     width: 40%;
   }
 }
+
+.write-right {
+  float: right;
+}
 .write .write-link.attach:before {
   display: inline-block;
   float: left;
