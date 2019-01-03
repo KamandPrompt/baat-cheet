@@ -201,3 +201,24 @@ socket.on('room joined', function(data) {
     var room_id = convertIntoId(data.name);
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
 }); 
+
+socket.on('usernames', function(data){
+    var html = '';
+    for (var nickname in data) //Foreach all nicknames received in data
+    {
+        var isNicknameOnline = data[nickname].online //Get the online state
+
+        //We test the online status
+        if (isNicknameOnline)
+        {
+            var status = '<font color=green></font>'
+        }
+        else
+        {
+            var status = '<font color=red></font>'
+        }
+
+        html += nickname + ' (Online: ' + status + ')<br/>' //print the status
+    }
+    $('#userN').html(html);
+});

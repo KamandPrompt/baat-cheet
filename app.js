@@ -13,7 +13,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
 app.set('view options', {
     layout: false
-});
+});	
 
 //routing
 app.use('/',index);
@@ -23,6 +23,7 @@ app.use(function(err,req,res,next){
 });
 //users online
 var users = [];
+nicknames = {};
 
 //list of rooms and number of users in particular room (default: lobby)
 var rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0}];	
@@ -61,6 +62,36 @@ io.on('connection', function(socket) {
 			socket.emit('user exists', name);
 		}
 	});
+	//new user 
+    socket.on('new user', function(data, callback){
+
+        if (nicknames.hasOwnProperty(data)){ //We check if data received is in nicknames array
+    		callback(false);
+		} else{
+		    callback(true);
+    		socket.nickname = data;
+	    	nicknames[socket.nickname] = {online: true}; //Then we put an object with a variable online
+    	    console.log('user connected: ' + socket.nickname);
+		//  io.emit('update_personal', nicknames + ': Online');
+
+    		updateNicknames();
+		}
+    });
+    // update all user name
+
+    function updateNicknames(){
+        io.sockets.emit('usernames', nicknames);
+
+    }
+    //disconnected service
+
+    socket.on('disconnect', function(data){
+    console.log('user disconnected:' + socket.nickname )
+	    if(!socket.nickname) return;
+	    nicknames[socket.nickname].online = false; //We dont splie nickname from array but change online state to false
+	    updateNicknames();
+	});
+
 
 	//When client sends message
 	socket.on('Message Request', function(data){
