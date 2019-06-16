@@ -4,11 +4,11 @@
   "description": "An anonymous chat site",
   "main": "index.js",
   "scripts": {
-    "start":"node app.js"
+    "start": "node app.js"
   },
-  "engines" :{
-    "npm" : "3.10.10",
-    "node" : "6.9.4"
+  "engines": {
+    "npm": "3.10.10",
+    "node": "6.9.4"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,6 @@
   "dependencies": {
     "express": "^4.14.0",
     "socket.io": "^1.7.2",
-    "ejs":"^2.5.5"
+    "ejs": "^2.5.5"
   }
 }

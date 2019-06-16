@@ -287,7 +287,7 @@ body {
   flex-direction: column;
 }
 .container .right .chat > :first-child{
-  margin-top: auto !important;
+  margin-top: 0 /*auto !important*/;
 }
 .container .right .chat.active-chat {
   display: block;
@@ -401,6 +401,8 @@ body {
 }
 
 .container .right .bubble .info {
+  float:right; 
+  color: rgba(1,1,1,0.35);
   font-size: 12px;
   font-weight: 100;
   position: relative;
