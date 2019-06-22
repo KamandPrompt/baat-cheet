@@ -297,7 +297,7 @@ body {
  .write {
   z-index: 10;
   position: absolute;
-  bottom: 29px;
+  bottom: 16px;
   left: 35%;
   height: 42px;
   padding-left: 8px;
@@ -401,6 +401,8 @@ body {
 }
 
 .container .right .bubble .info {
+  float:right; 
+  color: rgba(1,1,1,0.35);
   font-size: 12px;
   font-weight: 100;
   position: relative;
