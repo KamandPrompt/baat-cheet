@@ -77,7 +77,7 @@ function collap(room_id) {
   room_id = convertIntoId(room_id);
   var height = $("#" + room_id + "-msg").find('.Participants').css('height');
   if(height == '0px') {
-   $("#" + room_id + "-msg").find('.Participants').css({"height":"60%" , "z-index":"-10"});
+   $("#" + room_id + "-msg").find('.Participants').css({"height":"60%" , "z-index":"10"});
   $("#" + room_id + "-msg").find('.btn').addClass('viewUsers');
   } else {
    $("#" + room_id + "-msg").find('.Participants').css({"height":"0%" , "z-index":"-10"});
