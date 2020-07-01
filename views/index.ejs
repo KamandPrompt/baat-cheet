@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/emojify.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="/client.js"></script>
@@ -27,7 +26,7 @@
             <div class="top">
                 <input type="text" placeholder="Search..." class="searchtext"/>
                 <a href="javascript:;" class="search"><span class="icon"><i class="fa fa-search"></i></span></a>
-		
+
                 <a onclick="newRoom()" id="newRoom"></a>
             </div>
             <ul class="people" name="people">
@@ -38,13 +37,13 @@
             </ul>
         </div>
         <div class="right" id="lobby-msg" data-joined="1">
-            
+
             <div class="top" data-chat="person1">
                 <center id="online"><span>Lobby</span></center>
                 <center><span></span></center>
             </div>
             <div class="chat" data-chat="person1" >
-                
+
             </div>
         </div>
         <div class="error"></div>
@@ -54,22 +53,29 @@
             <div class="write-right">
                 <a href="#" class="write-link smiley">
                     <ul id="emobox">
-                        <li><img src="/images/emoji/smile.png" id="smile" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/laughing.png" id="laughing" onclick="writeEmoji(this)" /></li>
-                        <li><img src="/images/emoji/grin.png" id="grin" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/joy.png" id="joy" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/stuck_out_tongue_winking_eye.png" id="tongue" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/thumbsup.png" id="thumbsup" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/sunglasses.png" id="sunglasses" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/heart.png" id="heart" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/kissing_heart.png" id="kissing" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/wink.png" id="wink" onclick="writeEmoji(this)"/></li>
+                      <li><span onclick="writeEmoji('😀')">😀</span></li>
+                      <li><span onclick="writeEmoji('😁')">😁</span></li>
+                      <li><span onclick="writeEmoji('😂')">😂</span></li>
+                      <li><span onclick="writeEmoji('😃')">😃</span></li>
+                      <li><span onclick="writeEmoji('😄')">😄</span></li>
+                      <li><span onclick="writeEmoji('😄')">😄</span></li>
+                      <li><span onclick="writeEmoji('😄')">😄</span></li>
+                      <li><span onclick="writeEmoji('😅')">😅</span></li>
+                      <li><span onclick="writeEmoji('😆')">😆</span></li>
+                      <li><span onclick="writeEmoji('😇')">😇</span></li>
+                      <li><span onclick="writeEmoji('😈')">😈</span></li>
+                      <li><span onclick="writeEmoji('😉')">😉</span></li>
+                      <li><span onclick="writeEmoji('😊')">😊</span></li>
+                      <li><span onclick="writeEmoji('😋')">😋</span></li>
+                      <li><span onclick="writeEmoji('😑')">😑</span></li>
+                      <li><span onclick="writeEmoji('😎')">😎</span></li>
+
                     </ul>
                 </a>
                 <a href="javascript:;" class="write-link send"></a>
             </div>
         </div>
-        
+
     </div>
 </div>
 
