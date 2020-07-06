@@ -559,22 +559,28 @@ body {
   font-size: 15px;
   color: #999;
 }
-#emobox{
-  position: absolute;
-  bottom: 100%;
-  right: 0;
-  background: #fff;
-  display: none;
-  width: 140px;
-  margin-left: -50%;
-  padding: 2px;
-  border-color: #000;
-  border: solid 1px #000;
+#emobox {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    cursor: pointer;
+    background: #fff;
+    width: 200px;
+    height: 200px;
+    display: none;
+    margin-left: -50%;
+    padding: 2px;
+    border-color: #000;
+    border: solid 1px #000;
+    overflow-y: scroll;
+    overflow-x: scroll;
 }
-#emobox li img{
-  width: 20px;
+
+#emobox li img {
+    width: 20px;
 }
-#emobox li{
- float: left;
- padding: 3px;
+
+#emobox li {
+    float: left;
+    padding: 3px;
 }

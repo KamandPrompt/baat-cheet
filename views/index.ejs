@@ -52,20 +52,111 @@
             <a href="javascript:;" class="write-link attach"></a>
             <input type="text" id="textarea" data-active="lobby"/>
             <div class="write-right">
-                <a href="#" class="write-link smiley">
+                <button class="write-link smiley" onclick="showEmoji()"></button>
                     <ul id="emobox">
-                        <li><img src="/images/emoji/smile.png" id="smile" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/laughing.png" id="laughing" onclick="writeEmoji(this)" /></li>
-                        <li><img src="/images/emoji/grin.png" id="grin" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/joy.png" id="joy" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/stuck_out_tongue_winking_eye.png" id="tongue" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/thumbsup.png" id="thumbsup" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/sunglasses.png" id="sunglasses" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/heart.png" id="heart" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/kissing_heart.png" id="kissing" onclick="writeEmoji(this)"/></li>
-                        <li><img src="/images/emoji/wink.png" id="wink" onclick="writeEmoji(this)"/></li>
+                        <li><span onclick='writeEmoji(this)' id='grinning'>😀</span></li>
+                        <li><span onclick='writeEmoji(this)' id='grin'>😁</span></li>
+                        <li><span onclick='writeEmoji(this)' id='joy'>😂</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smiley'>😃</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smile'>😄</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sweat_smile'>😅</span></li>
+                        <li><span onclick='writeEmoji(this)' id='laughing'>😆</span></li>
+                        <li><span onclick='writeEmoji(this)' id='satisfied'>😆</span></li>
+                        <li><span onclick='writeEmoji(this)' id='innocent'>😇</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smiling_imp'>😈</span></li>
+                        <li><span onclick='writeEmoji(this)' id='wink'>😉</span></li>
+                        <li><span onclick='writeEmoji(this)' id='blush'>😊</span></li>
+                        <li><span onclick='writeEmoji(this)' id='yum'>😋</span></li>
+                        <li><span onclick='writeEmoji(this)' id='relieved'>😌</span></li>
+                        <li><span onclick='writeEmoji(this)' id='heart_eyes'>😍</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sunglasses'>😎</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smirk'>😏</span></li>
+                        <li><span onclick='writeEmoji(this)' id='neutral_face'>😐</span></li>
+                        <li><span onclick='writeEmoji(this)' id='expressionless'>😑</span></li>
+                        <li><span onclick='writeEmoji(this)' id='unamused'>😒</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sweat'>😓</span></li>
+                        <li><span onclick='writeEmoji(this)' id='pensive'>😔</span></li>
+                        <li><span onclick='writeEmoji(this)' id='confused'>😕</span></li>
+                        <li><span onclick='writeEmoji(this)' id='confounded'>😖</span></li>
+                        <li><span onclick='writeEmoji(this)' id='kissing'>😗</span></li>
+                        <li><span onclick='writeEmoji(this)' id='kissing_heart'>😘</span></li>
+                        <li><span onclick='writeEmoji(this)' id='kissing_smiling_eyes'>😙</span></li>
+                        <li><span onclick='writeEmoji(this)' id='kissing_closed_eyes'>😚</span></li>
+                        <li><span onclick='writeEmoji(this)' id='stuck_out_tongue'>😛</span></li>
+                        <li><span onclick='writeEmoji(this)' id='stuck_out_tongue_winking_eye'>😜</span></li>
+                        <li><span onclick='writeEmoji(this)' id='stuck_out_tongue_closed_eyes'>😝</span></li>
+                        <li><span onclick='writeEmoji(this)' id='disappointed'>😞</span></li>
+                        <li><span onclick='writeEmoji(this)' id='worried'>😟</span></li>
+                        <li><span onclick='writeEmoji(this)' id='angry'>😠</span></li>
+                        <li><span onclick='writeEmoji(this)' id='rage'>😡</span></li>
+                        <li><span onclick='writeEmoji(this)' id='cry'>😢</span></li>
+                        <li><span onclick='writeEmoji(this)' id='persevere'>😣</span></li>
+                        <li><span onclick='writeEmoji(this)' id='triumph'>😤</span></li>
+                        <li><span onclick='writeEmoji(this)' id='disappointed_relieved'>😥</span></li>
+                        <li><span onclick='writeEmoji(this)' id='frowning'>😦</span></li>
+                        <li><span onclick='writeEmoji(this)' id='anguished'>😧</span></li>
+                        <li><span onclick='writeEmoji(this)' id='fearful'>😨</span></li>
+                        <li><span onclick='writeEmoji(this)' id='weary'>😩</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sleepy'>😪</span></li>
+                        <li><span onclick='writeEmoji(this)' id='tired_face'>😫</span></li>
+                        <li><span onclick='writeEmoji(this)' id='grimacing'>😬</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sob'>😭</span></li>
+                        <li><span onclick='writeEmoji(this)' id='open_mouth'>😮</span></li>
+                        <li><span onclick='writeEmoji(this)' id='hushed'>😯</span></li>
+                        <li><span onclick='writeEmoji(this)' id='cold_sweat'>😰</span></li>
+                        <li><span onclick='writeEmoji(this)' id='scream'>😱</span></li>
+                        <li><span onclick='writeEmoji(this)' id='astonished'>😲</span></li>
+                        <li><span onclick='writeEmoji(this)' id='heartbeat'>💓</span></li>
+                        <li><span onclick='writeEmoji(this)' id='broken_heart'>💔</span></li>
+                        <li><span onclick='writeEmoji(this)' id='two_hearts'>💕</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sparkling_heart'>💖</span></li>
+                        <li><span onclick='writeEmoji(this)' id='heartpulse'>💗</span></li>
+                        <li><span onclick='writeEmoji(this)' id='cupid'>💘</span></li>
+                        <li><span onclick='writeEmoji(this)' id='flushed'>😳</span></li>
+                        <li><span onclick='writeEmoji(this)' id='sleeping'>😴</span></li>
+                        <li><span onclick='writeEmoji(this)' id='dizzy_face'>😵</span></li>
+                        <li><span onclick='writeEmoji(this)' id='no_mouth'>😶</span></li>
+                        <li><span onclick='writeEmoji(this)' id='mask'>😷</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smile_cat'>😸</span></li>
+                        <li><span onclick='writeEmoji(this)' id='joy_cat'>😹</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smiley_cat'>😺</span></li>
+                        <li><span onclick='writeEmoji(this)' id='heart_eyes_cat'>😻</span></li>
+                        <li><span onclick='writeEmoji(this)' id='smirk_cat'>😼</span></li>
+                        <li><span onclick='writeEmoji(this)' id='kissing_cat'>😽</span></li>
+                        <li><span onclick='writeEmoji(this)' id='pouting_cat'>😾</span></li>
+                        <li><span onclick='writeEmoji(this)' id='crying_cat_face'>😿</span></li>
+                        <li><span onclick='writeEmoji(this)' id='scream_cat'>🙀</span></li>
+                        <li><span onclick='writeEmoji(this)' id='slightly_frowning_face'>🙁</span></li>
+                        <li><span onclick='writeEmoji(this)' id='slightly_smiling_face'>🙂</span></li>
+                        <li><span onclick='writeEmoji(this)' id='upside_down_face'>🙃</span></li>
+                        <li><span onclick='writeEmoji(this)' id='face_with_rolling_eyes'>🙄</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-gesturing-no'>🙅‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='no_good'>🙅‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-gesturing-no'>🙅‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-gesturing-ok'>🙆‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='ok_woman'>🙆‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-gesturing-ok'>🙆‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-bowing'>🙇‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-bowing'>🙇‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='bow'>🙇‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='see_no_evil'>🙈</span></li>
+                        <li><span onclick='writeEmoji(this)' id='hear_no_evil'>🙉</span></li>
+                        <li><span onclick='writeEmoji(this)' id='speak_no_evil'>🙊</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-raising-hand'>🙋‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='raising_hand'>🙋‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-raising-hand'>🙋‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='raised_hands'>🙌</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-frowning'>🙍‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='person_frowning'>🙍‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-frowning'>🙍‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='woman-pouting'>🙎‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='person_with_pouting_face'>🙎‍♀️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='man-pouting'>🙎‍♂️</span></li>
+                        <li><span onclick='writeEmoji(this)' id='pray'>🙏</span></li>
+
+
                     </ul>
-                </a>
+
                 <a href="javascript:;" class="write-link send"></a>
             </div>
         </div>
@@ -90,3 +181,4 @@
 <script src='/emojify.js'></script>
 </body>
 </html>
+

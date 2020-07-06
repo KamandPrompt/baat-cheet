@@ -1,6 +1,7 @@
 //setup basic express server
 var express = require('express')
 var app = require('express')();
+var emoji = require('node-emoji');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
@@ -68,7 +69,7 @@ io.on('connection', function(socket) {
 		//if message is valid
 		if(data.msg) {
 			//display message to all clients in room including sender
-			io.sockets["in"](data.room).emit('Display Message', {msg: data.msg, user: socket.username, room: data.room});
+			io.sockets["in"](data.room).emit('Display Message', {msg: emoji.emojify(data.msg), user: socket.username, room: data.room});
 		}
 	});
 

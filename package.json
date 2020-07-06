@@ -20,8 +20,10 @@
     "url": "https://github.com/ssh-iitmandi/baat-cheet/issues"
   },
   "dependencies": {
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "socket.io": "^1.7.2",
-    "ejs": "^2.5.5"
-  }
+    "node-emoji": "^1.10.0",
+    "socket.io": "^1.7.2"
+  },
+  "homepage": "https://github.com/ssh-iitmandi/baat-cheet#readme"
 }
