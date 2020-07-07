@@ -5,3 +5,9 @@
   margin-bottom: -0.25em;
   background-size: contain;
 }
+
+#emobox {
+  height: 300px;
+  width: 300px;
+  overflow-y: scroll;
+}

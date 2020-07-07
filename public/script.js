@@ -91,26 +91,6 @@ emo.addEventListener("click", active, false);
 
 function writeEmoji(emoji){
   var emojiName = emoji.id;
-  if(emojiName == "smile")
-    $("#textarea").val($("#textarea").val() + ":)");
-  else if(emojiName == "laughing")    
-    $("#textarea").val($("#textarea").val() + ":laughing:");
-  else if(emojiName == "grin")    
-    $("#textarea").val($("#textarea").val() + ":grin:");
-  else if(emojiName == "joy")    
-    $("#textarea").val($("#textarea").val() + ":joy:");
-  else if(emojiName == "tongue")    
-    $("#textarea").val($("#textarea").val() + ":P");
-  else if(emojiName == "thumbsup")    
-    $("#textarea").val($("#textarea").val() + ":thumbsup:");
-  else if(emojiName == "sunglasses")    
-    $("#textarea").val($("#textarea").val() + ":sunglasses:");
-  else if(emojiName == "heart")    
-    $("#textarea").val($("#textarea").val() + "<3");
-  else if(emojiName == "kissing")    
-    $("#textarea").val($("#textarea").val() + ":*");
-  else if(emojiName == "wink")    
-    $("#textarea").val($("#textarea").val() + ";)");
+  $("#textarea").val($("#textarea").val() + ":" + emojiName + ":");
   $("#textarea").focus();
 }
-
