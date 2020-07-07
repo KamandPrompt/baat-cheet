@@ -98,10 +98,25 @@ socket.on('Display Message', function(data) {
     else {
         class_name = 'others'
     }
+    // Adding Emoji
+    var p = data.msg;
+    var colon1 = p.indexOf(":");
+    while (colon1 != -1) {
+      var colon2 = p.indexOf(":", colon1 + 1);
+      if (colon2 != -1) {
+        emoji = p.slice(colon1+1, colon2);
+        var p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emoji + ".png\">" + p.slice(colon2 + 1);
+        colon1 = p.indexOf(":", colon2 + 1);
+      }
+      else {
+        break;
+      }
+    }
+    p = "<p>" + p + "</p>";
     var room_id = convertIntoId(data.room);
     if(class_name == 'self' || ($("#" + room_id + "-msg").children(".chat")[0].scrollHeight - $("#" + room_id + "-msg").children(".chat").scrollTop() == scrollDiff)){
         $("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
-                                " + data.msg + "<br>\
+                                " + p + "<br>\
                                 <span class='info'>" + data.user + "</span>\
                            </div>");
         var room_id = convertIntoId($(".active").attr("id"));
@@ -109,7 +124,7 @@ socket.on('Display Message', function(data) {
         $("#" + room_id + "-msg").children(".chat").scrollTop(height);
     }
     else{$("#"+ room_id +"-msg").children(".chat[data-chat='person1']").append("<div class='bubble " + class_name + "' data-chat ='person1'>\
-                                " + data.msg + "<br>\
+                                " + p + "<br>\
                                 <span class='info'>" + data.user + "</span>\
                            </div>");
     }
