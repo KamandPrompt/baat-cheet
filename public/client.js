@@ -8,7 +8,7 @@ function setUsername() {
 
 //sends a message
 function sendMessage() {
-    msg = $('#textarea').val(); 
+    msg = $('#textarea').val();
     //alert(msg);
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     room_name = $(".active").attr("id");
@@ -17,7 +17,7 @@ function sendMessage() {
 
 //creates a room
 function createRoom() {
-    if($("#roomName").val()=='') return ; 
+    if($("#roomName").val()=='') return ;
     socket.emit('create room', {room_name: $('#roomName').val(), description: $('#description').val()});
 }
 
@@ -35,7 +35,7 @@ function leaveRoom(room){
     var room_id = convertIntoId(room);
     socket.emit('leave room', {name:room} );
     $(".error").html('<span id="error">You havent joined this room yet. <button onclick="joinRoom( \'' + room + '\' )" id="joinBtn">Join<Button/> to see the conversation.</span>');
-    
+
     $("#" + room_id + "-msg").attr("data-joined",0);
     $("#" + room_id + "-msg,.write").hide();
     $(".error").show();
@@ -104,9 +104,12 @@ socket.on('Display Message', function(data) {
     while (colon1 != -1) {
       var colon2 = p.indexOf(":", colon1 + 1);
       if (colon2 != -1) {
-        emoji = p.slice(colon1+1, colon2);
-        var p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emoji + ".png\">" + p.slice(colon2 + 1);
-        colon1 = p.indexOf(":", colon2 + 1);
+        emoji_name = p.slice(colon1+1, colon2);
+        position = emoji_names.indexOf(emoji_name)
+        if (position != -1) {
+          p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojis[position] + ".png\">" + p.slice(colon2 + 1);
+        }
+        colon1 = p.indexOf(":", colon2+1);
       }
       else {
         break;
@@ -215,4 +218,4 @@ socket.on('update info', function(rooms) {
 socket.on('room joined', function(data) {
     var room_id = convertIntoId(data.name);
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-}); 
+});
