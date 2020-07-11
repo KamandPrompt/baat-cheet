@@ -342,16 +342,7 @@ body {
 .write-right {
   float: right;
 }
-.write .write-link.attach:before {
-  display: inline-block;
-  float: left;
-  width: 20px;
-  height: 42px;
-  content: '';
-  background-image: url("http://s1.postimg.org/s5gfy283f/attachemnt.png");
-  background-repeat: no-repeat;
-  background-position: center;
-}
+
 .write .write-link.smiley:before {
   display: inline-block;
   float: left;
@@ -572,7 +563,7 @@ body {
   border: solid 1px #000;
 }
 #emobox li img{
-  width: 20px;
+  width: 2.1em;
 }
 #emobox li{
  float: left;
