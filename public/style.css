@@ -61,7 +61,7 @@ li{
     font-size: 8vw;
     position: relative;
 }
-body {  
+body {
   background-color: #000;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -178,7 +178,7 @@ body {
 }
 .container .left .people .person {
   position: relative;
-  left: -15%; 
+  left: -15%;
   width: 100%;
   text-overflow: ellipsis;
   padding: 12px 0 16px;
@@ -273,7 +273,7 @@ body {
   display: none;
   overflow: auto;
   padding: 0 35px 92px;
-  padding-bottom: 0; 
+  padding-bottom: 0;
   border-width: 1px 1px 1px 0;
   border-style: solid;
   border-bottom: none;
@@ -392,13 +392,10 @@ body {
 }
 
 .container .right .bubble .info {
-  float:right; 
-  color: rgba(1,1,1,0.35);
-  font-size: 12px;
-  font-weight: 100;
+  color: rgba(1,1,1,0.7);
   position: relative;
   display: inline-block;
-  clear: both;  
+  clear: both;
 }
 
 .container .right .bubble:before {
@@ -437,7 +434,7 @@ body {
   background-color: #eceff1;
   -webkit-align-self: flex-end;
   align-self: flex-end;
-  
+
 }
 .container .right .bubble.self:before {
   right: -3px;
@@ -531,13 +528,13 @@ body {
   font-weight:bold;
   width:400px;
   margin-left: calc(50% - 200px);
-  margin-top: 15%;  
+  margin-top: 15%;
 }
 #roomName, #description{
   margin: 5%;
   width: 300px;
   font-size: 1.5vw;
-  border-color: #000; 
+  border-color: #000;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: transparent;
 }
