@@ -68,9 +68,6 @@ socket.on('user set', function(data) {
     $("#user").fadeOut();
     $("body").css("background-color", "#f8f8f8");
     $(".wrapper").fadeIn();
-    $(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                            </div>");
     // $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
     $(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
     socket.username = data.username;
