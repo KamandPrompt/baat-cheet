@@ -21,9 +21,11 @@ app.use(function(err,req,res,next){
 	console.log(err.stack);
 	res.status(500);
 });
+//users online
+var users = [];
 
 //list of rooms and number of users in particular room (default: lobby)
-var rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0, users: []}];
+var rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0}];	
 
 io.on('connection', function(socket) {
 
@@ -36,22 +38,22 @@ io.on('connection', function(socket) {
 			return;
 		}
 		//if username is not taken
-		else if(rooms[0].users.indexOf(name) == -1) {
-			rooms[0].users.push(name);
+		else if(users.indexOf(name) == -1) {
+			users.push(name);
 
 			//username is valid so user is set
-			socket.emit('user set', {username: name, online: rooms[0].num_users + 1, online_users: rooms[0].users});
+			socket.emit('user set', {username: name, online: rooms[0].num_users + 1});
 
 			//by default, user joins lobby
 			socket.join('lobby');
 			rooms[0].num_users++;
 
 			//notify all users (except sender) that user joined
-			socket.broadcast.emit('user joined', {username: name, online: rooms[0].num_users, online_users: rooms[0].users});
+			socket.broadcast.emit('user joined', {username: name, online: rooms[0].num_users});
 			socket.username = name;
 
 			for (var i = 1; i < rooms.length; i++) {
-				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description, online: rooms[i].num_users, online_users: rooms[0].users});
+				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description, online: rooms[i].num_users});
 			}
 		}
 		//if username is taken
@@ -92,10 +94,10 @@ io.on('connection', function(socket) {
 		}
 
 		//room not taken so insert into room array 
-		rooms.push({name: data.room_name, description: data.description, num_users: 1, users: [socket.username]});
+		rooms.push({name: data.room_name, description: data.description, num_users: 1});
 		socket.join(data.room_name);
-		socket.emit('room created self', {room_name: data.room_name, description: data.description, online: 1, online_users: [socket.username]});
-		socket.broadcast.emit('room created other', {room_name: data.room_name, description: data.description, online_users: [socket.username]});
+		socket.emit('room created self', {room_name: data.room_name, description: data.description, online: 1});
+		socket.broadcast.emit('room created other', {room_name: data.room_name, description: data.description});		
 	});
 
 	//When user requests to join the room
@@ -104,24 +106,21 @@ io.on('connection', function(socket) {
 
 		var num_rooms = rooms.length;
 		var num_users;
-		let room_index = 0;
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users++;
 				num_users = rooms[i].num_users;
-				rooms[i].users.push(socket.username);
-				room_index = i;
 				break;
 			}
 		}
 
 		//update the user's info
-		socket.emit('room joined', {name: room.name, online: num_users, online_users: rooms[room_index].users});
+		socket.emit('room joined', {name: room.name, online: num_users});
 
 		//notify other users in room that someone joined
-		socket["to"](room.name).broadcast.emit('user join', {username: socket.username, room: room.name, online: num_users, online_users: rooms[room_index].users});
+		socket["to"](room.name).broadcast.emit('user join', {username: socket.username, room: room.name, online: num_users});
 	});
 
 	//When user requests to leave the room
@@ -130,20 +129,12 @@ io.on('connection', function(socket) {
 
 		var num_rooms = rooms.length;
 		var num_users;
-		var room_index = 0;
 
 		//update number of users in room
 		for(var i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users--;
 				num_users = rooms[i].num_users;
-				for( var j = 0; j < rooms[i].users.length; j++){
-				   if ( rooms[i].users[j] === socket.username) {
-				     rooms[i].users.splice(j, 1);
-				     j--;
-				   }
-				}
-				room_index = i;
 				//if users become 0, destroy/delete the room
 				if(rooms[i].num_users == 0) {
 					io.sockets.emit('destroy room', room.name);
@@ -155,7 +146,7 @@ io.on('connection', function(socket) {
 		}
 
 		//notify other users in room that someone left
-		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name, online: num_users, online_users: rooms[room_index].users});
+		socket["to"](room.name).broadcast.emit('user left room', {username: socket.username, room: room.name, online: num_users});
 	});
 
 	//When user disconnets remove user from users
@@ -167,10 +158,6 @@ io.on('connection', function(socket) {
 		for(var i = 0; i < num_rooms; i++) {
 			if(socket.rooms[rooms[i].name]) {	
 				rooms[i].num_users--;
-				var index = rooms[i].users.indexOf(socket.username);
-				if(index != -1) {
-					rooms[i].users.splice(index, 1);
-				}
 
 				//notify other users in room that user left
 				//socket["to"](rooms[i].name).broadcast.emit('user left room', {username: socket.username, room: rooms[i].name});
@@ -187,6 +174,11 @@ io.on('connection', function(socket) {
 
 		io.sockets.emit('user left', {username: socket.username});
 		io.sockets.emit('update info', rooms);
-
+			
+		//remove username from users array
+		var index = users.indexOf(socket.username);
+		if(index != -1) {
+			users.splice(index, 1);
+		}
 	});
 });
