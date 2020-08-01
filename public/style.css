@@ -268,6 +268,38 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
 }
+.container .right .top .btn {
+  border-radius: 5px;
+  border: none;
+}
+.container .right .top .btn:hover, .container .right .top .btn.viewUsers {
+  background-color: white;
+}
+.container .right .Participants {
+  z-index: -10;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.08);
+  position: fixed;
+  top: 80px;
+  right: 20%;
+  height: 0%;
+  width: 23%;
+  transition: .5s;
+}
+.container .right .Participants span ul li {
+  color: #261B1B;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.container .right .Participants span ul li:before {
+  content: "\f007";
+  font-family: FontAwesome;
+  display: inline-block;
+  margin-left: -1.3em;
+  width: 1.3em;
+  position: absolute;
+}
 .container .right .chat {
   position: relative;
   display: none;
