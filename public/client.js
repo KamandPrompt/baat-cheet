@@ -56,6 +56,15 @@ function convertIntoId(name) {
     return name.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^{|}~ ]/g, "\\$&");
 }
 
+
+//convert an array into list elements
+function convertIntoList(arr) {
+    var list = ('<ul>');
+    for(var i=0; i<arr.length; i++)	list = list.concat('<li>' + arr[i] + '</li>');
+    list = list.concat('</ul>');
+    return list;
+}
+
 //if server emits user exists, propmt for changing username
 socket.on('user exists', function(data) {
     document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
@@ -70,6 +79,7 @@ socket.on('user set', function(data) {
     $(".wrapper").fadeIn();
     // $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
     $(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
+    $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
     socket.username = data.username;
     scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
@@ -78,6 +88,7 @@ socket.on('user set', function(data) {
 socket.on('user joined', function(data) {
     $.notify(data.username + " just joined", "info");
     $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+    $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //notifies users that someone left
@@ -92,6 +103,7 @@ socket.on('user join', function(data) {
     if (data.room != "lobby") {
         $.notify(data.username + " just joined " + data.room + " room!", "info");
         $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
     }
 });
 
@@ -166,13 +178,19 @@ socket.on('room created self', function(data) {
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
     $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
-            <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
+            <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
+            <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " user online</span></button></center>\
+            </div>\
+            <div class='Participants'>\
+                <center><h2>Participants</h2></center>\
+                <span></span>\
+            </div>\
                             <div class='chat active-chat' data-chat='person1'></div>\
         </div>");
     $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
                                             </div>");
-    $("#" + room_id + "-msg").find('.top').append("<center><span> " + data.online + " users online</span></center>");
+    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
     $("#room").fadeOut();
     $(".wrapper").fadeIn();
     $('#roomName').val("");
@@ -189,13 +207,19 @@ socket.on('room created other', function(data) {
                                 <span class='preview'>" + data.description + "</span>\
                             </li>");
         $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
-                <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center></div>\
+                <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
+                    <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " users online</span></button></center>\
+                </div>\
+                <div class='Participants'>\
+                    <center><h2>Participants</h2></center>\
+                    <span></span>\
+                </div>\
                                 <div class='chat active-chat' data-chat='person1'></div>\
             </div>");
         $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                     <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
                                                 </div>");
-        $("#" + room_id + "-msg").find('.top').append("<center><span> " + data.online + " users online</span></center>");
+        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
     }
 });
 
@@ -221,6 +245,7 @@ socket.on('user left room', function(data) {
     var room_id = convertIntoId(data.room);
     $.notify(data.username + " just left room " + data.room, "error");
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //updates info about number of users
@@ -230,6 +255,7 @@ socket.on('update info', function(rooms) {
     for (var i = 0; i < rooms.length; i++) {
         room_id = convertIntoId(rooms[i].name);
         $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = rooms[i].num_users + " user(s) online";
+        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(rooms[i].users);
     }
 });
 
@@ -237,4 +263,5 @@ socket.on('update info', function(rooms) {
 socket.on('room joined', function(data) {
     var room_id = convertIntoId(data.name);
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
