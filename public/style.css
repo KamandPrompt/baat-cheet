@@ -288,6 +288,9 @@ body {
 }
 .container .right .Participants span ul li {
   color: #261B1B;
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .container .right .Participants span ul li:before {
   content: "\f007";
@@ -295,6 +298,7 @@ body {
   display: inline-block;
   margin-left: -1.3em;
   width: 1.3em;
+  position: absolute;
 }
 .container .right .chat {
   position: relative;
