@@ -326,11 +326,10 @@ body {
   z-index: -10;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.08);
-  position: fixed;
+  position: sticky;
   top: 80px;
-  right: 20%;
-  height: 0%;
-  width: 23%;
+  margin: auto;
+  width: 60%;
   transition: .5s;
 }
 
