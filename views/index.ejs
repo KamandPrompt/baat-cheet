@@ -7,9 +7,9 @@
     <meta name="description" content="Baat Cheet is an anonymous chat app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/emojify.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
     <script src="/client.js"></script>
   </head>
@@ -28,7 +28,8 @@
         <div class="left">
           <div class="top">
             <input type="text" placeholder="Search..." class="searchtext" />
-            <a onclick="newRoom()" id="newRoom"></a>
+            <!-- font-awesome plus -->
+            <a onclick="newRoom()" id="newRoom"><i class="fas fa-plus-circle"></i></a>
           </div>
           <ul class="people" name="people">
             <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
@@ -58,11 +59,13 @@
           <div class="write" id="write">
             <input type="text" id="textarea" data-active="lobby" />
             <div class="write-right">
-              <a href="#" class="write-link smiley">
+              <!-- font-awesome smiley -->
+              <a href="#" class="write-link smiley"><i class="far fa-smile"></i>
                 <ul id="emobox">
                 </ul>
               </a>
-              <a href="javascript:;" class="write-link send"></a>
+              <!-- font-awesome send -->
+              <a href="javascript:;" class="write-link send"><i class="fas fa-paper-plane"></i></a>
             </div>
           </div>
         </div>
