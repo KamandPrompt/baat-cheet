@@ -262,7 +262,8 @@ body {
   color: #999;
 }
 
-.container .left .people .person.active, .container .left .people .person:hover {
+.container .left .people .person.active,
+.container .left .people .person:hover {
   margin-top: -1px;
   margin-left: -1px;
   padding-top: 13px;
@@ -278,12 +279,14 @@ body {
   padding-left: calc(10% + 1px);
 }
 
-.container .left .people .person.active span, .container .left .people .person:hover span {
+.container .left .people .person.active span,
+.container .left .people .person:hover span {
   color: #fff;
   background: transparent;
 }
 
-.container .left .people .person.active:after, .container .left .people .person:hover:after {
+.container .left .people .person.active:after,
+.container .left .people .person:hover:after {
   display: none;
 }
 
@@ -318,7 +321,8 @@ body {
   border: none;
 }
 
-.container .right .top .btn:hover, .container .right .top .btn.viewUsers {
+.container .right .top .btn:hover,
+.container .right .top .btn.viewUsers {
   background-color: white;
 }
 
@@ -436,7 +440,7 @@ body {
   width: 40px;
   height: 42px;
   content: '';
-  background-image: url("images/icons/emoji.png");
+  background-image: url("images/icons/smile.svg");
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -449,11 +453,14 @@ body {
   height: 42px;
   margin-left: 5px;
   content: '';
-  background-image: url("images/icons/send.png");
-  background-size: 38px 38px;
+  background-image: url("images/icons/paper-plane.svg");
+  background-size: 38px 28px;
   background-repeat: no-repeat;
   background-position: center;
+  border-radius: 50%;
+  background-color: #00b0ff;
 }
+
 
 #joinBtn {
   cursor: pointer;
@@ -548,7 +555,8 @@ body {
   color: #999;
 }
 
-.container .right .conversation-start span:before, .container .right .conversation-start span:after {
+.container .right .conversation-start span:before,
+.container .right .conversation-start span:after {
   position: absolute;
   top: 10px;
   display: inline-block;
@@ -566,7 +574,8 @@ body {
   right: 0;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   margin-top: 1.5%;
   margin-left: 2%;
   font-size: 1vw;
@@ -584,7 +593,7 @@ body {
   margin-left: 4.2px;
   width: 40px;
   height: 42px;
-  background-image: url("/images/icons/images.jpeg");
+  background-image: url("/images/icons/plus-circle.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40px 42px;
@@ -598,20 +607,25 @@ body {
   margin-left: 5%;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   font-size: 1.2em;
   border-radius: 12.5px;
   width: 100px;
   height: 35px;
 }
 
-#newRoom:hover, #submit:hover, #cancel:hover {
+#newRoom:hover,
+#submit:hover,
+#cancel:hover {
   border-color: #0b2d63;
   color: #0b2d63;
   cursor: pointer;
 }
 
-#newRoom:active, #submit:active, #cancel:active {
+#newRoom:active,
+#submit:active,
+#cancel:active {
   border-color: #27496d;
   color: #27496d;
 }
@@ -639,7 +653,8 @@ body {
   margin-top: 15%;
 }
 
-#roomName, #description {
+#roomName,
+#description {
   margin: 5%;
   width: 300px;
   font-size: 1.5vw;

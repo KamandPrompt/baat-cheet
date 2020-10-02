@@ -1,92 +1,92 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Baat Cheet is an anonymous chat app">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><%= title %></title>
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/emojify.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
-    <script src="/client.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Baat Cheet is an anonymous chat app">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/emojify.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
+  <script src="/client.js"></script>
+</head>
 
-  <body>
-    <div id="user">
-      <div>
-        <h1 id="bc"><%= title %></h1>
-        <input type="text" placeholder="What's your nickname?" autofocus="autofocus" id="userN" name="username">
-        <p id="error_response"></p>
-      </div>
+<body>
+  <div id="user">
+    <div>
+      <h1 id="bc"><%= title %></h1>
+      <input type="text" placeholder="What's your nickname?" autofocus="autofocus" id="userN" name="username">
+      <p id="error_response"></p>
     </div>
+  </div>
 
-    <div class="wrapper">
-      <div class="container">
-        <div class="left">
-          <div class="top">
-            <input type="text" placeholder="Search..." class="searchtext" />
-            <a onclick="newRoom()" id="newRoom"></a>
-          </div>
-          <ul class="people" name="people">
-            <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
-              <span class="name">Lobby</span><br>
-              <span class="preview">Central Lobby</span>
-            </li>
-          </ul>
-          <button class="sidebar-btn" onclick="SidebarToggle()">
-            <i id="toggle-icon" class="fa fa-angle-right"></i>
-          </button>
+  <div class="wrapper">
+    <div class="container">
+      <div class="left">
+        <div class="top">
+          <input type="text" placeholder="Search..." class="searchtext" />
+          <a onclick="newRoom()" id="newRoom"></a>
         </div>
-        <div class="right" id="lobby-msg" data-joined="1">
+        <ul class="people" name="people">
+          <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
+            <span class="name">Lobby</span><br>
+            <span class="preview">Central Lobby</span>
+          </li>
+        </ul>
+        <button class="sidebar-btn" onclick="SidebarToggle()">
+          <i id="toggle-icon" class="fa fa-angle-right"></i>
+        </button>
+      </div>
+      <div class="right" id="lobby-msg" data-joined="1">
 
-          <div class="top" data-chat="person1">
-            <center id="online"><span>Lobby</span></center>
-            <center><button class="btn" onclick="collap('lobby')"><span></span></button></center>
-          </div>
-          <div class="Participants">
-            <center>
-              <h2>Participants</h2>
-            </center>
-            <span></span>
-          </div>
-          <div class="chat" data-chat="person1">
+        <div class="top" data-chat="person1">
+          <center id="online"><span>Lobby</span></center>
+          <center><button class="btn" onclick="collap('lobby')"><span></span></button></center>
+        </div>
+        <div class="Participants">
+          <center>
+            <h2>Participants</h2>
+          </center>
+          <span></span>
+        </div>
+        <div class="chat" data-chat="person1">
 
-          </div>
-          <div class="write" id="write">
-            <input type="text" id="textarea" data-active="lobby" />
-            <div class="write-right">
-              <a href="#" class="write-link smiley">
-                <ul id="emobox">
-                </ul>
-              </a>
-              <a href="javascript:;" class="write-link send"></a>
-            </div>
+        </div>
+        <div class="write" id="write">
+          <input type="text" id="textarea" data-active="lobby" />
+          <div class="write-right">
+            <a href="#" class="write-link smiley">
+              <ul id="emobox">
+              </ul>
+            </a>
+            <a href="javascript:;" class="write-link send"></a>
           </div>
         </div>
-        <div class="error"></div>
-
-
       </div>
+      <div class="error"></div>
+
+
     </div>
+  </div>
 
-    <div id="room">
-      <div>
-        <input type="text" placeholder="Room Name" id="roomName" name="roomName"><br>
-        <textarea placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
-        <button onclick="submitRoom()" id="submit">Submit</button>
-        <button id="cancel">Cancel</button>
-      </div>
-      <span id='roomError'></span>
+  <div id="room">
+    <div>
+      <input type="text" placeholder="Room Name" id="roomName" name="roomName"><br>
+      <textarea placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
+      <button onclick="submitRoom()" id="submit">Submit</button>
+      <button id="cancel">Cancel</button>
     </div>
+    <span id='roomError'></span>
+  </div>
 
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='/notify.min.js'></script>
-    <script src='/script.js'></script>
-    <script src='/emojify.js'></script>
-  </body>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='/notify.min.js'></script>
+  <script src='/script.js'></script>
+  <script src='/emojify.js'></script>
+</body>
 
 </html>
