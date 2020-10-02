@@ -106,19 +106,36 @@ function writeEmoji(emoji) {
 
 // For sidebar to work on small screens
 
+function closeSidebar() {
+  const navbar = document.querySelector(".left");
+  navbar.style.left = '-300px';
+  right.style.width = "100%";
+  var toggle = document.querySelector("#toggle-icon");
+  toggle.className = '';
+  toggle.className += 'fa fa-angle-right';
+}
+
+function openSidebar() { 
+  const navbar = document.querySelector(".left");
+  navbar.style.left = '0px';
+  right.style.width = "calc(100% - 300px)";
+  var toggle = document.querySelector("#toggle-icon");
+  toggle.className = '';
+  toggle.className += 'fa fa-angle-left';
+}
+
 function SidebarToggle() {
   const navbar = document.querySelector(".left");
   if (navbar.style.left == '0px') {
-    navbar.style.left = '-300px';
-    right.style.width = "100%";
-    var toggle = document.querySelector("#toggle-icon");
-    toggle.className = '';
-    toggle.className += 'fa fa-angle-right';
-  } else {
-    navbar.style.left = '0px';
-    right.style.width = "calc(100% - 300px)";
-    var toggle = document.querySelector("#toggle-icon");
-    toggle.className = '';
-    toggle.className += 'fa fa-angle-left';
+    closeSidebar();
+  } 
+  else {
+    openSidebar();
+    document.body.addEventListener('click', function(event) {
+      var sidebar = document.getElementsByClassName('left')[0];
+      if(!sidebar.contains(event.target)) {  //In case the user clicks outside the sidebar, the sidebar closes
+        closeSidebar(); 
+      }
+    }, false); 
   }
 }
