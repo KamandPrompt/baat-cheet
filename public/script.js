@@ -106,7 +106,7 @@ function writeEmoji(emoji) {
 
 // For sidebar to work on small screens
 
-function CloseSidebar() {
+function closeSidebar() {
   const navbar = document.querySelector(".left");
   navbar.style.left = '-300px';
   right.style.width = "100%";
@@ -115,7 +115,7 @@ function CloseSidebar() {
   toggle.className += 'fa fa-angle-right';
 }
 
-function OpenSidebar() { 
+function openSidebar() { 
   const navbar = document.querySelector(".left");
   navbar.style.left = '0px';
   right.style.width = "calc(100% - 300px)";
@@ -127,16 +127,15 @@ function OpenSidebar() {
 function SidebarToggle() {
   const navbar = document.querySelector(".left");
   if (navbar.style.left == '0px') {
-    CloseSidebar();
+    closeSidebar();
   } 
   else {
-    OpenSidebar();
+    openSidebar();
     document.body.addEventListener('click', function(event) {
       var sidebar = document.getElementsByClassName('left')[0];
       if(!sidebar.contains(event.target)) {  //In case the user clicks outside the sidebar, the sidebar closes
-        CloseSidebar(); 
+        closeSidebar(); 
       }
     }, false); 
   }
-  
 }
