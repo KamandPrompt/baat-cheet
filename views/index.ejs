@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Baat Cheet is an anonymous chat app">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Baat Cheet is an anonymous chat app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/emojify.css">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/emojify.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
     <script src="/client.js"></script>
   </head>
@@ -18,7 +28,13 @@
     <div id="user">
       <div>
         <h1 id="bc"><%= title %></h1>
-        <input type="text" placeholder="What's your nickname?" autofocus="autofocus" id="userN" name="username">
+        <input
+          type="text"
+          placeholder="What's your nickname?"
+          autofocus="autofocus"
+          id="userN"
+          name="username"
+        />
         <p id="error_response"></p>
       </div>
     </div>
@@ -29,11 +45,18 @@
           <div class="top">
             <input type="text" placeholder="Search..." class="searchtext" />
             <!-- font-awesome plus -->
-            <a onclick="newRoom()" id="newRoom"><i class="fas fa-plus-circle"></i></a>
+            <a onclick="newRoom()" id="newRoom"
+              ><i class="fas fa-plus-circle"></i
+            ></a>
           </div>
           <ul class="people" name="people">
-            <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
-              <span class="name">Lobby</span><br>
+            <li
+              class="person active"
+              data-chat="lobby"
+              id="lobby"
+              onclick="showRoom(this)"
+            >
+              <span class="name">Lobby</span><br />
               <span class="preview">Central Lobby</span>
             </li>
           </ul>
@@ -42,10 +65,13 @@
           </button>
         </div>
         <div class="right" id="lobby-msg" data-joined="1">
-
           <div class="top" data-chat="person1">
             <center id="online"><span>Lobby</span></center>
-            <center><button class="btn" onclick="collap('lobby')"><span></span></button></center>
+            <center>
+              <button class="btn" onclick="collap('lobby')">
+                <span></span>
+              </button>
+            </center>
           </div>
           <div class="Participants">
             <center>
@@ -53,43 +79,77 @@
             </center>
             <span></span>
           </div>
-          <div class="chat" data-chat="person1">
-
-          </div>
+          <div class="chat" data-chat="person1"></div>
           <div class="write" id="write">
             <input type="text" id="textarea" data-active="lobby" />
             <div class="write-right">
               <!-- font-awesome smiley -->
-              <a href="#" class="write-link smiley"><i class="far fa-smile"></i>
-                <ul id="emobox">
-                </ul>
+              <a href="#" class="write-link smiley"
+                ><i class="far fa-smile"></i>
+                <ul id="emobox"></ul>
               </a>
               <!-- font-awesome send -->
-              <a href="javascript:;" class="write-link send"><i class="fas fa-paper-plane"></i></a>
+              <a href="javascript:;" class="write-link send"
+                ><i class="fas fa-paper-plane"></i
+              ></a>
             </div>
           </div>
         </div>
         <div class="error"></div>
-
-
       </div>
     </div>
 
     <div id="room">
-      <div>
-        <input type="text" placeholder="Room Name" id="roomName" name="roomName"><br>
-        <textarea placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
-        <button onclick="submitRoom()" id="submit">Submit</button>
-        <button id="cancel">Cancel</button>
+      <div class="container">
+        <div class="form-group">
+          <input
+            class="form-control"
+            type="text"
+            placeholder="Room Name"
+            id="roomName"
+            name="roomName"
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-control"
+            placeholder="Description"
+            id="description"
+            name="description"
+            rows="5"
+            cols="30"
+          ></textarea>
+        </div>
+        <button
+          class="btn btn-outline-primary"
+          onclick="submitRoom()"
+          id="submit"
+        >
+          Submit
+        </button>
+        <button class="btn btn-light" id="cancel">Cancel</button>
       </div>
-      <span id='roomError'></span>
+      <span id="roomError"></span>
     </div>
 
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='/notify.min.js'></script>
-    <script src='/script.js'></script>
-    <script src='/emojify.js'></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/notify.min.js"></script>
+    <script src="/script.js"></script>
+    <script src="/emojify.js"></script>
   </body>
-
 </html>
