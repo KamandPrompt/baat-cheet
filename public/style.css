@@ -326,12 +326,11 @@ body {
   z-index: -10;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.08);
-  position: absolute;
+  position: fixed;
   top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 20%;
   height: 0%;
-  width: auto;
+  width: 23%;
   transition: .5s;
 }
 
