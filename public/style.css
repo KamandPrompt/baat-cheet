@@ -581,6 +581,11 @@ body {
   right: 0;
 }
 
+.container .right .Participants {
+  width: 100%;
+  right: 0;
+}
+
 #submit, #cancel {
   margin-top: 1.5%;
   margin-left: 2%;
