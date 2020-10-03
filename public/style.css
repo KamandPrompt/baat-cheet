@@ -25,6 +25,11 @@ li {
   margin: auto;
 }
 
+#user .home-label {
+  background: linear-gradient(#000,  #00b0ff);
+  border: 2px solid  #00b0ff;
+}
+
 #userN {
   background-color: transparent;
   max-width: 700px;
@@ -52,7 +57,7 @@ li {
   }
 
   #bc {
-    font-size: 16vw !important;
+    font-size: 7rem !important;
   }
 
   #userN {
