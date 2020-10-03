@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Baat Cheet is an anonymous chat app">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Baat Cheet is an anonymous chat app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/emojify.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/emojify.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
     <script src="/client.js"></script>
   </head>
@@ -18,34 +28,57 @@
     <div id="user">
       <div>
         <h1 id="bc"><%= title %></h1>
-        <input type="text" placeholder="What's your nickname?" autofocus="autofocus" id="userN" name="username">
+        <input
+          type="text"
+          placeholder="What's your nickname?"
+          autofocus="autofocus"
+          id="userN"
+          name="username"
+        />
         <p id="error_response"></p>
       </div>
     </div>
 
     <div class="wrapper">
-      <div class="container">
+      <div class="container-fluid chat-wrapper">
         <div class="left">
-          <div class="top">
+          <div class="top flex">
             <input type="text" placeholder="Search..." class="searchtext" />
             <!-- font-awesome plus -->
-            <a onclick="newRoom()" id="newRoom"><i class="fas fa-plus-circle"></i></a>
+            <button
+              onclick="newRoom()"
+              id="newRoom"
+              type="button"
+              class="btn"
+              data-toggle="modal"
+              data-target="#staticBackdrop"
+            >
+              <i class="fas fa-plus-circle"></i>
+            </button>
           </div>
           <ul class="people" name="people">
-            <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
-              <span class="name">Lobby</span><br>
+            <li
+              class="person active"
+              data-chat="lobby"
+              id="lobby"
+              onclick="showRoom(this)"
+            >
+              <span class="name">Lobby</span><br />
               <span class="preview">Central Lobby</span>
             </li>
           </ul>
+        </div>
+        <div class="right" id="lobby-msg" data-joined="1">
           <button class="sidebar-btn" onclick="SidebarToggle()">
             <i id="toggle-icon" class="fa fa-angle-right"></i>
           </button>
-        </div>
-        <div class="right" id="lobby-msg" data-joined="1">
-
           <div class="top" data-chat="person1">
             <center id="online"><span>Lobby</span></center>
-            <center><button class="btn" onclick="collap('lobby')"><span></span></button></center>
+            <center>
+              <button class="btn" onclick="collap('lobby')">
+                <span></span>
+              </button>
+            </center>
           </div>
           <div class="Participants">
             <center>
@@ -53,43 +86,120 @@
             </center>
             <span></span>
           </div>
-          <div class="chat" data-chat="person1">
-
-          </div>
+          <div class="chat" data-chat="person1"></div>
           <div class="write" id="write">
             <input type="text" id="textarea" data-active="lobby" />
             <div class="write-right">
               <!-- font-awesome smiley -->
-              <a href="#" class="write-link smiley"><i class="far fa-smile"></i>
-                <ul id="emobox">
-                </ul>
+              <a href="#" class="write-link smiley"
+                ><i class="far fa-smile"></i>
+                <ul id="emobox"></ul>
               </a>
               <!-- font-awesome send -->
-              <a href="javascript:;" class="write-link send"><i class="fas fa-paper-plane"></i></a>
+              <a href="javascript:;" class="write-link send"
+                ><i class="fas fa-paper-plane"></i
+              ></a>
             </div>
           </div>
         </div>
         <div class="error"></div>
-
-
       </div>
     </div>
 
-    <div id="room">
+    <!-- <div id="room">
       <div>
-        <input type="text" placeholder="Room Name" id="roomName" name="roomName"><br>
-        <textarea placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
+        <input
+          type="text"
+          placeholder="Room Name"
+          id="roomName"
+          name="roomName"
+        /><br />
+        <textarea
+          placeholder="Description"
+          id="description"
+          name="description"
+          rows="5"
+          cols="30"
+        ></textarea>
         <button onclick="submitRoom()" id="submit">Submit</button>
         <button id="cancel">Cancel</button>
       </div>
-      <span id='roomError'></span>
+      <span id="roomError"></span>
+    </div> -->
+
+    <div
+      class="modal fade"
+      id="staticBackdrop"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div id="room" class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleFormControlInput1">Room Name</label>
+                <input
+                  type="text"
+                  name="roomName"
+                  class="form-control"
+                  id="roomName"
+                  placeholder="Your new room name"
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea
+                  name="description"
+                  class="form-control"
+                  id="description"
+                  rows="3"
+                  placeholder="Description of your room"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              onclick="submitRoom()"
+              class="btn btn-primary btn-lg btn-block"
+            >
+              Add Rooms
+            </button>
+            <span id="roomError"></span>
+          </div>
+        </div>
+      </div>
     </div>
 
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='/notify.min.js'></script>
-    <script src='/script.js'></script>
-    <script src='/emojify.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/notify.min.js"></script>
+    <script src="/script.js"></script>
+    <script src="/emojify.js"></script>
   </body>
-
 </html>
