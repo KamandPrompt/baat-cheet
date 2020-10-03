@@ -325,7 +325,7 @@ body {
 .container .right .Participants {
   z-index: -10;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: #d8dde0;
   position: fixed;
   top: 80px;
   right: 20%;
@@ -391,6 +391,11 @@ body {
   .right {
     width: 100% !important;
     display: block;
+  }
+
+  .container .right .Participants {
+    width: 100%;
+    right: 0;
   }
 }
 
