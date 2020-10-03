@@ -94,7 +94,7 @@ body {
   transform: translate(-50%, 0);
 }
 
-.container {
+.app-container {
   position: absolute;
   top: 48%;
   left: 50%;
@@ -195,7 +195,7 @@ body {
   background: #0b7dda;
 }
 
-.container .left .people {
+.app-container .left .people {
   margin-left: -1px;
   padding-left: 21%;
   border-right: 1px solid #e6e6e6;
@@ -503,7 +503,7 @@ body {
   clear: both;
 }
 
-.container .right .bubble:before {
+.app-container .right .bubble:before {
   position: absolute;
   top: 19px;
   display: block;
