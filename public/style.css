@@ -383,9 +383,11 @@ body {
   .sidebar-btn {
     visibility: visible;
   }
-
+  .close-menu{
+    left:-300px !important;
+  }
   .left {
-    left: -300px;
+    left: 0px;
   }
 
   .right {
