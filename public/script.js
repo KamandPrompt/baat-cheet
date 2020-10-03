@@ -132,8 +132,16 @@ function SidebarToggle() {
   else {
     openSidebar();
     document.body.addEventListener('click', function(event) {
-      var sidebar = document.getElementsByClassName('left')[0];
-      if(!sidebar.contains(event.target)) {  //In case the user clicks outside the sidebar, the sidebar closes
+      var sidebar = document.getElementsByClassName('left')[0]; //Ensuring that clicks inside the sidebar(outside lobbies) don't make the sidebar collapse
+      var lobbyName = document.getElementsByClassName('person'); //In case user clicks a lobby from the sidebar, the sidebar collapse. This is a list of classes
+      var addLobbyPage = document.getElementById('room'); //Ensuring that clicks on page to add lobby names doesn't make the sidebar collapse
+      for (var i=0; i<lobbyName.length; i++) { 
+        if(lobbyName[i].contains(event.target)) {
+          closeSidebar(); 
+          return;
+        }
+      }
+      if(!sidebar.contains(event.target) && !addLobbyPage.contains(event.target)) { 
         closeSidebar(); 
       }
     }, false); 
