@@ -392,6 +392,7 @@ button:active,
 .showsidebar {
   transform: translate(0px)!important;
   display: initial!important;
+  transition: all 1s ease-in;
 }
 
 .hidesidebar {
@@ -407,6 +408,7 @@ button:active,
   .left {
     transform: translate(-240px);
     display: none;
+    transition-delay: 1s;
   }
 
   .right {

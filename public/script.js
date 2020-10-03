@@ -135,20 +135,6 @@ function openSidebar() {
 
 function SidebarToggle() {
   const navbar = document.querySelector('.left');
-  if (navbar.classList.contains('showsidebar')) {
-    closeSidebar();
-  } else {
-    openSidebar();
-    document.body.addEventListener(
-      'click',
-      function (event) {
-        var sidebar = document.getElementsByClassName('left')[0];
-        if (!sidebar.contains(event.target)) {
-          //In case the user clicks outside the sidebar, the sidebar closes
-          closeSidebar();
-        }
-      },
-      false
-    );
-  }
+  navbar.classList.toggle('showsidebar');
 }
+
