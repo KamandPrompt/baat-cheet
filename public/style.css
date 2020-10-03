@@ -63,7 +63,7 @@ li {
 #error_response {
   min-width: 100px;
   position: relative;
-  font-size: 1.3vw;
+  font-size: 1rem;
   margin: 2%;
 }
 
