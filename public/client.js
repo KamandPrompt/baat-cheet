@@ -177,7 +177,7 @@ socket.on('room created self', function(data) {
                             <span class='name'>" + data.room_name + "</span><br>\
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
-    $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
+    $('.app-container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
             <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
             <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " user online</span></button></center>\
             </div>\
@@ -206,7 +206,7 @@ socket.on('room created other', function(data) {
                                 <span class='name'>" + data.room_name + "</span><br>\
                                 <span class='preview'>" + data.description + "</span>\
                             </li>");
-        $('.container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
+        $('.app-container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
                 <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
                     <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " users online</span></button></center>\
                 </div>\
