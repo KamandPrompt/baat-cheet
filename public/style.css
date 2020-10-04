@@ -25,6 +25,11 @@ li {
   margin: auto;
 }
 
+#user .home-label {
+  background: rgba(0, 0, 0, 0);
+  border: 2px solid  #00b0ff;
+}
+
 #userN {
   background-color: transparent;
   max-width: 700px;
@@ -37,6 +42,7 @@ li {
   text-align: center;
   font-size: 1.8vw;
   color: #fff;
+  font-family: 'Roboto', 'Segoe UI', sans-serif;
 }
 
 #userN::-webkit-input-placeholder {
@@ -51,7 +57,7 @@ li {
   }
 
   #bc {
-    font-size: 16vw !important;
+    font-size: 7rem !important;
   }
 
   #userN {
@@ -62,7 +68,7 @@ li {
 #error_response {
   min-width: 100px;
   position: relative;
-  font-size: 1.3vw;
+  font-size: 1rem;
   margin: 2%;
 }
 
@@ -94,7 +100,7 @@ body {
   transform: translate(-50%, 0);
 }
 
-.container {
+.app-container {
   position: absolute;
   top: 48%;
   left: 50%;
@@ -115,7 +121,7 @@ body {
   visibility: hidden;
 }
 
-.container .left {
+.app-container .left {
   float: left;
   z-index: 999;
   position: absolute;
@@ -126,14 +132,14 @@ body {
   transition: 1s;
 }
 
-.container .left .top {
+.app-container .left .top {
   position: relative;
   width: 100%;
   height: 96px;
   padding: 29px;
 }
 
-.container .left .top:after {
+.app-container .left .top:after {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -148,7 +154,7 @@ body {
   transform: translate(-50%, 0);
 }
 
-.container .left input {
+.app-container .left input {
   float: left;
   height: 42px;
   padding: 0 15px;
@@ -165,11 +171,11 @@ body {
   font-weight: 400;
 }
 
-.container .left input:focus {
+.app-container .left input:focus {
   outline: none;
 }
 
-.container .left a.search {
+.app-container .left a.search {
   display: block;
   float: left;
   width: 42px;
@@ -182,7 +188,7 @@ body {
   border-radius: 50%;
 }
 
-.container .left .icon {
+.app-container .left .icon {
   position: absolute;
   margin-left: 14px;
   width: 20px;
@@ -191,11 +197,11 @@ body {
   color: white;
 }
 
-.container .left a.search:hover {
+.app-container .left a.search:hover {
   background: #0b7dda;
 }
 
-.container .left .people {
+.app-container .left .people {
   margin-left: -1px;
   padding-left: 21%;
   border-right: 1px solid #e6e6e6;
@@ -208,7 +214,7 @@ body {
   height: calc(100% - 120px);
 }
 
-.container .left .people .person {
+.app-container .left .people .person {
   position: relative;
   left: -15%;
   width: 100%;
@@ -219,7 +225,7 @@ body {
   background-color: #fff;
 }
 
-.container .left .people .person:after {
+.app-container .left .people .person:after {
   position: absolute;
   bottom: 0;
   left: 50%;
@@ -234,7 +240,7 @@ body {
   transform: translate(-50%, 0);
 }
 
-.container .left .people .person .name {
+.app-container .left .people .person .name {
   font-size: 14px;
   line-height: 22px;
   color: #1a1a1a;
@@ -242,7 +248,7 @@ body {
   font-weight: 600;
 }
 
-.container .left .people .person .time {
+.app-container .left .people .person .time {
   font-size: 14px;
   position: absolute;
   top: 16px;
@@ -252,7 +258,7 @@ body {
   background-color: #fff;
 }
 
-.container .left .people .person .preview {
+.app-container .left .people .person .preview {
   font-size: 14px;
   display: inline-block;
   overflow: hidden !important;
@@ -262,7 +268,7 @@ body {
   color: #999;
 }
 
-.container .left .people .person.active, .container .left .people .person:hover {
+.app-container .left .people .person.active, .app-container .left .people .person:hover {
   margin-top: -1px;
   margin-left: -1px;
   padding-top: 13px;
@@ -278,16 +284,16 @@ body {
   padding-left: calc(10% + 1px);
 }
 
-.container .left .people .person.active span, .container .left .people .person:hover span {
+.app-container .left .people .person.active span, .app-container .left .people .person:hover span {
   color: #fff;
   background: transparent;
 }
 
-.container .left .people .person.active:after, .container .left .people .person:hover:after {
+.app-container .left .people .person.active:after, .app-container .left .people .person:hover:after {
   display: none;
 }
 
-.container .right {
+.app-container .right {
   position: relative;
   float: right;
   width: calc(100% - 300px);
@@ -295,34 +301,34 @@ body {
   transition: 1s;
 }
 
-.container .right .top {
+.app-container .right .top {
   width: 100%;
   height: 47px;
   padding: 40px 29px;
   background-color: #eceff1;
 }
 
-.container .right .top span {
+.app-container .right .top span {
   font-size: 15px;
   color: #999;
 }
 
-.container .right .top span .name {
+.app-container .right .top span .name {
   color: #1a1a1a;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 600;
 }
 
-.container .right .top .btn {
+.app-container .right .top .btn {
   border-radius: 5px;
   border: none;
 }
 
-.container .right .top .btn:hover, .container .right .top .btn.viewUsers {
+.app-container .right .top .btn:hover, .app-container .right .top .btn.viewUsers {
   background-color: white;
 }
 
-.container .right .Participants {
+.app-container .right .Participants {
   z-index: -10;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.08);
@@ -334,14 +340,14 @@ body {
   transition: .5s;
 }
 
-.container .right .Participants span ul li {
+.app-container .right .Participants span ul li {
   color: #261B1B;
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.container .right .Participants span ul li:before {
+.app-container .right .Participants span ul li:before {
   content: "\f007";
   font-family: FontAwesome;
   display: inline-block;
@@ -350,7 +356,7 @@ body {
   position: absolute;
 }
 
-.container .right .chat {
+.app-container .right .chat {
   position: relative;
   display: none;
   overflow: auto;
@@ -369,11 +375,11 @@ body {
   flex-direction: column;
 }
 
-.container .right .chat> :first-child {
+.app-container .right .chat> :first-child {
   margin-top: auto !important;
 }
 
-.container .right .chat.active-chat {
+.app-container .right .chat.active-chat {
   display: block;
   display: -webkit-flex;
   display: flex;
@@ -483,7 +489,7 @@ body {
   padding-left: 0;
 }
 
-.container .right .bubble {
+.app-container .right .bubble {
   font-size: 16px;
   position: relative;
   display: inline-block;
@@ -496,14 +502,14 @@ body {
   border-radius: 5px;
 }
 
-.container .right .bubble .info {
+.app-container .right .bubble .info {
   color: rgba(1, 1, 1, 0.7);
   position: relative;
   display: inline-block;
   clear: both;
 }
 
-.container .right .bubble:before {
+.app-container .right .bubble:before {
   position: absolute;
   top: 19px;
   display: block;
@@ -516,7 +522,7 @@ body {
   transform: rotate(29deg) skew(-35deg);
 }
 
-.container .right .bubble.others {
+.app-container .right .bubble.others {
   float: left;
   color: #fff;
   background-color: #00b0ff;
@@ -527,17 +533,17 @@ body {
   animation-name: slideFromLeft;
 }
 
-.container .right .bubble.others:before {
+.app-container .right .bubble.others:before {
   left: -3px;
   background-color: #00b0ff;
 }
 
-.container .right .self {
+.app-container .right .self {
   -webkit-align-self: flex-end;
   align-self: flex-end;
 }
 
-.container .right .bubble.self {
+.app-container .right .bubble.self {
   float: right;
   color: #1a1a1a;
   background-color: #eceff1;
@@ -545,25 +551,25 @@ body {
   align-self: flex-end;
 }
 
-.container .right .bubble.self:before {
+.app-container .right .bubble.self:before {
   right: -3px;
   background-color: #eceff1;
 }
 
-.container .right .conversation-start {
+.app-container .right .conversation-start {
   position: relative;
   width: 100%;
   margin-bottom: 27px;
   text-align: center;
 }
 
-.container .right .conversation-start span {
+.app-container .right .conversation-start span {
   font-size: 14px;
   display: inline-block;
   color: #999;
 }
 
-.container .right .conversation-start span:before, .container .right .conversation-start span:after {
+.app-container .right .conversation-start span:before, .app-container .right .conversation-start span:after {
   position: absolute;
   top: 10px;
   display: inline-block;
@@ -573,11 +579,11 @@ body {
   background-color: #e6e6e6;
 }
 
-.container .right .conversation-start span:before {
+.app-container .right .conversation-start span:before {
   left: 0;
 }
 
-.container .right .conversation-start span:after {
+.app-container .right .conversation-start span:after {
   right: 0;
 }
 
@@ -646,10 +652,6 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   opacity: 0.85;
   background: #f8f8f8;
-}
-
-#room input, #room textarea {
-  font-size:1.1em;
 }
 
 #room>div {
