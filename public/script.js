@@ -5,16 +5,18 @@ $(document).ready(function() {
     }
   });
 
-  $('#textarea').on("keypress", function(val) {
+  // event listener to dinamic element
+  $("body").on("keypress", '.textarea', function(val) {
     if (val.which == 13) {
-      sendMessage();
+      sendMessage($(this).val());
       $(this).val("");
     }
   });
 
-  $('.send').click(function() {
-    sendMessage();
-    $('#textarea').val("");
+  $("body").on("click", '.send', function() {
+    var $input = $(this).parents('.write').find('.textarea');
+    sendMessage($input.val());
+    $input.val("");
   });
 });
 
