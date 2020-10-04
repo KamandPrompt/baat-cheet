@@ -26,7 +26,7 @@ li {
 }
 
 #user .home-label {
-  background: linear-gradient(#000,  #00b0ff);
+  background: rgba(0, 0, 0, 0);
   border: 2px solid  #00b0ff;
 }
 
