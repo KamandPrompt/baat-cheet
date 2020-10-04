@@ -438,7 +438,7 @@ body {
   float: left;
   width: 40px;
   height: 42px;
-  content: "";
+  content: '';
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -446,7 +446,7 @@ body {
 
 /* font-awesome smiley */
 
-.fa-smile {
+.fa-smile{
   position: absolute;
   font-size: 32px;
   right: 3.5rem;
@@ -459,14 +459,14 @@ body {
   width: 42px;
   height: 42px;
   margin-left: 5px;
-  content: "";
+  content: '';
   background-size: 38px 38px;
   background-repeat: no-repeat;
   background-position: center;
 }
 
 /* font-awesome send */
-.fa-paper-plane {
+.fa-paper-plane{
   color: #00adc1;
   font-size: 30px;
   margin-top: 0.3rem;
@@ -609,7 +609,7 @@ body {
 }
 
 /* font-awesome class */
-.fa-plus-circle {
+.fa-plus-circle{
   font-size: 40px;
   color: #00adc1;
 }
@@ -657,7 +657,11 @@ body {
   background: #f8f8f8;
 }
 
-#room > .container {
+#room input, #room textarea {
+  font-size:1.1em;
+}
+
+#room>div {
   border-radius: 2px;
   padding: 20px 30px;
   box-shadow: 0 0 15px;
