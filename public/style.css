@@ -387,9 +387,11 @@ body {
     left:-300px !important;
   }
   .open-menu {
-    left: 0px;
+    left: 0px !important;
   }
-
+  .left{
+    left:-300px;
+  }
   .right {
     width: 100% !important;
     display: block;
@@ -648,6 +650,10 @@ body {
   font-family: 'Source Sans Pro', sans-serif;
   opacity: 0.85;
   background: #f8f8f8;
+}
+
+#room input, #room textarea {
+  font-size:1.1em;
 }
 
 #room>div {
