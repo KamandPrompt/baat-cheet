@@ -383,10 +383,10 @@ body {
   .sidebar-btn {
     visibility: visible;
   }
-  .close-menu{
+  .menu-closed{
     left:-300px !important;
   }
-  .left {
+  .open-menu {
     left: 0px;
   }
 
