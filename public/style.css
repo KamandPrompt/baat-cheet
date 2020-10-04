@@ -654,6 +654,10 @@ body {
   background: #f8f8f8;
 }
 
+#room input, #room textarea {
+  font-size:1.1em;
+}
+
 #room>div {
   border-radius: 2px;
   padding: 20px 30px;
