@@ -27,7 +27,7 @@ li {
 
 #user .home-label {
   background: rgba(0, 0, 0, 0);
-  border: 2px solid  #00b0ff;
+  border: 2px solid #00b0ff;
 }
 
 #userN {
@@ -122,21 +122,10 @@ body {
 }
 
 .app-container .left {
-  float: left;
   z-index: 999;
-  position: absolute;
   width: 300px;
-  height: 100%;
   border: 1px solid #e6e6e6;
-  background-color: #fff;
   transition: 1s;
-}
-
-.app-container .left .top {
-  position: relative;
-  width: 100%;
-  height: 96px;
-  padding: 29px;
 }
 
 .app-container .left .top:after {
@@ -155,18 +144,12 @@ body {
 }
 
 .app-container .left input {
-  float: left;
-  height: 42px;
-  padding: 0 15px;
   width: -moz-calc(100% - 50px);
   width: -webkit-calc(100% - 50px);
   width: -o-calc(100% - 50px);
   width: calc(100% - 50px);
   border: 1px solid #e6e6e6;
   background-color: #eceff1;
-  -moz-border-radius: 21px;
-  -webkit-border-radius: 21px;
-  border-radius: 21px;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
 }
@@ -202,27 +185,17 @@ body {
 }
 
 .app-container .left .people {
-  margin-left: -1px;
   padding-left: 21%;
   border-right: 1px solid #e6e6e6;
   border-left: 1px solid #e6e6e6;
-  width: -moz-calc(100% + 2px);
-  width: -webkit-calc(100% + 2px);
-  width: -o-calc(100% + 2px);
-  width: calc(100% + 2px);
-  overflow-y: auto;
-  height: calc(100% - 120px);
 }
 
 .app-container .left .people .person {
-  position: relative;
   left: -15%;
-  width: 100%;
   text-overflow: ellipsis;
   padding: 12px 0 16px;
   padding-left: 12%;
   cursor: pointer;
-  background-color: #fff;
 }
 
 .app-container .left .people .person:after {
@@ -260,17 +233,14 @@ body {
 
 .app-container .left .people .person .preview {
   font-size: 14px;
-  display: inline-block;
-  overflow: hidden !important;
   width: 70%;
   white-space: nowrap;
   text-overflow: ellipsis;
   color: #999;
 }
 
-.app-container .left .people .person.active, .app-container .left .people .person:hover {
-  margin-top: -1px;
-  margin-left: -1px;
+.app-container .left .people .person.active,
+.app-container .left .people .person:hover {
   padding-top: 13px;
   border: 0;
   background-color: #00b0ff;
@@ -284,12 +254,14 @@ body {
   padding-left: calc(10% + 1px);
 }
 
-.app-container .left .people .person.active span, .app-container .left .people .person:hover span {
+.app-container .left .people .person.active span,
+.app-container .left .people .person:hover span {
   color: #fff;
   background: transparent;
 }
 
-.app-container .left .people .person.active:after, .app-container .left .people .person:hover:after {
+.app-container .left .people .person.active:after,
+.app-container .left .people .person:hover:after {
   display: none;
 }
 
@@ -324,7 +296,8 @@ body {
   border: none;
 }
 
-.app-container .right .top .btn:hover, .app-container .right .top .btn.viewUsers {
+.app-container .right .top .btn:hover,
+.app-container .right .top .btn.viewUsers {
   background-color: white;
 }
 
@@ -389,15 +362,19 @@ body {
   .sidebar-btn {
     visibility: visible;
   }
-  .menu-closed{
-    left:-300px !important;
+
+  .menu-closed {
+    left: -300px !important;
   }
+
   .open-menu {
     left: 0px !important;
   }
-  .left{
-    left:-300px;
+
+  .left {
+    left: -300px;
   }
+
   .right {
     width: 100% !important;
     display: block;
@@ -441,7 +418,6 @@ body {
 }
 
 .write .write-link.smiley:before {
-  display: inline-block;
   float: left;
   width: 40px;
   height: 42px;
@@ -453,7 +429,7 @@ body {
 
 /* font-awesome smiley */
 
-.fa-smile{
+.fa-smile {
   position: absolute;
   font-size: 32px;
   right: 3.5rem;
@@ -462,7 +438,6 @@ body {
 }
 
 .write .write-link.send {
-  display: inline-block;
   float: left;
   width: 42px;
   height: 42px;
@@ -474,7 +449,7 @@ body {
 }
 
 /* font-awesome send */
-.fa-paper-plane{
+.fa-paper-plane {
   color: #00adc1;
   font-size: 30px;
   margin-top: 0.3rem;
@@ -573,7 +548,8 @@ body {
   color: #999;
 }
 
-.app-container .right .conversation-start span:before, .app-container .right .conversation-start span:after {
+.app-container .right .conversation-start span:before,
+.app-container .right .conversation-start span:after {
   position: absolute;
   top: 10px;
   display: inline-block;
@@ -591,7 +567,8 @@ body {
   right: 0;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   margin-top: 1.5%;
   margin-left: 2%;
   font-size: 1vw;
@@ -615,7 +592,7 @@ body {
 }
 
 /* font-awesome class */
-.fa-plus-circle{
+.fa-plus-circle {
   font-size: 40px;
   color: #00adc1;
 }
@@ -628,20 +605,25 @@ body {
   margin-left: 5%;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   font-size: 1.2em;
   border-radius: 12.5px;
   width: 100px;
   height: 35px;
 }
 
-#newRoom:hover, #submit:hover, #cancel:hover {
+#newRoom:hover,
+#submit:hover,
+#cancel:hover {
   border-color: #0b2d63;
   color: #0b2d63;
   cursor: pointer;
 }
 
-#newRoom:active, #submit:active, #cancel:active {
+#newRoom:active,
+#submit:active,
+#cancel:active {
   border-color: #27496d;
   color: #27496d;
 }
@@ -658,8 +640,9 @@ body {
   background: #f8f8f8;
 }
 
-#room input, #room textarea {
-  font-size:1.1em;
+#room input,
+#room textarea {
+  font-size: 1.1em;
 }
 
 #room>div {
@@ -673,7 +656,8 @@ body {
   margin-top: 15%;
 }
 
-#roomName, #description {
+#roomName,
+#description {
   margin: 5%;
   width: 300px;
   font-size: 1.5vw;
