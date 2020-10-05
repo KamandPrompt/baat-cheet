@@ -111,7 +111,8 @@ function writeEmoji(emoji) {
 
 function closeSidebar() {
   const navbar = document.querySelector(".left");
-  navbar.style.left = '-300px';
+  navbar.classList.remove('open-menu')
+  navbar.classList.add('menu-closed')
   right.style.width = "100%";
   var toggle = document.querySelector("#toggle-icon");
   toggle.className = '';
@@ -120,7 +121,8 @@ function closeSidebar() {
 
 function openSidebar() { 
   const navbar = document.querySelector(".left");
-  navbar.style.left = '0px';
+  navbar.classList.remove('menu-closed')
+  navbar.classList.add('open-menu')
   right.style.width = "calc(100% - 300px)";
   var toggle = document.querySelector("#toggle-icon");
   toggle.className = '';
@@ -129,7 +131,7 @@ function openSidebar() {
 
 function SidebarToggle() {
   const navbar = document.querySelector(".left");
-  if (navbar.style.left == '0px') {
+  if (!navbar.classList.contains('menu-closed') && navbar.classList.contains('open-menu')) {
     closeSidebar();
   } 
   else {

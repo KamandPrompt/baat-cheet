@@ -199,7 +199,7 @@ socket.on('room created self', function(data) {
                             </div>
                         `;
 
-    $('.container').append($contentInfo);
+    $('.app-container').append($contentInfo);
     
     $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                 <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
@@ -243,7 +243,7 @@ socket.on('room created other', function(data) {
                             </div>
                         `;
 
-        $('.container').append($contentInfo);
+        $('.app-container').append($contentInfo);
         $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
                                                     <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
                                                 </div>");
