@@ -186,7 +186,7 @@ socket.on('room created self', function(data) {
     const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='1' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn' onclick='collap(${room_name})'><span>${online} user online</span></button></center>
+                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
                                 </div>
                                 <div class='Participants'>
                                     <center><h2>Participants</h2></center>
@@ -230,7 +230,7 @@ socket.on('room created other', function(data) {
         const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn' onclick='collap(${room_name})'><span>${online} users online</span></button></center>
+                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
                                 </div>
                                 <div class='Participants'>
                                     <center><h2>Participants</h2></center>
