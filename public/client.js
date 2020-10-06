@@ -7,9 +7,8 @@ function setUsername() {
 };
 
 //sends a message
-function sendMessage() {
-    msg = $('#textarea').val();
-    //alert(msg);
+function sendMessage(msg) {
+    // alert(msg);
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     room_name = $(".active").attr("id");
     socket.emit('Message Request', {
@@ -162,6 +161,13 @@ socket.on('Display Message', function(data) {
     var room_id = convertIntoId($(".active").attr("id"));
     var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
+    
+    let currRoom = $(".active").attr("id");
+    let isJoined = $("#" + room_id + "-msg").attr("data-joined");
+
+    if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
+        $.notify(`${data.user}@${data.room}\n${(p.length >= 20) ? p.substr(0, 20) + '...' : p}`, "info");
+    }
 });
 
 //if room exists, then prompt for another room name
@@ -171,26 +177,37 @@ socket.on('room exists', function(data) {
 
 //displays room to the creator
 socket.on('room created self', function(data) {
+    const { description, room_name, online, online_users } = data;
     var date = new Date();
-    var room_id = convertIntoId(data.room_name);
-    $('.people').append("<li class='person w-100 position-relative' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
-                            <span class='name'>" + data.room_name + "</span><br>\
-                            <span class='preview'>" + data.description + "</span>\
-                        </li>");
-    $('.app-container').append("<div class='right' id='" + data.room_name + "-msg" + "' data-joined='1' style='display:none;'>\
-            <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
-            <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " user online</span></button></center>\
-            </div>\
-            <div class='Participants'>\
-                <center><h2>Participants</h2></center>\
-                <span></span>\
-            </div>\
-                            <div class='chat active-chat' data-chat='person1'></div>\
-        </div>");
-    $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                            </div>");
-    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+    var room_id = convertIntoId(room_name);
+
+    const $write = $("#write");
+    const $userInfo = `
+                        <li class='person w-100 position-relative' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
+                            <span class='name'>${room_name}</span><br>
+                            <span class='preview'>${description}</span>
+                        </li>
+                    `;
+    $('.people').append($userInfo);
+
+    const $contentInfo = `
+                            <div class='right' id='${room_name}-msg' data-joined='1' style='display:none;'>
+                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
+                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
+                                </div>
+                                <div class='Participants'>
+                                    <center><h2>Participants</h2></center>
+                                    <span></span>
+                                </div>
+                                <div class='chat active-chat' data-chat='person1'></div>
+                                <div class="write">
+                                    ${$write.html()}
+                                </div>
+                            </div>
+                        `;
+
+    $('.app-container').append($contentInfo);
+    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     $("#room").fadeOut();
     $(".wrapper").fadeIn();
     $('#roomName').val("");
@@ -200,26 +217,37 @@ socket.on('room created self', function(data) {
 //displays room to the others
 socket.on('room created other', function(data) {
     if (username) {
+        const { description, room_name, online, online_users } = data;
         var date = new Date();
-        var room_id = convertIntoId(data.room_name);
-        $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
-                                <span class='name'>" + data.room_name + "</span><br>\
-                                <span class='preview'>" + data.description + "</span>\
-                            </li>");
-        $('.app-container').append("<div class='right' id='" + data.room_name + "-msg" + "'  data-joined='0' style='display:none;'>\
-                <div class='top'><center id='online'><span>" + data.room_name + " Room</span>&nbsp;(<a href='#' onclick='leaveRoom(\"" + data.room_name + "\")'>Leave room</a>)</center>\
-                    <center><button class='btn' onclick='collap(\"" + data.room_name + "\")'><span> " + data.online + " users online</span></button></center>\
-                </div>\
-                <div class='Participants'>\
-                    <center><h2>Participants</h2></center>\
-                    <span></span>\
-                </div>\
-                                <div class='chat active-chat' data-chat='person1'></div>\
-            </div>");
-        $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                    <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                                </div>");
-        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+        var room_id = convertIntoId(room_name);
+        
+        const $write = $("#write");
+        const $userInfo = `
+                            <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
+                                <span class='name'>${room_name}</span><br>
+                                <span class='preview'>${description}</span>
+                            </li>
+                        `;
+        $('.people').append($userInfo);
+
+        const $contentInfo = `
+                            <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
+                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
+                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
+                                </div>
+                                <div class='Participants'>
+                                    <center><h2>Participants</h2></center>
+                                    <span></span>
+                                </div>
+                                <div class='chat active-chat' data-chat='person1'></div>
+                                <div class="write">
+                                    ${$write.html()}
+                                </div>
+                            </div>
+                        `;
+
+        $('.app-container').append($contentInfo);
+        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     }
 });
 
@@ -261,7 +289,8 @@ socket.on('update info', function(rooms) {
 
 //updates info about number of users
 socket.on('room joined', function(data) {
-    var room_id = convertIntoId(data.name);
-    $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+    const { name, online, online_users } = data;
+    var room_id = convertIntoId(name);
+    $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = online + " user(s) online";
+    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
 });

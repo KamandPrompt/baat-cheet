@@ -5,16 +5,18 @@ $(document).ready(function() {
     }
   });
 
-  $('#textarea').on("keypress", function(val) {
+  // event listener to dinamic element
+  $("body").on("keypress", '.textarea', function(val) {
     if (val.which == 13) {
-      sendMessage();
+      sendMessage($(this).val());
       $(this).val("");
     }
   });
 
-  $('.send').click(function() {
-    sendMessage();
-    $('#textarea').val("");
+  $("body").on("click", '.send', function() {
+    var $input = $(this).parents('.write').find('.textarea');
+    sendMessage($input.val());
+    $input.val("");
   });
 });
 
@@ -57,7 +59,7 @@ function showRoom(name) {
   var room = name.id;
   var room_id = convertIntoId(room);
   $("#" + room_id).addClass('active');
-  $("#" + room_id + "-msg").css("display", "inherit");
+  $("#" + room_id + "-msg").css("display", "inherit").addClass('active');
   if ($("#" + room_id + "-msg").attr("data-joined") == 0) {
     $(".error").css("display", "inherit");
     $(".error").html('<span id="error">You havent joined this room yet. <input type="button" onclick="joinRoom(\'' + name.id + '\')" value="Join" id="joinBtn"/> to see the conversation.</span>');
@@ -84,24 +86,25 @@ function collap(room_id) {
   }
 }
 
-var emo = document.querySelector(".smiley");
-
-function active() {
-  if ($(".smiley").hasClass("active")) {
-    $(".smiley").removeClass("active");
-    $("#emobox").css("display", "none");
+function active(el) {
+  if (el.hasClass("active")) {
+    el.removeClass("active");
+    el.find('.emobox').css("display", "none");
   } else {
-    $(".smiley").addClass("active");
-    $("#emobox").css("display", "block");
+    el.addClass("active");
+    el.find('.emobox').css("display", "block");
   }
 }
 
-emo.addEventListener("click", active, false);
+$("body").on("click", '.smiley', function() {
+  active($(this));
+});
 
 function writeEmoji(emoji) {
   var emojiName = emoji.id;
-  $("#textarea").val($("#textarea").val() + ":" + emojiName + ":");
-  $("#textarea").focus();
+  const $textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".textarea");
+  $textarea.val($textarea.val() + ":" + emojiName + ":");
+  $textarea.focus();
 }
 
 // For sidebar to work on small screens
