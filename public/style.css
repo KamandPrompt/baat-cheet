@@ -13,6 +13,10 @@ li {
 }
 
 #user {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-family: 'Barrio', cursive;
   color: white;
   display: flex;
@@ -52,7 +56,6 @@ li {
 
 @media screen and (max-width: 50em) {
   #user {
-    position: absolute;
     height: 80%;
   }
 
