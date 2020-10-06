@@ -161,6 +161,13 @@ socket.on('Display Message', function(data) {
     var room_id = convertIntoId($(".active").attr("id"));
     var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
+    
+    let currRoom = $(".active").attr("id");
+    let isJoined = $("#" + room_id + "-msg").attr("data-joined");
+
+    if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
+        $.notify(`${data.user}@${data.room}\n${(p.length >= 20) ? p.substr(0, 20) + '...' : p}`, "info");
+    }
 });
 
 //if room exists, then prompt for another room name
