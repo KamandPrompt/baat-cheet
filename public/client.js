@@ -59,18 +59,18 @@ function convertIntoId(name) {
 //convert an array into list elements
 function convertIntoList(arr) {
     var list = ('<ul>');
-    for(var i=0; i<arr.length; i++)	list = list.concat('<li>' + arr[i] + '</li>');
+    for (var i = 0; i < arr.length; i++)	list = list.concat('<li>' + arr[i] + '</li>');
     list = list.concat('</ul>');
     return list;
 }
 
 //if server emits user exists, propmt for changing username
-socket.on('user exists', function(data) {
+socket.on('user exists', function (data) {
     document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
 });
 
 //if server emits user set, display rooms to user
-socket.on('user set', function(data) {
+socket.on('user set', function (data) {
     username = data.username;
     var date = new Date()
     $("#user").fadeOut();
@@ -84,20 +84,20 @@ socket.on('user set', function(data) {
 });
 
 //notifies users that someone joined baat-cheet
-socket.on('user joined', function(data) {
+socket.on('user joined', function (data) {
     $.notify(data.username + " just joined", "info");
     $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
     $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //notifies users that someone left
-socket.on('user left', function(data) {
+socket.on('user left', function (data) {
     $.notify(data.username + " just left", "error");
 });
 
 
 //notifies users that someone joined a room
-socket.on('user join', function(data) {
+socket.on('user join', function (data) {
     var room_id = convertIntoId(data.room);
     if (data.room != "lobby") {
         $.notify(data.username + " just joined " + data.room + " room!", "info");
@@ -107,7 +107,7 @@ socket.on('user join', function(data) {
 });
 
 //displays message to users
-socket.on('Display Message', function(data) {
+socket.on('Display Message', function (data) {
     var today = new Date();
     var class_name;
     if (socket.username == data.user) {
@@ -161,7 +161,7 @@ socket.on('Display Message', function(data) {
     var room_id = convertIntoId($(".active").attr("id"));
     var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
-    
+
     let currRoom = $(".active").attr("id");
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
@@ -171,19 +171,19 @@ socket.on('Display Message', function(data) {
 });
 
 //if room exists, then prompt for another room name
-socket.on('room exists', function(data) {
+socket.on('room exists', function (data) {
     $('#roomError').text(data + ' room already exists! Try another room name');
 });
 
 //displays room to the creator
-socket.on('room created self', function(data) {
+socket.on('room created self', function (data) {
     const { description, room_name, online, online_users } = data;
     var date = new Date();
     var room_id = convertIntoId(room_name);
 
     const $write = $("#write");
     const $userInfo = `
-                        <li class='person w-100 position-relative' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
+                        <li class='person w-100 position-relative my-1' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
                             <span class='name'>${room_name}</span><br>
                             <span class='preview'>${description}</span>
                         </li>
@@ -215,12 +215,12 @@ socket.on('room created self', function(data) {
 });
 
 //displays room to the others
-socket.on('room created other', function(data) {
+socket.on('room created other', function (data) {
     if (username) {
         const { description, room_name, online, online_users } = data;
         var date = new Date();
         var room_id = convertIntoId(room_name);
-        
+
         const $write = $("#write");
         const $userInfo = `
                             <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
@@ -252,7 +252,7 @@ socket.on('room created other', function(data) {
 });
 
 //destroys room because there are no users in it
-socket.on('destroy room', function(data) {
+socket.on('destroy room', function (data) {
 
     //redirect user to lobby if the active room is to be destroyed
     if ($(".active").attr("id") == data) {
@@ -269,7 +269,7 @@ socket.on('destroy room', function(data) {
 });
 
 //notifies when user leaves the room
-socket.on('user left room', function(data) {
+socket.on('user left room', function (data) {
     var room_id = convertIntoId(data.room);
     $.notify(data.username + " just left room " + data.room, "error");
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
@@ -277,7 +277,7 @@ socket.on('user left room', function(data) {
 });
 
 //updates info about number of users
-socket.on('update info', function(rooms) {
+socket.on('update info', function (rooms) {
     var room_id;
     // alert(rooms);
     for (var i = 0; i < rooms.length; i++) {
@@ -288,7 +288,7 @@ socket.on('update info', function(rooms) {
 });
 
 //updates info about number of users
-socket.on('room joined', function(data) {
+socket.on('room joined', function (data) {
     const { name, online, online_users } = data;
     var room_id = convertIntoId(name);
     $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = online + " user(s) online";
