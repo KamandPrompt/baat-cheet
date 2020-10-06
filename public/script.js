@@ -112,8 +112,8 @@ function closeSidebar() {
   navbar.classList.add('menu-closed')
   right.style.width = "100%";
   var toggle = document.querySelector("#toggle-icon");
-  toggle.className = '';
-  toggle.className += 'fa fa-angle-right';
+  toggle.classList.remove('fa-angle-left');
+  toggle.classList.add('fa-angle-right');
 }
 
 function openSidebar() { 
@@ -122,8 +122,8 @@ function openSidebar() {
   navbar.classList.add('open-menu')
   right.style.width = "calc(100% - 300px)";
   var toggle = document.querySelector("#toggle-icon");
-  toggle.className = '';
-  toggle.className += 'fa fa-angle-left';
+  toggle.classList.remove('fa-angle-right');
+  toggle.classList.add('fa-angle-left');
 }
 
 function SidebarToggle() {

@@ -17,7 +17,7 @@
     <div class="app-container">
       <div class="float-left position-absolute h-100 bg-white left">
         <div class="top position-relative w-100 p-4 my-4">
-          <input type="text" placeholder="Search..." class="rounded-pill px-3 py-2 float-left" />
+          <input type="text" placeholder="Search..." class="rounded-pill form-control px-3 py-2 float-left" />
           <a onclick="newRoom()" id="newRoom"><i class="fas fa-plus-circle"></i></a>
         </div>
         <ul class="people overflow-auto" name="people">
@@ -26,8 +26,8 @@
             <span class="preview overflow-hidden d-inline-block">Central Lobby</span>
           </li>
         </ul>
-        <button class="sidebar-btn" onclick="SidebarToggle()">
-          <i id="toggle-icon" class="fa fa-angle-right"></i>
+        <button class="btn rounded-0 sidebar-btn" onclick="SidebarToggle()">
+          <i id="toggle-icon" class="fa fa-angle-right text-white"></i>
         </button>
       </div>
       <div class="right" id="lobby-msg" data-joined="1">

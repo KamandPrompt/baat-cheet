@@ -119,6 +119,7 @@ body {
   top: 10px;
   font-size: 20px;
   visibility: hidden;
+  background-color: #00adc1;
 }
 
 .app-container .left {
@@ -196,6 +197,7 @@ body {
   padding: 12px 0 16px;
   padding-left: 12%;
   cursor: pointer;
+  transition: background-color 200ms;
 }
 
 .app-container .left .people .person:after {
@@ -241,17 +243,9 @@ body {
 
 .app-container .left .people .person.active,
 .app-container .left .people .person:hover {
-  padding-top: 13px;
   border: 0;
   background-color: #00b0ff;
-  width: -moz-calc(100% + 2px);
-  width: -webkit-calc(100% + 2px);
-  width: -o-calc(100% + 2px);
-  width: calc(100% + 2px);
-  padding-left: -moz-calc(10% + 1px);
-  padding-left: -webkit-calc(10% + 1px);
-  padding-left: -o-calc(10% + 1px);
-  padding-left: calc(10% + 1px);
+  transition: background-color 200ms;
 }
 
 .app-container .left .people .person.active span,

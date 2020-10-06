@@ -173,7 +173,7 @@ socket.on('room exists', function(data) {
 socket.on('room created self', function(data) {
     var date = new Date();
     var room_id = convertIntoId(data.room_name);
-    $('.people').append("<li class='person' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
+    $('.people').append("<li class='person w-100 position-relative' data-chat='person1' id='" + data.room_name + "' onclick='showRoom(this)'>\
                             <span class='name'>" + data.room_name + "</span><br>\
                             <span class='preview'>" + data.description + "</span>\
                         </li>");
