@@ -13,7 +13,6 @@ li {
 }
 
 #user {
-  font-family: 'Barrio', cursive;
   display: flex;
 }
 
@@ -32,7 +31,7 @@ li {
   border-bottom: 2px solid #fff;
   outline: none;
   text-align: center;
-  font-size: 1.8vw;
+  font-size: 1.5rem;
   color: #fff;
   font-family: 'Roboto', 'Segoe UI', sans-serif;
 }
@@ -42,26 +41,9 @@ li {
   opacity: 0.5;
 }
 
-@media screen and (max-width: 50em) {
- 
-  #bc {
-    font-size: 7rem !important;
-  }
-
-  #userN {
-    font-size: 6vw;
-  }
-}
-
-#error_response {
-  min-width: 100px;
-  position: relative;
-  font-size: 1rem;
-  margin: 2%;
-}
-
-#bc {
-  font-size: 8vw;
+.home-title {
+  font-family: 'Barrio', cursive;
+  font-size: 7rem;
 }
 
 body {
