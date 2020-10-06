@@ -200,10 +200,6 @@ socket.on('room created self', function(data) {
                         `;
 
     $('.app-container').append($contentInfo);
-    
-    $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                            </div>");
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     $("#room").fadeOut();
     $(".wrapper").fadeIn();
@@ -244,9 +240,6 @@ socket.on('room created other', function(data) {
                         `;
 
         $('.app-container').append($contentInfo);
-        $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append("<div class='conversation-start'>\
-                                                    <span>" + date.getHours() + ':' + date.getMinutes() + "</span>\
-                                                </div>");
         $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     }
 });
