@@ -14,7 +14,6 @@ li {
 
 #user {
   font-family: 'Barrio', cursive;
-  color: white;
   display: flex;
 }
 
@@ -44,10 +43,7 @@ li {
 }
 
 @media screen and (max-width: 50em) {
-  #user {
-    height: 80%;
-  }
-
+ 
   #bc {
     font-size: 7rem !important;
   }
@@ -66,7 +62,6 @@ li {
 
 #bc {
   font-size: 8vw;
-  position: relative;
 }
 
 body {
