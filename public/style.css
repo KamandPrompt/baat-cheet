@@ -16,29 +16,15 @@ li {
   display: flex;
 }
 
-#user .home-label {
+.home-label {
   background: rgba(0, 0, 0, 0);
   border: 2px solid  #00b0ff;
 }
 
 #userN {
-  background-color: transparent;
-  max-width: 700px;
-  position: relative;
-  min-width: 100%;
-  padding: 10px;
-  border: none;
-  border-bottom: 2px solid #fff;
   outline: none;
-  text-align: center;
   font-size: 1.5rem;
-  color: #fff;
   font-family: 'Roboto', 'Segoe UI', sans-serif;
-}
-
-#userN::-webkit-input-placeholder {
-  color: white;
-  opacity: 0.5;
 }
 
 .home-title {
