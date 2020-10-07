@@ -101,31 +101,11 @@
               ></a>
             </div>
           </div>
+          <div class="overlay" onclick="overlayClick()"></div>
         </div>
         <div class="error"></div>
       </div>
     </div>
-
-    <!-- <div id="room">
-      <div>
-        <input
-          type="text"
-          placeholder="Room Name"
-          id="roomName"
-          name="roomName"
-        /><br />
-        <textarea
-          placeholder="Description"
-          id="description"
-          name="description"
-          rows="5"
-          cols="30"
-        ></textarea>
-        <button onclick="submitRoom()" id="submit">Submit</button>
-        <button id="cancel">Cancel</button>
-      </div>
-      <span id="roomError"></span>
-    </div> -->
 
     <div
       class="modal fade"
@@ -139,7 +119,9 @@
       <div id="room" class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <h5 class="modal-title" id="staticBackdropLabel">
+              Add your desired room
+            </h5>
             <button
               type="button"
               class="close"
