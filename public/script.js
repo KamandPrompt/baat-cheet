@@ -113,7 +113,6 @@ function closeSidebar() {
   const navbar = document.querySelector(".left");
   navbar.classList.remove('open-menu')
   navbar.classList.add('menu-closed')
-  right.style.width = "100%";
   var toggle = document.querySelector("#toggle-icon");
   toggle.className = '';
   toggle.className += 'fa fa-angle-right';
@@ -123,7 +122,6 @@ function openSidebar() {
   const navbar = document.querySelector(".left");
   navbar.classList.remove('menu-closed')
   navbar.classList.add('open-menu')
-  right.style.width = "calc(100% - 300px)";
   var toggle = document.querySelector("#toggle-icon");
   toggle.className = '';
   toggle.className += 'fa fa-angle-left';
