@@ -286,12 +286,11 @@ body {
 .app-container .right .Participants {
   z-index: -10;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   top: 80px;
-  right: 20%;
   height: 0%;
-  width: 23%;
+  width: inherit;
   transition: .5s;
 }
 
