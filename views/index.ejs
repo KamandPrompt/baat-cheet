@@ -7,24 +7,13 @@
     <meta name="description" content="Baat Cheet is an anonymous chat app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= title %></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/emojify.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
-    <script src="/client.js"></script>
+    <%- include('head_imports'); %>
   </head>
 
   <body>
-    <div id="user">
-      <div>
-        <h1 id="bc"><%= title %></h1>
-        <input type="text" placeholder="What's your nickname?" autofocus="autofocus" id="userN" name="username">
-        <p id="error_response"></p>
-      </div>
-    </div>
-
+    <%- include('user', {title: title}); %>
     <div class="wrapper">
-      <div class="container">
+      <div class="app-container">
         <div class="left">
           <div class="top">
             <input type="text" placeholder="Search..." class="searchtext" />
@@ -41,7 +30,7 @@
             <i id="toggle-icon" class="fa fa-angle-right"></i>
           </button>
         </div>
-        <div class="right" id="lobby-msg" data-joined="1">
+        <div class="right active" id="lobby-msg" data-joined="1">
 
           <div class="top" data-chat="person1">
             <center id="online"><span>Lobby</span></center>
@@ -57,11 +46,11 @@
 
           </div>
           <div class="write" id="write">
-            <input type="text" id="textarea" data-active="lobby" />
+            <input type="text" id="textarea" class="textarea" data-active="lobby" />
             <div class="write-right">
               <!-- font-awesome smiley -->
               <a href="#" class="write-link smiley"><i class="far fa-smile"></i>
-                <ul id="emobox">
+                <ul id="emobox" class="emobox">
                 </ul>
               </a>
               <!-- font-awesome send -->
@@ -84,12 +73,9 @@
       </div>
       <span id='roomError'></span>
     </div>
-
-
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='/notify.min.js'></script>
-    <script src='/script.js'></script>
-    <script src='/emojify.js'></script>
+    
   </body>
-
+  <footer>
+    <%- include('footer_imports'); %>
+  </footer>
 </html>

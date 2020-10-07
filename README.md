@@ -11,3 +11,5 @@ Just head over to [Baat-cheet](https://baat-cheet.iitmandi.co.in/) where you can
 ## Want to help? [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/KamandPrompt/baat-cheet/pulls)
 
 Want to file a bug, request a feature, contribute some code, or improve documentation? Excellent! Read up on our guidelines for [contributing](CONTRIBUTING.md) and then check out one of our [issues](https://github.com/KamandPrompt/baat-cheet/issues). Make sure you follow the guidelines before sending a contribution!
+
+### Special thank to [Twemoji](https://twemoji.twitter.com/) project without which we could not add emoji feature here.
