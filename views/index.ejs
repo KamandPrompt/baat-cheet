@@ -19,7 +19,7 @@
           <div class="top">
             <input type="text" placeholder="Search..." class="searchtext" />
             <!-- font-awesome plus -->
-            <a onclick="newRoom()" id="newRoom"><i class="fas fa-plus-circle"></i></a>
+            <a onclick="newRoom()" class="text-primary" id="newRoom"><i class="fas fa-plus-circle"></i></a>
           </div>
           <ul class="people" name="people">
             <li class="person active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
@@ -55,11 +55,11 @@
                 </ul>
               </a>
               <!-- font-awesome send -->
-              <a href="javascript:;" class="write-link send"><i class="fas fa-paper-plane"></i></a>
+              <a href="javascript:;" class="write-link send text-primary"><i class="fas fa-paper-plane"></i></a>
             </div>
           </div>
         </div>
-        <div class="error"></div>
+        <div class="error jumbotron text-center"></div>
 
 
       </div>

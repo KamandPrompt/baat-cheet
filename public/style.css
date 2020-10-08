@@ -18,7 +18,6 @@ li {
 
 .home-label {
   background: rgba(0, 0, 0, 0);
-  border: 2px solid  #00b0ff;
 }
 
 #userN {
@@ -228,7 +227,7 @@ body {
   margin-left: -1px;
   padding-top: 13px;
   border: 0;
-  background-color: #00b0ff;
+  background-color: #007bff;
   width: -moz-calc(100% + 2px);
   width: -webkit-calc(100% + 2px);
   width: -o-calc(100% + 2px);
@@ -429,18 +428,13 @@ body {
 
 /* font-awesome send */
 .fa-paper-plane{
-  color: #00adc1;
   font-size: 30px;
   margin-top: 0.3rem;
 }
 
 #joinBtn {
   cursor: pointer;
-  background: #1ade1a;
-  color: white;
   width: 20%;
-  padding: 1%;
-  border: 0;
 }
 
 .write#join {
@@ -483,7 +477,6 @@ body {
 .app-container .right .bubble.others {
   float: left;
   color: #fff;
-  background-color: #00b0ff;
   -webkit-align-self: flex-start;
   align-self: flex-start;
   -moz-animation-name: slideFromLeft;
@@ -493,7 +486,7 @@ body {
 
 .app-container .right .bubble.others:before {
   left: -3px;
-  background-color: #00b0ff;
+  background-color: #007bff;
 }
 
 .app-container .right .self {
@@ -571,7 +564,6 @@ body {
 /* font-awesome class */
 .fa-plus-circle{
   font-size: 40px;
-  color: #00adc1;
 }
 
 #submit {
