@@ -432,10 +432,6 @@ body {
   margin-top: 0.3rem;
 }
 
-#joinBtn {
-  cursor: pointer;
-}
-
 .write#join {
   padding-left: 0;
 }

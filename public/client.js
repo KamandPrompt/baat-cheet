@@ -43,7 +43,7 @@ function leaveRoom(room) {
     socket.emit('leave room', {
         name: room
     });
-    $(".error").html('<span id="error">You havent joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn">Join to see the conversation.</a></span>');
+    $(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
 
     $("#" + room_id + "-msg").attr("data-joined", 0);
     $("#" + room_id + "-msg,.write").hide();
