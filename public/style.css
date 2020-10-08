@@ -228,7 +228,7 @@ body {
   margin-left: -1px;
   padding-top: 13px;
   border: 0;
-  background-color: #00b0ff;
+  background-color: #007bff;
   width: -moz-calc(100% + 2px);
   width: -webkit-calc(100% + 2px);
   width: -o-calc(100% + 2px);
@@ -483,7 +483,7 @@ body {
 .app-container .right .bubble.others {
   float: left;
   color: #fff;
-  background-color: #00b0ff;
+  background-color: #007bff;
   -webkit-align-self: flex-start;
   align-self: flex-start;
   -moz-animation-name: slideFromLeft;
@@ -493,7 +493,7 @@ body {
 
 .app-container .right .bubble.others:before {
   left: -3px;
-  background-color: #00b0ff;
+  background-color: #007bff;
 }
 
 .app-container .right .self {

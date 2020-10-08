@@ -154,7 +154,6 @@ socket.on('Display Message', function(data) {
     if (class_name == 'self') {
         div.innerHTML += p + br.outerHTML + timestamp.outerHTML;
     } else {
-        div.classList.add("bg-primary")
         div.innerHTML += username.outerHTML + br.outerHTML + p + br.outerHTML + timestamp.outerHTML;
     }
     var room_id = convertIntoId(data.room);
