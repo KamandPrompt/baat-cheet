@@ -659,3 +659,6 @@ body {
   float: left;
   padding: 3px;
 }
+.error{
+  display:none;
+}
