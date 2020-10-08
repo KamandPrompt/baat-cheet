@@ -483,7 +483,6 @@ body {
 .app-container .right .bubble.others {
   float: left;
   color: #fff;
-  background-color: #007bff;
   -webkit-align-self: flex-start;
   align-self: flex-start;
   -moz-animation-name: slideFromLeft;
@@ -571,7 +570,6 @@ body {
 /* font-awesome class */
 .fa-plus-circle{
   font-size: 40px;
-  color: #007bff;
 }
 
 #submit {
