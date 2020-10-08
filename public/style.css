@@ -90,7 +90,7 @@ body {
 .app-container .left .top {
   position: relative;
   width: 100%;
-  height: 96px;
+  height: 80px;
   padding: 29px;
 }
 
@@ -110,24 +110,15 @@ body {
 }
 
 .app-container .left input {
-  float: left;
-  height: 42px;
-  padding: 0 15px;
-  width: -moz-calc(100% - 50px);
-  width: -webkit-calc(100% - 50px);
-  width: -o-calc(100% - 50px);
-  width: calc(100% - 50px);
-  border: 1px solid #e6e6e6;
-  background-color: #eceff1;
-  -moz-border-radius: 21px;
-  -webkit-border-radius: 21px;
-  border-radius: 21px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
+  border-radius: 1.0rem; 
 }
 
 .app-container .left input:focus {
-  outline: none;
+  color: #495057;
+  background-color: #fff;
+  border-color: #00b0ff;
+  outline: 0;
+  box-shadow: none;
 }
 
 .app-container .left a.search {
@@ -429,7 +420,7 @@ body {
 
 /* font-awesome send */
 .fa-paper-plane{
-  color: #00adc1;
+  color: #00b0ff;
   font-size: 30px;
   margin-top: 0.3rem;
 }
@@ -571,7 +562,7 @@ body {
 /* font-awesome class */
 .fa-plus-circle{
   font-size: 40px;
-  color: #00adc1;
+  color: #00b0ff;
 }
 
 #submit {
@@ -667,4 +658,33 @@ body {
 #emobox li {
   float: left;
   padding: 3px;
+}
+
+
+/* Left Side Bar Section */
+
+/* Overriding columns to 1 in side bar */
+.card-columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+}
+
+/* Styling the card */
+.card {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.card:hover {
+  box-shadow: 2px 2px 12px #bbbbbb;
+}
+.card-columns > .card.active{
+  color: white;
+  background-color: #00b0ff;
+}
+.card-text > small {
+  color: #00b0ff;
 }

@@ -30,8 +30,8 @@ $(".search").click(function() {
 
 function search() {
   var $searchtext = $(".searchtext").val().toLowerCase();
-  $("ul[name='people'] li").each(function() {
-    var st = $(this).children(".name").text().toLowerCase();
+  $(".card-columns[name='people'] .card").each(function() {
+    var st = $(this).find( ".card-body > .name" ).text().toLowerCase();
     var $pt = $.trim(st);
     if ($pt.includes($searchtext))
       $(this).show();
