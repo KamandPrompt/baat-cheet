@@ -678,3 +678,31 @@ body {
 .error{
   display:none;
 }
+
+/* Left Side Bar Section */
+
+/* Overriding columns to 1 in side bar */
+.card-columns {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    column-count: 1;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+    column-gap: 1.25rem;
+}
+
+/* Styling the card */
+.card {
+  transition: 0.5s;
+  cursor: pointer;
+}
+.card:hover {
+  box-shadow: 2px 2px 12px #bbbbbb;
+}
+.card-columns > .card.active{
+  color: white;
+  background-color: #00b0ff;
+}
+.card-text > small {
+  color: #00b0ff;
+}
