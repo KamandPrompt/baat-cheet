@@ -19,6 +19,7 @@
           <div class="top form-group mb-0">
             <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
             <!-- font-awesome plus -->
+            <a onclick="newRoom()" class="text-primary" id="newRoom"><i class="fas fa-plus-circle"></i></a>
           </div>
           <div class="card-columns m-2" name="people">
             <div class="card active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
@@ -31,7 +32,7 @@
           <div onclick="newRoom()" class="card m-2">
             <div class="card-body text-center">
               <p class="card-text mb-0">
-                <a  id="newRoom">
+                <a class="text-primary" id="newRoom">
                   <i class="fas fa-plus-circle"></i>
                 </a>
               </p>
@@ -66,11 +67,11 @@
                 </ul>
               </a>
               <!-- font-awesome send -->
-              <a href="javascript:;" class="write-link send"><i class="fas fa-paper-plane"></i></a>
+              <a href="javascript:;" class="write-link send text-primary"><i class="fas fa-paper-plane"></i></a>
             </div>
           </div>
         </div>
-        <div class="error"></div>
+        <div class="error jumbotron text-center"></div>
 
 
       </div>
