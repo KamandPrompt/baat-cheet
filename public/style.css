@@ -285,12 +285,21 @@ body {
 .app-container .right .Participants {
   z-index: -10;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(236 239 241);
   position: fixed;
   top: 80px;
-  height: 0%;
-  width: inherit;
-  transition: .5s;
+  height: 60%;
+  width: 30%;
+  opacity: 0; /*For transition animation*/
+  transition: opacity .5s ease-out;
+  display: block;
+  left: 0;
+  right: 0;
+  position: absolute;
+  margin: auto;
+  border-left: solid 5px rgb(9 121 249);
+  border-right: solid 5px rgb(9 121 249);
+  border-bottom: solid 1px rgb(9 121 249)
 }
 
 .app-container .right .Participants span ul li {
