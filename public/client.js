@@ -67,7 +67,7 @@ function convertIntoList(arr) {
 // Appending the user info into left side card
 function appendUserInfo(room_name, description) {
     const $userInfo = `
-                    <div data-chat='person1' id='${room_name}' onclick='showRoom(this)' class="card">
+                    <div data-chat='person1' id='${room_name}' onclick='showRoom(this)' class="card person">
                         <div class="card-body">
                             <h5 class="card-title name">${room_name}</h5>
                             <p class="card-text preview">${description}</p>
@@ -84,7 +84,7 @@ function appendContentInfo(room_name, online, data_joined) {
     const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
+                                    <center><button class='btn btn-sm p-0' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
                                 </div>
                                 <div class='Participants'>
                                     <center><h2>Participants</h2></center>

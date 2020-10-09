@@ -16,12 +16,12 @@
     <div class="wrapper">
       <div class="app-container">
         <div class="left">
-          <div class="top form-group mb-0">
+          <div class="top form-group mb-0 px-3 pb-3 pt-4">
             <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
             <!-- font-awesome plus -->
           </div>
           <div class="card-columns m-2" name="people">
-            <div class="card active" data-chat="lobby" id="lobby" onclick="showRoom(this)">
+            <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
               <div class="card-body">
                 <h5 class="card-title name">Lobby</h5>
                 <p class="card-text preview">Central Lobby</p>
@@ -38,7 +38,7 @@
               <p class="card-text text-primary"><small>Click to add new Room</small></p>
             </div>
           </div>
-          <button class="sidebar-btn" onclick="SidebarToggle()">
+          <button class="sidebar-btn btn btn-primary btn-group" type="button" onclick="SidebarToggle()">
             <i id="toggle-icon" class="fa fa-angle-right"></i>
           </button>
         </div>
@@ -46,7 +46,7 @@
 
           <div class="top" data-chat="person1">
             <center id="online"><span>Lobby</span></center>
-            <center><button class="btn" onclick="collap('lobby')"><span></span></button></center>
+            <center><button class="btn btn-sm p-0" onclick="collap('lobby')"><span></span></button></center>
           </div>
           <div class="Participants">
             <center>
