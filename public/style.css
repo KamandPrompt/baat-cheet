@@ -75,7 +75,6 @@ body {
   visibility: hidden;
 }
 
-
 /* App Left Section Style */
 .app-container .left {
   float: left;
@@ -88,13 +87,12 @@ body {
   transition: 1s;
 }
 
-.overflow-style {
-  overflow: scroll;
-  height: 89%;
+.room-list {
+  overflow: auto;
+  height: 90%;
 }
 
 /* App Left Section Style End*/
-
 /* App Right Section Style */
 .app-container .right {
   position: relative;
@@ -139,7 +137,8 @@ body {
   top: 80px;
   height: 60%;
   width: 30%;
-  opacity: 0; /*For transition animation*/
+  opacity: 0;
+  /*For transition animation*/
   transition: opacity .5s ease-out;
   display: block;
   left: 0;
@@ -195,21 +194,25 @@ body {
   display: -webkit-flex;
   display: flex;
 }
-/* App Right Section Style End*/
 
+/* App Right Section Style End*/
 @media screen and (max-width: 900px) {
   .sidebar-btn {
     visibility: visible;
   }
-  .menu-closed{
-    left:-300px !important;
+
+  .menu-closed {
+    left: -300px !important;
   }
+
   .open-menu {
     left: 0px !important;
   }
-  .left{
-    left:-300px;
+
+  .left {
+    left: -300px;
   }
+
   .right {
     width: 100% !important;
     display: block;
@@ -264,8 +267,7 @@ body {
 }
 
 /* font-awesome smiley */
-
-.fa-smile{
+.fa-smile {
   position: absolute;
   font-size: 32px;
   right: 3.5rem;
@@ -286,7 +288,7 @@ body {
 }
 
 /* font-awesome send */
-.fa-paper-plane{
+.fa-paper-plane {
   font-size: 30px;
   margin-top: 0.3rem;
 }
@@ -416,7 +418,7 @@ body {
 }
 
 /* font-awesome class */
-.fa-plus-circle{
+.fa-plus-circle {
   font-size: 40px;
 }
 
@@ -459,7 +461,7 @@ body {
 }
 
 #room input, #room textarea {
-  font-size:1.1em;
+  font-size: 1.1em;
 }
 
 #room>div {
@@ -514,16 +516,16 @@ body {
   float: left;
   padding: 3px;
 }
-/* Left Side Bar Section */
 
+/* Left Side Bar Section */
 /* Overriding columns to 1 in side bar */
 .card-columns {
-    -webkit-column-count: 1;
-    -moz-column-count: 1;
-    column-count: 1;
-    -webkit-column-gap: 1.25rem;
-    -moz-column-gap: 1.25rem;
-    column-gap: 1.25rem;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-gap: 1.25rem;
+  -moz-column-gap: 1.25rem;
+  column-gap: 1.25rem;
 }
 
 /* Styling the card */
@@ -531,13 +533,16 @@ body {
   transition: 0.5s;
   cursor: pointer;
 }
+
 .card:hover {
   box-shadow: 2px 2px 12px #bbbbbb;
 }
-.card-columns > .card.active{
+
+.card-columns>.card.active {
   color: white;
   background-color: #007bff;
 }
-.error{
-  display:none;
+
+.error {
+  display: none;
 }
