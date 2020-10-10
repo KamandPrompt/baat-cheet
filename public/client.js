@@ -132,30 +132,40 @@ socket.on('Display Message', function(data) {
         }
     }
     var dateTime = new Date();
+    var year = dateTime.getFullYear().toString(10);
+    var month = dateTime.getMonth().toString(10);
+    var day = dateTime.getDay().toString(10);
     var hours = dateTime.getHours().toString(10);
     var mins = dateTime.getMinutes().toString(10);
+    var secs = dateTime.getSeconds().toString(10);
     if (hours.length == 1) {
         hours = '0' + hours;
     }
     if (mins.length == 1) {
         mins = '0' + mins;
     }
+    if (secs.length == 1) {
+        secs = '0' + secs;
+    }
     // Format Message
     const div = document.createElement('div');
-    const username = document.createElement('small');
-    const timestamp = document.createElement('small');
-    const br = document.createElement('br');
-    div.classList.add("bubble", class_name);
-    username.classList.add("info");
-    timestamp.classList.add("info");
+    const username = document.createElement('div');
+    const timestamp = document.createElement('div');
+    const userMsg = document.createElement('p');
+    //const br = document.createElement('br');
+    div.classList.add("card", "bg-light", "mb-3", class_name);
+    username.classList.add("d-block", "text-secondary");
+    timestamp.classList.add("d-block", "text-secondary");
+    userMsg.classList.add("card-text", "text-primary", "mb-0");
     div.setAttribute("data-chat", "person1")
     username.innerText = data.user;
-    timestamp.innerText = hours + ":" + mins;
+    timestamp.innerText = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + secs;
+    userMsg.innerHTML = p;
     if (class_name == 'self') {
-        div.innerHTML += p + br.outerHTML + timestamp.outerHTML;
+        div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML + "</div>";
     } else {
         div.classList.add("bg-primary");
-        div.innerHTML += username.outerHTML + br.outerHTML + p + br.outerHTML + timestamp.outerHTML;
+        div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML+ "</div>";
     }
     var room_id = convertIntoId(data.room);
     $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append(div)
