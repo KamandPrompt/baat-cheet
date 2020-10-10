@@ -16,31 +16,34 @@
     <div class="wrapper">
       <div class="app-container">
         <div class="left">
-          <div class="top form-group mb-0 px-3 pb-3 pt-4">
+          <div class="top form-group mb-0 px-3 pt-4">
             <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
-            <!-- font-awesome plus -->
+            <hr class="mb-0"/>
           </div>
-          <div class="card-columns m-2" name="people">
-            <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
-              <div class="card-body">
-                <h5 class="card-title name">Lobby</h5>
-                <p class="card-text preview">Central Lobby</p>
+          <!-- Overflow style div -->
+          <div class="overflow-style">
+            <div class="card-columns m-2" name="people">
+              <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
+                <div class="card-body">
+                  <h5 class="card-title name">Lobby</h5>
+                  <p class="card-text preview">Central Lobby</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div onclick="newRoom()" class="card m-2">
-            <div class="card-body text-center">
-              <p class="card-text mb-0">
-                <a class="text-primary" id="newRoom">
-                  <i class="fas fa-plus-circle"></i>
-                </a>
-              </p>
-              <p class="card-text text-primary"><small>Click to add new Room</small></p>
+            <div onclick="newRoom()" class="card m-2">
+              <div class="card-body text-center">
+                <p class="card-text mb-0">
+                  <a class="text-primary" id="newRoom">
+                    <i class="fas fa-plus-circle"></i>
+                  </a>
+                </p>
+                <p class="card-text text-primary"><small>Click to add new Room</small></p>
+              </div>
             </div>
+            <button class="sidebar-btn btn btn-primary btn-group btn-lg" type="button" onclick="SidebarToggle()">
+              <i id="toggle-icon" class="fa fa-angle-right"></i>
+            </button>
           </div>
-          <button class="sidebar-btn btn btn-primary btn-group" type="button" onclick="SidebarToggle()">
-            <i id="toggle-icon" class="fa fa-angle-right"></i>
-          </button>
         </div>
         <div class="right active" id="lobby-msg" data-joined="1">
 
