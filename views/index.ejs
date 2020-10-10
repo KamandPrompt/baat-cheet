@@ -16,12 +16,12 @@
     <div class="wrapper">
       <div class="app-container">
         <div class="left">
-          <div class="top form-group mb-0 px-3 pt-4">
+          <div class="form-group mb-0 px-3 pt-4">
             <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
             <hr class="mb-0"/>
           </div>
           <!-- Overflow style div -->
-          <div class="overflow-style">
+          <div class="room-list">
             <div class="card-columns m-2" name="people">
               <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
                 <div class="card-body">
@@ -88,7 +88,7 @@
       </div>
       <span id='roomError'></span>
     </div>
-    
+
   </body>
   <footer>
     <%- include('footer_imports'); %>
