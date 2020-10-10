@@ -167,7 +167,8 @@ socket.on('Display Message', function(data) {
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
-        $.notify(`Room ${data.room}-\n${data.user}: ${(p.length >= 20) ? p.substr(0, 20) + '...' : p}`, "info");
+        var p_notif=data.msg;
+        $.notify(`Room ${data.room}-\n${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
     }
 });
 
