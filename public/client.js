@@ -117,7 +117,6 @@ socket.on('Display Message', function(data) {
     }
     // Adding Emoji
     var p = data.msg;
-    var p_notif=p;
     var colon1 = p.indexOf(":");
     while (colon1 != -1) {
         var colon2 = p.indexOf(":", colon1 + 1);
@@ -125,7 +124,6 @@ socket.on('Display Message', function(data) {
             emoji_name = p.slice(colon1 + 1, colon2);
             position = emoji_names.indexOf(emoji_name)
             if (position != -1) {
-                p_notif = p_notif.slice(0, colon1+1) + emoji_name +p.slice(colon2);
                 p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojis[position] + ".png\">" + p.slice(colon2 + 1);
             }
             colon1 = p.indexOf(":", colon2 + 1);
@@ -169,6 +167,7 @@ socket.on('Display Message', function(data) {
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
+        var p_notif=data.msg;
         $.notify(`Room ${data.room}-\n${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
     }
 });
