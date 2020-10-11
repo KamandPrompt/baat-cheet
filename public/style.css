@@ -458,7 +458,7 @@ body {
   border-radius: 5px;
 }
 
-.app-container .right .bubble .info {
+.app-container .right .card .info {
   color: rgba(1, 1, 1, 0.7);
   position: relative;
   display: inline-block;
@@ -478,7 +478,7 @@ body {
   transform: rotate(29deg) skew(-35deg);
 }
 
-.app-container .right .bubble.others {
+.app-container .right .card.others {
   float: left;
   color: #fff;
   -webkit-align-self: flex-start;
@@ -488,7 +488,7 @@ body {
   animation-name: slideFromLeft;
 }
 
-.app-container .right .bubble.others:before {
+.app-container .right .card.others:before {
   left: -3px;
   background-color: #007bff;
 }
@@ -498,7 +498,7 @@ body {
   align-self: flex-end;
 }
 
-.app-container .right .bubble.self {
+.app-container .right .card.self {
   float: right;
   color: #1a1a1a;
   background-color: #eceff1;
@@ -506,7 +506,7 @@ body {
   align-self: flex-end;
 }
 
-.app-container .right .bubble.self:before {
+.app-container .right .card.self:before {
   right: -3px;
   background-color: #eceff1;
 }

@@ -132,9 +132,8 @@ socket.on('Display Message', function(data) {
         }
     }
     var dateTime = new Date();
-    var year = dateTime.getFullYear().toString(10);
     var month = dateTime.getMonth().toString(10);
-    var day = dateTime.getDay().toString(10);
+    var day = dateTime.getDate().toString(10);
     var hours = dateTime.getHours().toString(10);
     var mins = dateTime.getMinutes().toString(10);
     var secs = dateTime.getSeconds().toString(10);
@@ -149,19 +148,22 @@ socket.on('Display Message', function(data) {
     }
     // Format Message
     const div = document.createElement('div');
-    const username = document.createElement('div');
-    const timestamp = document.createElement('div');
+    const username = document.createElement('small');
+    const timestamp = document.createElement('small');
     const userMsg = document.createElement('p');
     //const br = document.createElement('br');
-    div.classList.add("card", "bg-light", "mb-3", class_name);
-    username.classList.add("d-block", "text-secondary");
-    timestamp.classList.add("d-block", "text-secondary");
-    userMsg.classList.add("card-text", "text-primary", "mb-0");
+    div.classList.add("card", "mb-3", class_name);
+    username.classList.add("d-block");
+    timestamp.classList.add("d-block");
+    userMsg.classList.add("card-text", "mb-0");
     div.setAttribute("data-chat", "person1")
     username.innerText = data.user;
-    timestamp.innerText = year + "-" + month + "-" + day + " " + hours + ":" + mins + ":" + secs;
+    timestamp.innerText = month + "-" + day + " " + hours + ":" + mins + ":" + secs;
     userMsg.innerHTML = p;
     if (class_name == 'self') {
+        username.classList.add("text-secondary");
+        timestamp.classList.add("text-secondary");
+        userMsg.classList.add("text-primary");
         div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML + "</div>";
     } else {
         div.classList.add("bg-primary");
