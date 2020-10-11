@@ -1,7 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,400,600);
-@import url('https://fonts.googleapis.com/css?family=Barrio');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -14,21 +10,6 @@ li {
 
 #user {
   display: flex;
-}
-
-.home-label {
-  background: rgba(0, 0, 0, 0);
-}
-
-#userN {
-  outline: none;
-  font-size: 1.5rem;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
-}
-
-.home-title {
-  font-family: 'Barrio', cursive;
-  font-size: 7rem;
 }
 
 body {
@@ -402,7 +383,6 @@ body {
   color: #1f4e9b;
   background: rgba(0, 0, 0, 0);
   border: solid 2px #1f4e9b;
-  font-family: 'Roboto', sans-serif;
 }
 
 #newRoom {

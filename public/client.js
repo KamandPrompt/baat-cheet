@@ -75,7 +75,7 @@ function appendUserInfo(room_name, description) {
                     </div>
                 `;
     $('.card-columns').append($userInfo);
-    
+
 }
 
 // Appending the content
@@ -101,8 +101,9 @@ function appendContentInfo(room_name, online, data_joined) {
 }
 
 //if server emits user exists, propmt for changing username
-socket.on('user exists', function(data) {
-    document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
+socket.on('user exists', (data) => {
+    nameError = document.getElementById('nicknameError');
+    nameError.innerHTML = 'There is already one person with this nickname, try another one.';
 });
 
 //if server emits user set, display rooms to user
@@ -198,7 +199,7 @@ socket.on('Display Message', function(data) {
     var room_id = convertIntoId($(".active").attr("id"));
     var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
-    
+
     let currRoom = $(".active").attr("id");
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
