@@ -1,13 +1,13 @@
-var socket = io();
-var username, scrollDiff;
+const socket = io();
+let username, scrollDiff;
 
 //sets client username
-function setUsername() {
+const setUsername = ()=>  {
     socket.emit('set username', $('#userN').val());
 };
 
 //sends a message
-function sendMessage(msg) {
+const sendMessage = (msg)=>  {
     // alert(msg);
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     room_name = $(".active").attr("id");
@@ -18,7 +18,7 @@ function sendMessage(msg) {
 }
 
 //creates a room
-function createRoom() {
+const createRoom = () => {
     if ($("#roomName").val() == '') return;
     socket.emit('create room', {
         room_name: $('#roomName').val(),
@@ -27,45 +27,44 @@ function createRoom() {
 }
 
 //requests server to join a room
-function joinRoom(room) {
-    var room_id = convertIntoId(room);
+const joinRoom = (room) => {
+    const room_id = convertIntoId(room);
     socket.emit('join room', {
         name: room
     });
     $(".error").hide();
-    $("#" + room_id + "-msg").attr("data-joined", 1);
-    $("#" + room_id + "-msg,.write").show();
+    $(`#${room_id}-msg`).attr("data-joined", 1);
+    $(`#${room_id}-msg,.write`).show();
 }
 
 //requests server to leave a room
-function leaveRoom(room) {
-    var room_id = convertIntoId(room);
+const leaveRoom = (room) => {
+    const room_id = convertIntoId(room);
     socket.emit('leave room', {
         name: room
     });
     $(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
 
-    $("#" + room_id + "-msg").attr("data-joined", 0);
-    $("#" + room_id + "-msg,.write").hide();
+    $(`#${room_id}-msg`).attr("data-joined", 0);
+    $(`#${room_id}-msg,.write`).hide();
     $(".error").show();
 }
 
 //For handling meta-characters in jquery
-function convertIntoId(name) {
-    return name.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^{|}~ ]/g, "\\$&");
-}
+const convertIntoId = (name) => name.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^{|}~ ]/g, "\\$&");
+
 
 
 //convert an array into list elements
-function convertIntoList(arr) {
-    var list = ('<ul>');
-    for(var i=0; i<arr.length; i++)	list = list.concat('<li>' + arr[i] + '</li>');
+const convertIntoList = (arr) => {
+    let list = ('<ul>');
+    for(let i=0; i<arr.length; i++)	list = list.concat(`<li>${arr[i]}</li>`);
     list = list.concat('</ul>');
     return list;
 }
 
 // Appending the user info into left side card
-function appendUserInfo(room_name, description) {
+const appendUserInfo = (room_name, description) => {
     const $userInfo = `
                     <div data-chat='person1' id='${room_name}' onclick='showRoom(this)' class="card person">
                         <div class="card-body">
@@ -79,7 +78,7 @@ function appendUserInfo(room_name, description) {
 }
 
 // Appending the content
-function appendContentInfo(room_name, online, data_joined) {
+const appendContentInfo = (room_name, online, data_joined) => {
     const $write = $("#write");
     const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
@@ -101,14 +100,11 @@ function appendContentInfo(room_name, online, data_joined) {
 }
 
 //if server emits user exists, propmt for changing username
-socket.on('user exists', function(data) {
-    document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
-});
+socket.on('user exists', (data) => document.getElementById('error_response').innerHTML = data + 'username already taken! Try another one.')
 
 //if server emits user set, display rooms to user
-socket.on('user set', function(data) {
+socket.on('user set', (data) => {
     username = data.username;
-    var date = new Date()
     $("#user").fadeOut();
     $("body").css("background-color", "#f8f8f8");
     $(".wrapper").fadeIn();
@@ -120,42 +116,41 @@ socket.on('user set', function(data) {
 });
 
 //notifies users that someone joined baat-cheet
-socket.on('user joined', function(data) {
+socket.on('user joined', (data) => {
     $.notify(data.username + " just joined", "info");
     $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
     $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //notifies users that someone left
-socket.on('user left', function(data) {
+socket.on('user left', (data) => {
     $.notify(data.username + " just left", "error");
 });
 
 
 //notifies users that someone joined a room
-socket.on('user join', function(data) {
-    var room_id = convertIntoId(data.room);
+socket.on('user join', (data) => {
+    const room_id = convertIntoId(data.room);
     if (data.room != "lobby") {
         $.notify(data.username + " just joined " + data.room + " room!", "info");
-        $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+        $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
     }
 });
 
 //displays message to users
-socket.on('Display Message', function(data) {
-    var today = new Date();
-    var class_name;
+socket.on('Display Message', (data) => {
+    let class_name;
     if (socket.username == data.user) {
         class_name = 'self';
     } else {
         class_name = 'others'
     }
     // Adding Emoji
-    var p = data.msg;
-    var colon1 = p.indexOf(":");
+    let p = data.msg;
+    let colon1 = p.indexOf(":");
     while (colon1 != -1) {
-        var colon2 = p.indexOf(":", colon1 + 1);
+        let colon2 = p.indexOf(":", colon1 + 1);
         if (colon2 != -1) {
             emoji_name = p.slice(colon1 + 1, colon2);
             position = emoji_names.indexOf(emoji_name)
@@ -167,9 +162,9 @@ socket.on('Display Message', function(data) {
             break;
         }
     }
-    var dateTime = new Date();
-    var hours = dateTime.getHours().toString(10);
-    var mins = dateTime.getMinutes().toString(10);
+    const dateTime = new Date();
+    const hours = dateTime.getHours().toString(10);
+    const mins = dateTime.getMinutes().toString(10);
     if (hours.length == 1) {
         hours = '0' + hours;
     }
@@ -193,17 +188,17 @@ socket.on('Display Message', function(data) {
         div.classList.add("bg-primary");
         div.innerHTML += username.outerHTML + br.outerHTML + p + br.outerHTML + timestamp.outerHTML;
     }
-    var room_id = convertIntoId(data.room);
+    let room_id = convertIntoId(data.room);
     $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append(div)
-    var room_id = convertIntoId($(".active").attr("id"));
-    var height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
+    room_id = convertIntoId($(".active").attr("id"));
+    const height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
     $("#" + room_id + "-msg").children(".chat").scrollTop(height);
     
     let currRoom = $(".active").attr("id");
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
-        var p_notif=data.msg;
+        const p_notif=data.msg;
         $.notify(`Room ${data.room}-\n${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
     }
 });

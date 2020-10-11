@@ -1,12 +1,12 @@
 //setup basic express server
-var express = require('express')
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var index = require('./serve/index.js');
-var port = process.env.PORT || 3000;
-http.listen(port,function(){
+const express = require('express')
+const app = require('express')();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+const path = require('path');
+const index = require('./serve/index.js');
+const port = process.env.PORT || 3000;
+http.listen(port,() => {
 	console.log("Listening",http.address().port);
 });
 app.use(express.static(__dirname + '/public'));
@@ -17,18 +17,18 @@ app.set('view options', {
 
 //routing
 app.use('/',index);
-app.use(function(err,req,res,next){
+app.use((err,req,res,next) => {
 	console.log(err.stack);
 	res.status(500);
 });
 
 //list of rooms and number of users in particular room (default: lobby)
-var rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0, users: []}];
+const rooms = [{name: 'lobby', description: 'Central Lobby', num_users: 0, users: []}];
 
-io.on('connection', function(socket) {
+io.on('connection', (socket) => {
 
 	//When client requests for setting username
-	socket.on('set username', function(name) {
+	socket.on('set username', (name) => {
 		name = name.trim()
 
 		//if name is empty(null), do nothing
@@ -50,7 +50,7 @@ io.on('connection', function(socket) {
 			socket.broadcast.emit('user joined', {username: name, online: rooms[0].num_users, online_users: rooms[0].users});
 			socket.username = name;
 
-			for (var i = 1; i < rooms.length; i++) {
+			for (let i = 1; i < rooms.length; i++) {
 				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description, online: rooms[i].num_users, online_users: rooms[0].users});
 			}
 		}
@@ -61,7 +61,7 @@ io.on('connection', function(socket) {
 	});
 
 	//When client sends message
-	socket.on('Message Request', function(data){
+	socket.on('Message Request', (data) => {
 
 		//if message is valid
 		if(data.msg) {
@@ -71,7 +71,7 @@ io.on('connection', function(socket) {
 	});
 
 	//When client creates room
-	socket.on('create room', function(data) {
+	socket.on('create room', (data) => {
 		data.room_name = data.room_name.trim();
 
 		//if room name is empty, do nothing
@@ -79,10 +79,10 @@ io.on('connection', function(socket) {
 			return;
 		}
 
-		var num_rooms = rooms.length
+		let num_rooms = rooms.length
 
 		//check if room exists
-		for(var i = 0; i<num_rooms; ++i) {
+		for(let i = 0; i<num_rooms; ++i) {
 
 			//if room name is taken
 			if(rooms[i].name == data.room_name) {
@@ -99,15 +99,15 @@ io.on('connection', function(socket) {
 	});
 
 	//When user requests to join the room
-	socket.on('join room', function(room) {
+	socket.on('join room', (room)=> {
 		socket.join(room.name);
 
-		var num_rooms = rooms.length;
-		var num_users;
+		let num_rooms = rooms.length;
+		let num_users;
 		let room_index = 0;
 
 		//update number of users in room
-		for(var i = 0; i < num_rooms; i++) {
+		for(let i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users++;
 				num_users = rooms[i].num_users;
@@ -125,19 +125,19 @@ io.on('connection', function(socket) {
 	});
 
 	//When user requests to leave the room
-	socket.on('leave room', function(room) {
+	socket.on('leave room', (room) => {
 		socket.leave(room.name);
 
-		var num_rooms = rooms.length;
-		var num_users;
-		var room_index = 0;
+		const num_rooms = rooms.length;
+		let num_users;
+		let room_index = 0;
 
 		//update number of users in room
-		for(var i = 0; i < num_rooms; i++) {
+		for(let i = 0; i < num_rooms; i++) {
 			if(room.name == rooms[i].name) {
 				rooms[i].num_users--;
 				num_users = rooms[i].num_users;
-				for( var j = 0; j < rooms[i].users.length; j++){
+				for( let j = 0; j < rooms[i].users.length; j++){
 				   if ( rooms[i].users[j] === socket.username) {
 				     rooms[i].users.splice(j, 1);
 				     j--;
@@ -159,15 +159,15 @@ io.on('connection', function(socket) {
 	});
 
 	//When user disconnets remove user from users
-	socket.on('disconnecting', function() {
+	socket.on('disconnecting', () => {
 
-		var num_rooms = rooms.length;
+		const num_rooms = rooms.length;
 
 		//update number of users in rooms 
-		for(var i = 0; i < num_rooms; i++) {
+		for(let i = 0; i < num_rooms; i++) {
 			if(socket.rooms[rooms[i].name]) {	
 				rooms[i].num_users--;
-				var index = rooms[i].users.indexOf(socket.username);
+				const index = rooms[i].users.indexOf(socket.username);
 				if(index != -1) {
 					rooms[i].users.splice(index, 1);
 				}
