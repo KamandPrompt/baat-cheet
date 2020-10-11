@@ -189,13 +189,13 @@ socket.on('Display Message', (data) => {
         div.innerHTML += username.outerHTML + br.outerHTML + p + br.outerHTML + timestamp.outerHTML;
     }
     let room_id = convertIntoId(data.room);
-    $("#" + room_id + "-msg").children(".chat[data-chat='person1']").append(div)
+    $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(div)
     room_id = convertIntoId($(".active").attr("id"));
-    const height = $("#" + room_id + "-msg").children(".chat")[0].scrollHeight;
-    $("#" + room_id + "-msg").children(".chat").scrollTop(height);
+    const height = $(`#${room_id}-msg`).children(".chat")[0].scrollHeight;
+    $(`#${room_id}-msg`).children(".chat").scrollTop(height);
     
     let currRoom = $(".active").attr("id");
-    let isJoined = $("#" + room_id + "-msg").attr("data-joined");
+    let isJoined = $(`#${room_id}-msg`).attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
         const p_notif=data.msg;
@@ -204,15 +204,14 @@ socket.on('Display Message', (data) => {
 });
 
 //if room exists, then prompt for another room name
-socket.on('room exists', function(data) {
-    $('#roomError').text(data + ' room already exists! Try another room name');
+socket.on('room exists', (data) =>  {
+    $('#roomError').text(`${data} room already exists! Try another room name`);
 });
 
 //displays room to the creator
-socket.on('room created self', function(data) {
+socket.on('room created self', (data) =>  {
     const { description, room_name, online, online_users } = data;
-    var date = new Date();
-    var room_id = convertIntoId(room_name);
+    let room_id = convertIntoId(room_name);
     appendUserInfo(room_name,description);
     appendContentInfo(room_name,online,1);
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
@@ -223,11 +222,10 @@ socket.on('room created self', function(data) {
 });
 
 //displays room to the others
-socket.on('room created other', function(data) {
+socket.on('room created other', (data) =>{
     if (username) {
         const { description, room_name, online, online_users } = data;
-        var date = new Date();
-        var room_id = convertIntoId(room_name);
+        let room_id = convertIntoId(room_name);
         appendUserInfo(room_name, description);
         appendContentInfo(room_name,online,0);
         $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
@@ -247,26 +245,26 @@ socket.on('destroy room', function(data) {
     $(".write").css("display", "initial");
 
     var room_id = convertIntoId(data);
-    $('#' + room_id).remove();
-    $('#' + room_id + '-msg').remove();
+    $(`#${room_id}`).remove();
+    $(`#${room_id}-msg`).remove();
 });
 
 //notifies when user leaves the room
-socket.on('user left room', function(data) {
-    var room_id = convertIntoId(data.room);
-    $.notify(data.username + " just left room " + data.room, "error");
-    $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+socket.on('user left room', (data) =>  {
+    let room_id = convertIntoId(data.room);
+    $.notify(`${data.username} just left room  ${data.room}`, "error");
+    $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //updates info about number of users
-socket.on('update info', function(rooms) {
-    var room_id;
+socket.on('update info', (rooms)=> {
+    let room_id;
     // alert(rooms);
-    for (var i = 0; i < rooms.length; i++) {
+    for (let i = 0; i < rooms.length; i++) {
         room_id = convertIntoId(rooms[i].name);
-        $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = rooms[i].num_users + " user(s) online";
-        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(rooms[i].users);
+        $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = rooms[i].num_users + " user(s) online";
+        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(rooms[i].users);
     }
 });
 
@@ -274,6 +272,6 @@ socket.on('update info', function(rooms) {
 socket.on('room joined', function(data) {
     const { name, online, online_users } = data;
     var room_id = convertIntoId(name);
-    $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = online + " user(s) online";
-    $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
+    $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = online + " user(s) online";
+    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
 });
