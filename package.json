@@ -8,8 +8,8 @@
     "dev": "nodemon app.js"
   },
   "engines": {
-    "npm": "3.10.10",
-    "node": "6.9.4"
+    "npm": "6.2.0",
+    "node": "10.8.0"
   },
   "repository": {
     "type": "git",
