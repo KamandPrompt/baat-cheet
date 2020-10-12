@@ -20,15 +20,8 @@
     "url": "https://github.com/ssh-iitmandi/baat-cheet/issues"
   },
   "dependencies": {
-<<<<<<< HEAD
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "socket.io": "^2.3.0"
-=======
-    "bootstrap": "^4.5.2",
-    "ejs": "^2.5.5",
-    "express": "^4.17.1",
-    "socket.io": "^1.7.2"
->>>>>>> 81b8437... Added the bootstrap modal for creating a new room. Changed the style.css file too and imported jquery and popper required for the data attributes of modal to function properly. Closes issue #118
   }
 }
