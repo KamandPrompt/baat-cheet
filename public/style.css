@@ -441,3 +441,7 @@ body {
 .modal-body {
   border-bottom: 1px solid lightgray;
 }
+/* Notification styles */
+.notification-error {
+  color: #ff0000;
+}

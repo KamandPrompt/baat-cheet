@@ -1,4 +1,8 @@
 $(document).ready(function() {
+
+  // Init notiifications
+  $('.toast').toast({delay: 3000});
+
   $("#userN").on("keypress", function(val) {
     if (val.which == 13) {
       setUsername();
@@ -18,6 +22,7 @@ $(document).ready(function() {
     sendMessage($input.val());
     $input.val("");
   });
+
 });
 
 $(".searchtext").on("keyup", function(val) {
@@ -141,4 +146,16 @@ function SidebarToggle() {
       }
     }, false); 
   }
+}
+
+function showNotification(data, type){
+  var newClass = 'notification-'+type;
+
+  $('.toast-body').text(data);
+  $('#toast-wrapper').addClass(newClass);
+  $('.toast').toast('show');
+  $('.toast').on('hidden.bs.toast', function () {
+    $('#toast-wrapper').removeClass(newClass);
+  })
+  console.log(data, type);
 }
