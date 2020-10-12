@@ -156,6 +156,5 @@ function showNotification(data, type){
   $('.toast').toast('show');
   $('.toast').on('hidden.bs.toast', function () {
     $('#toast-wrapper').removeClass(newClass);
-  })
-  console.log(data, type);
+  });
 }
