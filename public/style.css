@@ -290,7 +290,8 @@ body {
   top: 80px;
   height: 60%;
   width: 30%;
-  opacity: 0; /*For transition animation*/
+  opacity: 0;
+  /*For transition animation*/
   transition: opacity .5s ease-out;
   display: block;
   left: 0;
@@ -351,15 +352,19 @@ body {
   .sidebar-btn {
     visibility: visible;
   }
-  .menu-closed{
-    left:-300px !important;
+
+  .menu-closed {
+    left: -300px !important;
   }
+
   .open-menu {
     left: 0px !important;
   }
-  .left{
-    left:-300px;
+
+  .left {
+    left: -300px;
   }
+
   .right {
     width: 100% !important;
     display: block;
@@ -414,8 +419,7 @@ body {
 }
 
 /* font-awesome smiley */
-
-.fa-smile{
+.fa-smile {
   position: absolute;
   font-size: 32px;
   right: 3.5rem;
@@ -436,7 +440,7 @@ body {
 }
 
 /* font-awesome send */
-.fa-paper-plane{
+.fa-paper-plane {
   font-size: 30px;
   margin-top: 0.3rem;
 }
@@ -445,37 +449,11 @@ body {
   padding-left: 0;
 }
 
-.app-container .right .bubble {
-  font-size: 16px;
-  position: relative;
-  display: inline-block;
-  clear: both;
-  margin-bottom: 8px;
-  padding: 13px 14px;
-  vertical-align: top;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
 .app-container .right .card .info {
   color: rgba(1, 1, 1, 0.7);
   position: relative;
   display: inline-block;
   clear: both;
-}
-
-.app-container .right .bubble:before {
-  position: absolute;
-  top: 19px;
-  display: block;
-  width: 8px;
-  height: 6px;
-  content: '\00a0';
-  -moz-transform: rotate(29deg) skew(-35deg);
-  -ms-transform: rotate(29deg) skew(-35deg);
-  -webkit-transform: rotate(29deg) skew(-35deg);
-  transform: rotate(29deg) skew(-35deg);
 }
 
 .app-container .right .card.others {
@@ -566,7 +544,7 @@ body {
 }
 
 /* font-awesome class */
-.fa-plus-circle{
+.fa-plus-circle {
   font-size: 40px;
 }
 
@@ -609,7 +587,7 @@ body {
 }
 
 #room input, #room textarea {
-  font-size:1.1em;
+  font-size: 1.1em;
 }
 
 #room>div {
@@ -664,6 +642,7 @@ body {
   float: left;
   padding: 3px;
 }
-.error{
-  display:none;
+
+.error {
+  display: none;
 }
