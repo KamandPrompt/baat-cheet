@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Baat Cheet is an anonymous chat app">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><%= title %></title>
     <%- include('head_imports'); %>
   </head>
@@ -15,6 +15,7 @@
 
     <div class="wrapper">
       <div class="app-container">
+        <%- include('notification'); %>
         <div class="left">
           <div class="form-group mb-0 px-3 pt-4">
             <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
@@ -46,7 +47,6 @@
           </div>
         </div>
         <div class="right active" id="lobby-msg" data-joined="1">
-
           <div class="top" data-chat="person1">
             <center id="online"><span>Lobby</span></center>
             <center><button class="btn btn-sm p-0" onclick="collap('lobby')"><span></span></button></center>
@@ -58,7 +58,6 @@
             <span></span>
           </div>
           <div class="chat" data-chat="person1">
-
           </div>
           <div class="write" id="write">
             <input type="text" id="textarea" class="textarea" data-active="lobby" />

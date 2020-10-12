@@ -499,3 +499,11 @@ body {
 .error {
   display: none;
 }
+
+/* Notification styles */
+.notification-info {
+  color: #333;
+}
+.notification-error {
+  color: #ff0000;
+}
