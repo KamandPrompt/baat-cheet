@@ -1,7 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,400,600);
-@import url('https://fonts.googleapis.com/css?family=Barrio');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -14,21 +10,6 @@ li {
 
 #user {
   display: flex;
-}
-
-.home-label {
-  background: rgba(0, 0, 0, 0);
-}
-
-#userN {
-  outline: none;
-  font-size: 1.5rem;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
-}
-
-.home-title {
-  font-family: 'Barrio', cursive;
-  font-size: 7rem;
 }
 
 body {
@@ -54,6 +35,7 @@ body {
   transform: translate(-50%, 0);
 }
 
+/* Main App Container */
 .app-container {
   position: absolute;
   top: 48%;
@@ -71,10 +53,10 @@ body {
   position: absolute;
   left: 300px;
   top: 10px;
-  font-size: 20px;
   visibility: hidden;
 }
 
+/* App Left Section Style */
 .app-container .left {
   float: left;
   z-index: 999;
@@ -86,167 +68,13 @@ body {
   transition: 1s;
 }
 
-.app-container .left .top {
-  position: relative;
-  width: 100%;
-  height: 96px;
-  padding: 29px;
+.room-list {
+  overflow: auto;
+  height: 90%;
 }
 
-.app-container .left .top:after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  display: block;
-  width: 80%;
-  height: 1px;
-  content: '';
-  background-color: #e6e6e6;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
-.app-container .left input {
-  float: left;
-  height: 42px;
-  padding: 0 15px;
-  width: -moz-calc(100% - 50px);
-  width: -webkit-calc(100% - 50px);
-  width: -o-calc(100% - 50px);
-  width: calc(100% - 50px);
-  border: 1px solid #e6e6e6;
-  background-color: #eceff1;
-  -moz-border-radius: 21px;
-  -webkit-border-radius: 21px;
-  border-radius: 21px;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
-}
-
-.app-container .left input:focus {
-  outline: none;
-}
-
-.app-container .left a.search {
-  display: block;
-  float: left;
-  width: 42px;
-  height: 42px;
-  margin-left: 10px;
-  background-color: #00b0ff;
-  border: 1px solid #e6e6e6;
-  -moz-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
-}
-
-.app-container .left .icon {
-  position: absolute;
-  margin-left: 14px;
-  width: 20px;
-  margin-top: 9px;
-  z-index: 1;
-  color: white;
-}
-
-.app-container .left a.search:hover {
-  background: #0b7dda;
-}
-
-.app-container .left .people {
-  margin-left: -1px;
-  padding-left: 21%;
-  border-right: 1px solid #e6e6e6;
-  border-left: 1px solid #e6e6e6;
-  width: -moz-calc(100% + 2px);
-  width: -webkit-calc(100% + 2px);
-  width: -o-calc(100% + 2px);
-  width: calc(100% + 2px);
-  overflow-y: auto;
-  height: calc(100% - 120px);
-}
-
-.app-container .left .people .person {
-  position: relative;
-  left: -15%;
-  width: 100%;
-  text-overflow: ellipsis;
-  padding: 12px 0 16px;
-  padding-left: 12%;
-  cursor: pointer;
-  background-color: #fff;
-}
-
-.app-container .left .people .person:after {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  display: block;
-  width: 80%;
-  height: 1px;
-  content: '';
-  background-color: #e6e6e6;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
-.app-container .left .people .person .name {
-  font-size: 14px;
-  line-height: 22px;
-  color: #1a1a1a;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 600;
-}
-
-.app-container .left .people .person .time {
-  font-size: 14px;
-  position: absolute;
-  top: 16px;
-  right: 10%;
-  padding: 0 0 5px 5px;
-  color: #999;
-  background-color: #fff;
-}
-
-.app-container .left .people .person .preview {
-  font-size: 14px;
-  display: inline-block;
-  overflow: hidden !important;
-  width: 70%;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #999;
-}
-
-.app-container .left .people .person.active, .app-container .left .people .person:hover {
-  margin-top: -1px;
-  margin-left: -1px;
-  padding-top: 13px;
-  border: 0;
-  background-color: #007bff;
-  width: -moz-calc(100% + 2px);
-  width: -webkit-calc(100% + 2px);
-  width: -o-calc(100% + 2px);
-  width: calc(100% + 2px);
-  padding-left: -moz-calc(10% + 1px);
-  padding-left: -webkit-calc(10% + 1px);
-  padding-left: -o-calc(10% + 1px);
-  padding-left: calc(10% + 1px);
-}
-
-.app-container .left .people .person.active span, .app-container .left .people .person:hover span {
-  color: #fff;
-  background: transparent;
-}
-
-.app-container .left .people .person.active:after, .app-container .left .people .person:hover:after {
-  display: none;
-}
-
+/* App Left Section Style End*/
+/* App Right Section Style */
 .app-container .right {
   position: relative;
   float: right;
@@ -348,6 +176,7 @@ body {
   display: flex;
 }
 
+/* App Right Section Style End*/
 @media screen and (max-width: 900px) {
   .sidebar-btn {
     visibility: visible;
@@ -528,7 +357,6 @@ body {
   color: #1f4e9b;
   background: rgba(0, 0, 0, 0);
   border: solid 2px #1f4e9b;
-  font-family: 'Roboto', sans-serif;
 }
 
 #newRoom {
@@ -641,6 +469,31 @@ body {
 #emobox li {
   float: left;
   padding: 3px;
+}
+/* Left Side Bar Section */
+/* Overriding columns to 1 in side bar */
+.card-columns {
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-gap: 1.25rem;
+  -moz-column-gap: 1.25rem;
+  column-gap: 1.25rem;
+}
+
+/* Styling the card */
+.card {
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 12px #bbbbbb;
+}
+
+.card-columns>.card.active {
+  color: white;
+  background-color: #007bff;
 }
 
 .error {

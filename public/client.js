@@ -64,9 +64,46 @@ function convertIntoList(arr) {
     return list;
 }
 
+// Appending the user info into left side card
+function appendUserInfo(room_name, description) {
+    const $userInfo = `
+                    <div data-chat='person1' id='${room_name}' onclick='showRoom(this)' class="card person">
+                        <div class="card-body">
+                            <h5 class="card-title name">${room_name}</h5>
+                            <p class="card-text preview">${description}</p>
+                        </div>
+                    </div>
+                `;
+    $('.card-columns').append($userInfo);
+
+}
+
+// Appending the content
+function appendContentInfo(room_name, online, data_joined) {
+    const $write = $("#write");
+    const $contentInfo = `
+                            <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
+                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
+                                    <center><button class='btn btn-sm p-0' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
+                                </div>
+                                <div class='Participants'>
+                                    <center><h2>Participants</h2></center>
+                                    <span></span>
+                                </div>
+                                <div class='chat active-chat' data-chat='person1'></div>
+                                <div class="write">
+                                    ${$write.html()}
+                                </div>
+                            </div>
+                        `;
+
+    $('.app-container').append($contentInfo);
+}
+
 //if server emits user exists, propmt for changing username
-socket.on('user exists', function(data) {
-    document.getElementById('error_response').innerHTML = data + ' username already taken! Try another one.'
+socket.on('user exists', (data) => {
+    nameError = document.getElementById('nicknameError');
+    nameError.innerHTML = 'There is already one person with this nickname, try another one.';
 });
 
 //if server emits user set, display rooms to user
@@ -180,7 +217,8 @@ socket.on('Display Message', function(data) {
     let isJoined = $("#" + room_id + "-msg").attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
-        $.notify(`Room ${data.room}-\n${data.user}: ${(p.length >= 20) ? p.substr(0, 20) + '...' : p}`, "info");
+        var p_notif=data.msg;
+        $.notify(`Room ${data.room}-\n${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
     }
 });
 
@@ -194,33 +232,8 @@ socket.on('room created self', function(data) {
     const { description, room_name, online, online_users } = data;
     var date = new Date();
     var room_id = convertIntoId(room_name);
-
-    const $write = $("#write");
-    const $userInfo = `
-                        <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
-                            <span class='name'>${room_name}</span><br>
-                            <span class='preview'>${description}</span>
-                        </li>
-                    `;
-    $('.people').append($userInfo);
-
-    const $contentInfo = `
-                            <div class='right' id='${room_name}-msg' data-joined='1' style='display:none;'>
-                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
-                                </div>
-                                <div class='Participants'>
-                                    <center><h2>Participants</h2></center>
-                                    <span></span>
-                                </div>
-                                <div class='chat active-chat' data-chat='person1'></div>
-                                <div class="write">
-                                    ${$write.html()}
-                                </div>
-                            </div>
-                        `;
-
-    $('.app-container').append($contentInfo);
+    appendUserInfo(room_name,description);
+    appendContentInfo(room_name,online,1);
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     $("#room").fadeOut();
     $(".wrapper").fadeIn();
@@ -234,7 +247,6 @@ socket.on('room created other', function(data) {
         const { description, room_name, online, online_users } = data;
         var date = new Date();
         var room_id = convertIntoId(room_name);
-
         const $write = $("#write");
         const $userInfo = `
                             <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
@@ -259,8 +271,9 @@ socket.on('room created other', function(data) {
                                 </div>
                             </div>
                         `;
-
         $('.app-container').append($contentInfo);
+        appendUserInfo(room_name, description);
+        appendContentInfo(room_name,online,0);
         $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     }
 });
