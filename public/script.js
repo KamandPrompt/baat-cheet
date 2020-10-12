@@ -12,9 +12,9 @@ $(document).ready(function() {
   });
 
   $("body").on("click", '.send', function() {
-    const $input = $(this).parents('.write').find('.textarea');
-    sendMessage($input.val());
-    $input.val("");
+    const input = $(this).parents('.write').find('.textarea');
+    sendMessage(input.val());
+    input.val("");
   });
 });
 
@@ -24,11 +24,11 @@ $(".searchtext").on("keyup", () => search());
 $(".search").click(() => search());
 
 const search = () => {
-  const $searchtext = $(".searchtext").val().toLowerCase();
+  const searchtext = $(".searchtext").val().toLowerCase();
   $(".card-columns[name='people'] .card").each(function() {
     var st = $(this).find( ".card-body > .name" ).text().toLowerCase();
     var $pt = $.trim(st);
-    if ($pt.includes($searchtext))
+    if ($pt.includes(searchtext))
       $(this).show();
     else
       $(this).hide();
@@ -93,9 +93,9 @@ $("body").on("click", '.smiley', function() {
 
 function writeEmoji(emoji) {
   var emojiName = emoji.id;
-  const $textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".textarea");
-  $textarea.val($textarea.val() + ":" + emojiName + ":");
-  $textarea.focus();
+  const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".textarea");
+  textarea.val(textarea.val() + ":" + emojiName + ":");
+  textarea.focus();
 }
 
 // For sidebar to work on small screens

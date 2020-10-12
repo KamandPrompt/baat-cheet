@@ -3,7 +3,6 @@ const express = require('express')
 const app = require('express')();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const path = require('path');
 const index = require('./serve/index.js');
 const port = process.env.PORT || 3000;
 http.listen(port,() => {
