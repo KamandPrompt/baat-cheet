@@ -163,8 +163,8 @@ socket.on('Display Message', (data) => {
         }
     }
     const dateTime = new Date();
-    const hours = dateTime.getHours().toString(10);
-    const mins = dateTime.getMinutes().toString(10);
+    let hours = dateTime.getHours().toString(10);
+    let mins = dateTime.getMinutes().toString(10);
     if (hours.length == 1) {
         hours = '0' + hours;
     }
