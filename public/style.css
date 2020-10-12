@@ -1,7 +1,3 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:100,400,600);
-@import url('https://fonts.googleapis.com/css?family=Barrio');
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -14,21 +10,6 @@ li {
 
 #user {
   display: flex;
-}
-
-.home-label {
-  background: rgba(0, 0, 0, 0);
-}
-
-#userN {
-  outline: none;
-  font-size: 1.5rem;
-  font-family: 'Roboto', 'Segoe UI', sans-serif;
-}
-
-.home-title {
-  font-family: 'Barrio', cursive;
-  font-size: 7rem;
 }
 
 body {
@@ -297,40 +278,14 @@ body {
   padding-left: 0;
 }
 
-.app-container .right .bubble {
-  font-size: 16px;
-  position: relative;
-  display: inline-block;
-  clear: both;
-  margin-bottom: 8px;
-  padding: 13px 14px;
-  vertical-align: top;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.app-container .right .bubble .info {
+.app-container .right .card .info {
   color: rgba(1, 1, 1, 0.7);
   position: relative;
   display: inline-block;
   clear: both;
 }
 
-.app-container .right .bubble:before {
-  position: absolute;
-  top: 19px;
-  display: block;
-  width: 8px;
-  height: 6px;
-  content: '\00a0';
-  -moz-transform: rotate(29deg) skew(-35deg);
-  -ms-transform: rotate(29deg) skew(-35deg);
-  -webkit-transform: rotate(29deg) skew(-35deg);
-  transform: rotate(29deg) skew(-35deg);
-}
-
-.app-container .right .bubble.others {
+.app-container .right .card.others {
   float: left;
   color: #fff;
   -webkit-align-self: flex-start;
@@ -340,7 +295,7 @@ body {
   animation-name: slideFromLeft;
 }
 
-.app-container .right .bubble.others:before {
+.app-container .right .card.others:before {
   left: -3px;
   background-color: #007bff;
 }
@@ -350,7 +305,7 @@ body {
   align-self: flex-end;
 }
 
-.app-container .right .bubble.self {
+.app-container .right .card.self {
   float: right;
   color: #1a1a1a;
   background-color: #eceff1;
@@ -358,7 +313,7 @@ body {
   align-self: flex-end;
 }
 
-.app-container .right .bubble.self:before {
+.app-container .right .card.self:before {
   right: -3px;
   background-color: #eceff1;
 }
@@ -402,7 +357,6 @@ body {
   color: #1f4e9b;
   background: rgba(0, 0, 0, 0);
   border: solid 2px #1f4e9b;
-  font-family: 'Roboto', sans-serif;
 }
 
 #newRoom {
@@ -516,7 +470,6 @@ body {
   float: left;
   padding: 3px;
 }
-
 /* Left Side Bar Section */
 /* Overriding columns to 1 in side bar */
 .card-columns {

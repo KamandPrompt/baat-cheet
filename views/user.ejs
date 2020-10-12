@@ -1,11 +1,10 @@
 <div id="user" class="text-center align-items-center justify-content-center h-100 w-100 position-fixed text-white">
   <div class="d-flex">
-    <div class="jumbotron p-auto m-5 home-label border border-primary">
-      <h1 class="home-title position-relative"><%= title %></h1>
-      <input type="text" placeholder="What's your nickname?"
-      class="position-relative bg-transparent text-white text-center w-100 p-3 border-top-0 border-right-0 border-left-0 border-bottom"
-      autofocus="autofocus" id="userN" name="username">
-      <p id="error_response" class="position-relative m-2"></p>
+    <div class="jumbotron p-auto m-5 border border-primary bg-transparent">
+      <h1 class="position-relative display-1"><%= title %></h1>
+      <input type="text" autocomplete="off" placeholder="What should we call you?" class="position-relative bg-transparent text-white text-center w-100 p-3 border-top-0 border-right-0 border-left-0 border-bottom" autofocus="true" id="userN"
+        name="username">
+      <p id="nicknameError" class="position-relative m-2"></p>
     </div>
   </div>
 </div>

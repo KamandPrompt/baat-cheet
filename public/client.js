@@ -74,7 +74,7 @@ const appendUserInfo = (room_name, description) => {
                     </div>
                 `;
     $('.card-columns').append($userInfo);
-    
+
 }
 
 // Appending the content
@@ -100,7 +100,10 @@ const appendContentInfo = (room_name, online, data_joined) => {
 }
 
 //if server emits user exists, propmt for changing username
-socket.on('user exists', (data) => document.getElementById('error_response').innerHTML = data + 'username already taken! Try another one.')
+socket.on('user exists', (data) => {
+    nameError = document.getElementById('nicknameError');
+    nameError.innerHTML = 'There is already one person with this nickname, try another one.';
+});
 
 //if server emits user set, display rooms to user
 socket.on('user set', (data) => {
@@ -162,38 +165,54 @@ socket.on('Display Message', (data) => {
             break;
         }
     }
-    const dateTime = new Date();
-    let hours = dateTime.getHours().toString(10);
-    let mins = dateTime.getMinutes().toString(10);
+
+    var dateTime = new Date();
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    var month = months[dateTime.getMonth()];
+    var day = dateTime.getDate().toString();
+    var hours = dateTime.getHours().toString();
+    var mins = dateTime.getMinutes().toString();
+    var secs = dateTime.getSeconds().toString();
+
     if (hours.length == 1) {
         hours = '0' + hours;
     }
     if (mins.length == 1) {
         mins = '0' + mins;
     }
+    if (secs.length == 1) {
+        secs = '0' + secs;
+    }
     // Format Message
     const div = document.createElement('div');
     const username = document.createElement('small');
     const timestamp = document.createElement('small');
-    const br = document.createElement('br');
-    div.classList.add("bubble", class_name);
-    username.classList.add("info");
-    timestamp.classList.add("info");
+    const userMsg = document.createElement('p');
+    //const br = document.createElement('br');
+    div.classList.add("card", "mb-3", "w-75", class_name);
+    username.classList.add("d-block");
+    timestamp.classList.add("d-block");
+    userMsg.classList.add("card-text", "mb-0");
     div.setAttribute("data-chat", "person1")
     username.innerText = data.user;
-    timestamp.innerText = hours + ":" + mins;
+    timestamp.innerText = hours + ":" + mins + ":" + secs + ", " + month + " " + day;
+    userMsg.innerHTML = p;
     if (class_name == 'self') {
-        div.innerHTML += p + br.outerHTML + timestamp.outerHTML;
+        username.classList.add("text-secondary");
+        timestamp.classList.add("text-secondary");
+        userMsg.classList.add("text-primary");
+        div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML + "</div>";
     } else {
         div.classList.add("bg-primary");
-        div.innerHTML += username.outerHTML + br.outerHTML + p + br.outerHTML + timestamp.outerHTML;
+        div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML+ "</div>";
     }
-    let room_id = convertIntoId(data.room);
+  let room_id = convertIntoId(data.room);
     $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(div)
     room_id = convertIntoId($(".active").attr("id"));
     const height = $(`#${room_id}-msg`).children(".chat")[0].scrollHeight;
     $(`#${room_id}-msg`).children(".chat").scrollTop(height);
     
+
     let currRoom = $(".active").attr("id");
     let isJoined = $(`#${room_id}-msg`).attr("data-joined");
 
@@ -225,7 +244,33 @@ socket.on('room created self', (data) =>  {
 socket.on('room created other', (data) =>{
     if (username) {
         const { description, room_name, online, online_users } = data;
-        let room_id = convertIntoId(room_name);
+        var date = new Date();
+        var room_id = convertIntoId(room_name);
+        const $write = $("#write");
+        const $userInfo = `
+                            <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
+                                <span class='name'>${room_name}</span><br>
+                                <span class='preview'>${description}</span>
+                            </li>
+                        `;
+        $('.people').append($userInfo);
+
+        const $contentInfo = `
+                            <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
+                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
+                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
+                                </div>
+                                <div class='Participants'>
+                                    <center><h2>Participants</h2></center>
+                                    <span></span>
+                                </div>
+                                <div class='chat active-chat' data-chat='person1'></div>
+                                <div class="write">
+                                    ${$write.html()}
+                                </div>
+                            </div>
+                        `;
+        $('.app-container').append($contentInfo);
         appendUserInfo(room_name, description);
         appendContentInfo(room_name,online,0);
         $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
