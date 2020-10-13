@@ -79,6 +79,17 @@ io.on('connection', function(socket) {
 			return;
 		}
 
+		//limit length of room name/description
+		var maxRoomNameLength = 20;
+		var maxDescriptionLength = 45;
+
+		if(data.room_name.length > maxRoomNameLength) {
+			data.room_name = data.room_name.substring(0, maxRoomNameLength - 1).concat("...");
+		}
+		if(data.description.length > maxDescriptionLength) {
+			data.description = data.description.substring(0, maxDescriptionLength - 1).concat("...");
+		}
+
 		var num_rooms = rooms.length
 
 		//check if room exists
