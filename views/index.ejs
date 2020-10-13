@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Baat Cheet is an anonymous chat app">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <%- include('head_imports'); %>
+</head>
+
+<body>
+  <%- include('user', {title: title}); %>
+
+  <div class="wrapper">
+    <div class="app-container">
+      <div class="left">
+        <div class="form-group mb-0 px-3 pt-4">
+          <input type="text" id="searchId" placeholder="Search..." class="searchtext form-control" />
+          <hr class="mb-0" />
+        </div>
+        <!-- Overflow style div -->
+        <div class="room-list">
+          <div class="card-columns m-2" name="people">
+            <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
+              <div class="card-body">
+                <h5 class="card-title name">Lobby</h5>
+                <p class="card-text preview">Central Lobby</p>
+              </div>
+            </div>
+          </div>
+          <div class="card m-2">
+            <div class="card-body text-center" data-toggle="modal" data-target="#newRoomModal">
+              <p class="card-text mb-0">
+                <a class="text-primary" id="newRoom">
+                  <i class="fas fa-plus-circle"></i>
+                </a>
+              </p>
+              <p class="card-text text-primary"><small>Click to add new Room</small></p>
+            </div>
+          </div>
+          <button class="sidebar-btn btn btn-primary btn-group btn-lg" type="button" onclick="SidebarToggle()">
+            <i id="toggle-icon" class="fa fa-angle-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="right active" id="lobby-msg" data-joined="1">
+
+        <div class="top" data-chat="person1">
+          <center id="online"><span>Lobby</span></center>
+          <center><button class="btn btn-sm p-0" onclick="collap('lobby')"><span></span></button></center>
+        </div>
+        <div class="Participants">
+          <center>
+            <h2>Participants</h2>
+          </center>
+          <span></span>
+        </div>
+        <div class="chat" data-chat="person1">
+
+        </div>
+        <div class="write" id="write">
+          <input type="text" id="textarea" class="textarea" data-active="lobby" />
+          <div class="write-right">
+            <!-- font-awesome smiley -->
+            <a href="#" class="write-link smiley"><i class="far fa-smile"></i>
+              <ul id="emobox" class="emobox">
+              </ul>
+            </a>
+            <!-- font-awesome send -->
+            <a href="javascript:;" class="write-link send text-primary"><i class="fas fa-paper-plane"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="error jumbotron text-center"></div>
+
+    </div>
+  </div>
+
+  <div id="room">
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add your desired room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="roomName">Room Name</label>
+                <input type="text" name="roomName" class="form-control" id="roomName"
+                  placeholder="Your new room name" />
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="3"
+                  placeholder="Description of your room"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button onclick="submitRoom()" class="btn btn-primary btn-lg btn-block" id="submit">
+              Add Room
+            </button>
+            <br>
+          </div>
+          <span id="roomError" class="ml-auto p-2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<footer>
+  <%- include('footer_imports'); %>
+</footer>
+
+</html>

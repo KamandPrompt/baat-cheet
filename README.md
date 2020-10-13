@@ -1,4 +1,5 @@
-# Baat-Cheet   
+# Baat-Cheet
+
 **Baat-cheet** is a completely anonymous online chat website developed by IIT Mandi.
 
 If you want to discuss your issues then join our [gitter community](https://gitter.im/Baat-Cheet-IIT/community) or if you are a student of IIT Mandi, you can also join your [zulipchat](https://kamandprompt.zulipchat.com/#narrow/stream/201590-Baat-Cheet.20Project).
