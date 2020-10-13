@@ -349,16 +349,6 @@ body {
   right: 0;
 }
 
-#submit, #cancel {
-  margin-top: 1.5%;
-  margin-left: 2%;
-  font-size: 1vw;
-  padding: 1%;
-  color: #1f4e9b;
-  background: rgba(0, 0, 0, 0);
-  border: solid 2px #1f4e9b;
-}
-
 #newRoom {
   position: relative;
   display: inline-block;
@@ -376,21 +366,6 @@ body {
   font-size: 40px;
 }
 
-#submit {
-  margin-left: calc(45% - 100px);
-}
-
-#cancel {
-  margin-left: 5%;
-}
-
-#submit, #cancel {
-  font-size: 1.2em;
-  border-radius: 12.5px;
-  width: 100px;
-  height: 35px;
-}
-
 #newRoom:hover, #submit:hover, #cancel:hover {
   border-color: #0b2d63;
   color: #0b2d63;
@@ -400,47 +375,6 @@ body {
 #newRoom:active, #submit:active, #cancel:active {
   border-color: #27496d;
   color: #27496d;
-}
-
-#room {
-  display: none;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  height: 100%;
-  width: 100%;
-  font-family: 'Source Sans Pro', sans-serif;
-  opacity: 0.85;
-  background: #f8f8f8;
-}
-
-#room input, #room textarea {
-  font-size: 1.1em;
-}
-
-#room>div {
-  border-radius: 2px;
-  padding: 20px 30px;
-  box-shadow: 0 0 15px;
-  font-size: 14px;
-  font-weight: bold;
-  width: 400px;
-  margin-left: calc(50% - 200px);
-  margin-top: 15%;
-}
-
-#roomName, #description {
-  margin: 5%;
-  width: 300px;
-  font-size: 1.5vw;
-  border-color: #000;
-  font-family: 'Source Sans Pro', sans-serif;
-  background-color: transparent;
-}
-
-#roomName {
-  border: none;
-  border-bottom: 1.5px solid #000;
 }
 
 #online {
@@ -498,4 +432,12 @@ body {
 
 .error {
   display: none;
+}
+
+.modal-header {
+  border-bottom: 1px solid lightgray;
+}
+
+.modal-body {
+  border-bottom: 1px solid lightgray;
 }

@@ -40,14 +40,6 @@ function search() {
   });
 };
 
-function newRoom() {
-  $("#room").css("display", "block");
-};
-
-$("#cancel").click(function() {
-  $(this).parent().parent().hide();
-});
-
 function submitRoom() {
   createRoom(); // used in client.js to pass details to app.js
 };
