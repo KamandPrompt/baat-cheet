@@ -224,7 +224,9 @@ socket.on('Display Message', function(data) {
 
 //if room exists, then prompt for another room name
 socket.on('room exists', function(data) {
+    $('#roomError').show();
     $('#roomError').text(data + ' room already exists! Try another room name');
+    setTimeout(() => $('#roomError').hide(), 2000);
 });
 
 //displays room to the creator
@@ -235,10 +237,11 @@ socket.on('room created self', function(data) {
     appendUserInfo(room_name,description);
     appendContentInfo(room_name,online,1);
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
-    $("#room").fadeOut();
-    $(".wrapper").fadeIn();
     $('#roomName').val("");
     $('#description').val("");
+    $('#newRoomModal').on('show.bs.modal', function () {
+        $('#newRoomModal').modal('hide');
+    });
 });
 
 //displays room to the others

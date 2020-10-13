@@ -377,17 +377,17 @@ body {
   color: #27496d;
 }
 
-#roomName, #description {
+/* #roomName, #description {
   margin: 5%;
   border-color: #000;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: transparent;
-}
+} */
 
-#roomName {
+/* #roomName {
   border: none;
   border-bottom: 1px solid #000;
-}
+} */
 
 #online {
   margin-top: -2%;
@@ -444,4 +444,12 @@ body {
 
 .error {
   display: none;
+}
+
+.modal-header {
+  border-bottom: 1px solid lightgray;
+}
+
+.modal-body {
+  border-bottom: 1px solid lightgray;
 }

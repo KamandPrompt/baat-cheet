@@ -75,40 +75,45 @@
       </div>
       <div class="error jumbotron text-center"></div>
 
-
     </div>
   </div>
 
-  <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Enter New Room Details</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-row col-sm-10">
-              <input class="form-control" type="text" placeholder="Room Name" id="roomName" name="roomName">
-            </div>
-            <div class="form-row col-sm-10">
-              <textarea class="form-control" placeholder="Description" id="description" name="description" rows="5" cols="30"></textarea>
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer row justify-content-center">
-          <button class="btn btn-primary" type="button" onclick="submitRoom()" id="submit" data-dismiss="modal">Submit</button>
+  <div id="room">
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add your desired room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="roomName">Room Name</label>
+                <input type="text" name="roomName" class="form-control" id="roomName"
+                  placeholder="Your new room name" />
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="3"
+                  placeholder="Description of your room"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button onclick="submitRoom()" class="btn btn-primary btn-lg btn-block" id="submit">
+              Add Room
+            </button>
+            <br>
+          </div>
+          <span id="roomError" class="ml-auto p-2"></span>
         </div>
       </div>
     </div>
   </div>
-  
-  <span id='roomError'></span>
-  
-</div>
 
 </body>
 <footer>
