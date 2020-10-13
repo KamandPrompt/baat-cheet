@@ -377,18 +377,6 @@ body {
   color: #27496d;
 }
 
-/* #roomName, #description {
-  margin: 5%;
-  border-color: #000;
-  font-family: 'Source Sans Pro', sans-serif;
-  background-color: transparent;
-} */
-
-/* #roomName {
-  border: none;
-  border-bottom: 1px solid #000;
-} */
-
 #online {
   margin-top: -2%;
   font-size: 15px;

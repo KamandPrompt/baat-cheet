@@ -227,6 +227,7 @@ socket.on('room exists', function(data) {
     $('#roomError').show();
     $('#roomError').text(data + ' room already exists! Try another room name');
     setTimeout(() => $('#roomError').hide(), 2000);
+    $('#roomName').val("");
 });
 
 //displays room to the creator
@@ -239,9 +240,10 @@ socket.on('room created self', function(data) {
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     $('#roomName').val("");
     $('#description').val("");
-    $('#newRoomModal').on('show.bs.modal', function () {
-        $('#newRoomModal').modal('hide');
-    });
+
+    jQuery.noConflict(); 
+    $(".modal-backdrop").remove();
+    $("#newRoomModal").modal('hide');
 });
 
 //displays room to the others

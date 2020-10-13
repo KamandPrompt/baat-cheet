@@ -85,7 +85,7 @@ io.on('connection', function(socket) {
 		for(var i = 0; i<num_rooms; ++i) {
 
 			//if room name is taken
-			if(rooms[i].name.val().toUpperCase() === data.room_name.val().toUpperCase()) {
+			if(rooms[i].name == data.room_name) {
 				socket.emit('room exists', data.room_name);
 				return;
 			}
