@@ -441,3 +441,10 @@ body {
 .modal-body {
   border-bottom: 1px solid lightgray;
 }
+
+.toast-header {
+  padding-top: 1.5em;
+}
+.toast {
+  min-width: 200px;
+}
