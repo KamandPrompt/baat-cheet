@@ -41,7 +41,7 @@ function search() {
 };
 
 function submitRoom() {
-  createRoom(); // used in client.js to pass details to app.js 
+  createRoom(); // used in client.js to pass details to app.js
 };
 
 function showRoom(name) {
