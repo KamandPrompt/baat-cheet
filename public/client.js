@@ -41,6 +41,7 @@ function joinRoom(room) {
 //requests server to leave a room
 function leaveRoom(room) {
     var room_id = convertIntoId(room);
+    document.getElementById(`lobby-msg`).classList.add("active");
     socket.emit('leave room', {
         name: room
     });
