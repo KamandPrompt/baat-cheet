@@ -17,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
   overflow-y: hidden;
   background-repeat: none;
@@ -97,7 +97,7 @@ body {
 
 .app-container .right .top span .name {
   color: #1a1a1a;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 600;
 }
 
@@ -106,7 +106,8 @@ body {
   border: none;
 }
 
-.app-container .right .top .btn:hover, .app-container .right .top .btn.viewUsers {
+.app-container .right .top .btn:hover,
+.app-container .right .top .btn.viewUsers {
   background-color: white;
 }
 
@@ -120,7 +121,7 @@ body {
   width: 30%;
   opacity: 0;
   /*For transition animation*/
-  transition: opacity .5s ease-out;
+  transition: opacity 0.5s ease-out;
   display: block;
   left: 0;
   right: 0;
@@ -128,11 +129,11 @@ body {
   margin: auto;
   border-left: solid 5px rgb(9 121 249);
   border-right: solid 5px rgb(9 121 249);
-  border-bottom: solid 1px rgb(9 121 249)
+  border-bottom: solid 1px rgb(9 121 249);
 }
 
 .app-container .right .Participants span ul li {
-  color: #261B1B;
+  color: #261b1b;
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -166,7 +167,7 @@ body {
   flex-direction: column;
 }
 
-.app-container .right .chat> :first-child {
+.app-container .right .chat > :first-child {
   margin-top: auto !important;
 }
 
@@ -228,7 +229,7 @@ body {
   border: 0;
   outline: none;
   background-color: transparent;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   font-weight: 400;
 }
 
@@ -241,7 +242,7 @@ body {
   float: left;
   width: 40px;
   height: 42px;
-  content: '';
+  content: "";
   background-size: 30px 30px;
   background-repeat: no-repeat;
   background-position: center;
@@ -262,7 +263,7 @@ body {
   width: 42px;
   height: 42px;
   margin-left: 5px;
-  content: '';
+  content: "";
   background-size: 38px 38px;
   background-repeat: no-repeat;
   background-position: center;
@@ -331,13 +332,14 @@ body {
   color: #999;
 }
 
-.app-container .right .conversation-start span:before, .app-container .right .conversation-start span:after {
+.app-container .right .conversation-start span:before,
+.app-container .right .conversation-start span:after {
   position: absolute;
   top: 10px;
   display: inline-block;
   width: 30%;
   height: 1px;
-  content: '';
+  content: "";
   background-color: #e6e6e6;
 }
 
@@ -349,7 +351,8 @@ body {
   right: 0;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   margin-top: 1.5%;
   margin-left: 2%;
   font-size: 1vw;
@@ -362,7 +365,7 @@ body {
 #newRoom {
   position: relative;
   display: inline-block;
-  content: '';
+  content: "";
   margin-left: 4.2px;
   width: 40px;
   height: 42px;
@@ -384,20 +387,25 @@ body {
   margin-left: 5%;
 }
 
-#submit, #cancel {
+#submit,
+#cancel {
   font-size: 1.2em;
   border-radius: 12.5px;
   width: 100px;
   height: 35px;
 }
 
-#newRoom:hover, #submit:hover, #cancel:hover {
+#newRoom:hover,
+#submit:hover,
+#cancel:hover {
   border-color: #0b2d63;
   color: #0b2d63;
   cursor: pointer;
 }
 
-#newRoom:active, #submit:active, #cancel:active {
+#newRoom:active,
+#submit:active,
+#cancel:active {
   border-color: #27496d;
   color: #27496d;
 }
@@ -409,16 +417,17 @@ body {
   left: 0px;
   height: 100%;
   width: 100%;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   opacity: 0.85;
   background: #f8f8f8;
 }
 
-#room input, #room textarea {
+#room input,
+#room textarea {
   font-size: 1.1em;
 }
 
-#room>div {
+#room > div {
   border-radius: 2px;
   padding: 20px 30px;
   box-shadow: 0 0 15px;
@@ -429,12 +438,13 @@ body {
   margin-top: 15%;
 }
 
-#roomName, #description {
+#roomName,
+#description {
   margin: 5%;
   width: 300px;
   font-size: 1.5vw;
   border-color: #000;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   background-color: transparent;
 }
 
@@ -491,7 +501,7 @@ body {
   box-shadow: 2px 2px 12px #bbbbbb;
 }
 
-.card-columns>.card.active {
+.card-columns > .card.active {
   color: white;
   background-color: #007bff;
 }
