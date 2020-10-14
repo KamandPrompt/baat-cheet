@@ -70,11 +70,11 @@ function collap(room_id) {
   room_id = convertIntoId(room_id);
   var height = $("#" + room_id + "-msg").find('.Participants').css('opacity');
   if(height == '0') {
-   $("#" + room_id + "-msg").find('.Participants').css({"opacity":"1" , "z-index":"10"});
-  $("#" + room_id + "-msg").find('.btn').addClass('viewUsers');
+    $("#" + room_id + "-msg").find('.Participants').css({"opacity":"1" , "z-index":"10"});
+    $("#" + room_id + "-msg").find('.btn').addClass('viewUsers');
   } else {
-   $("#" + room_id + "-msg").find('.Participants').css({"opacity":"0" , "z-index":"-10"});
-  $("#" + room_id + "-msg").find('.btn').removeClass('viewUsers');
+    $("#" + room_id + "-msg").find('.Participants').css({"opacity":"0" , "z-index":"-10"});
+    $("#" + room_id + "-msg").find('.btn').removeClass('viewUsers');
   }
 }
 
@@ -141,4 +141,37 @@ function SidebarToggle() {
       }
     }, false); 
   }
+}
+
+function notify(data, type){
+  var msgHeader;
+  var msgBody;  
+  
+  if(data.indexOf('|') > -1){
+    var notfication = data.split('|');
+    msgHeader = notfication[0];
+    msgBody = notfication[1];
+  } else {
+    msgHeader = 'Info';
+    msgBody = data;
+  }
+
+  var notficationID = Date.now();
+  var toastTemplate = `<div class="toast" id="${notficationID}">
+                        <div class="toast-header">
+                          <strong class="mr-auto">${msgHeader}</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">${msgBody}</div>
+                      </div>`;
+  
+  $('#toast-wrapper').append(toastTemplate);
+  // Init notiifications
+  $('.toast').toast({delay: 3000});
+  $(`#${notficationID}`).toast('show');
+  $(`#${notficationID}`).on('hidden.bs.toast', function () {
+    $(`#${notficationID}`).remove();
+  });
 }
