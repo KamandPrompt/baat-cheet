@@ -442,8 +442,16 @@ body {
   border-bottom: 1px solid lightgray;
 }
 
+/* Toast notifications */
+.toast-wrapper {
+  z-index: 2;
+  position: absolute; 
+  top: 1em; 
+  right: .25em;
+}
 .toast-header {
-  padding-top: 1.5em;
+  background-color: #007bff;
+  color: #fff;
 }
 .toast {
   min-width: 200px;

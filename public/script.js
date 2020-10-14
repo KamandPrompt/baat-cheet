@@ -1,7 +1,4 @@
 $(document).ready(function() {
-  // Init notiifications
-  $('.toast').toast({delay: 3000});
-
   $("#userN").on("keypress", function(val) {
     if (val.which == 13) {
       setUsername();
@@ -147,20 +144,34 @@ function SidebarToggle() {
 }
 
 function notify(data, type){
-  var newClass = 'notification-'+type;
-  var toast = $('.toast');
-
+  var msgHeader;
+  var msgBody;  
+  
   if(data.indexOf('|') > -1){
     var notfication = data.split('|');
-    $('.toast-header').text(notfication[0]);
-    $('.toast-body').text(notfication[1]);
+    msgHeader = notfication[0];
+    msgBody = notfication[1];
   } else {
-    $('.toast-body').text(data);
+    msgHeader = 'Info';
+    msgBody = data;
   }
 
-  toast.toast('show');
-  toast.on('hidden.bs.toast', function () {
-    $('.toast-header').text('');
-    $('.toast-body').text('');
+  var notficationID = Date.now();
+  var toastTemplate = `<div class="toast" id="${notficationID}">
+                        <div class="toast-header">
+                          <strong class="mr-auto">${msgHeader}</strong>
+                            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="toast-body">${msgBody}</div>
+                      </div>`;
+  
+  $('#toast-wrapper').append(toastTemplate);
+  // Init notiifications
+  $('.toast').toast({delay: 3000});
+  $(`#${notficationID}`).toast('show');
+  $(`#${notficationID}`).on('hidden.bs.toast', function () {
+    $(`#${notficationID}`).remove();
   });
 }
