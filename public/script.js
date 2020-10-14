@@ -35,13 +35,7 @@ const search = () => {
   });
 };
 
-const newRoom = () => $("#room").css("display", "block");
-
-
-$("#cancel").click(function() {$(this).parent().parent().hide()});
-
 const submitRoom = () => createRoom(); // used in client.js to pass details to app.js
-
 
 const showRoom = (name) => {
   const current_room_id = convertIntoId($(".active").attr("id"));

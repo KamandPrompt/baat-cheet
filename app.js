@@ -1,6 +1,6 @@
 //setup basic express server
 const express = require('express')
-const app = require('express')();
+const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const index = require('./serve/index.js');
@@ -79,6 +79,16 @@ io.on('connection', (socket) => {
 		}
 
 		let num_rooms = rooms.length
+		//limit length of room name/description
+		var maxRoomNameLength = 20;
+		var maxDescriptionLength = 45;
+
+		if(data.room_name.length > maxRoomNameLength) {
+			data.room_name = data.room_name.substring(0, maxRoomNameLength - 1).concat("...");
+		}
+		if(data.description.length > maxDescriptionLength) {
+			data.description = data.description.substring(0, maxDescriptionLength - 1).concat("...");
+		}
 
 		//check if room exists
 		for(let i = 0; i<num_rooms; ++i) {
