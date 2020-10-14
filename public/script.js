@@ -1,11 +1,12 @@
 $(document).ready(function() {
+  
   $("#userN").on("keypress", function(val) {
     if (val.which == 13) {
       setUsername();
     }
   });
 
-  // event listener to dinamic element
+  // event listener to dynamic element
   $("body").on("keypress", '.textarea', function(val) {
     if (val.which == 13) {
       sendMessage($(this).val());
@@ -18,6 +19,15 @@ $(document).ready(function() {
     sendMessage($input.val());
     $input.val("");
   });
+
+  // Prevent new room modal from closing on Enter key
+  $('#roomName').on("keypress", function(e) {
+    if(e.which === 13) {
+      e.preventDefault();
+      submitRoom();
+    }
+  });
+
 });
 
 $(".searchtext").on("keyup", function(val) {
