@@ -24,6 +24,7 @@ const createRoom = () => {
         room_name: $('#roomName').val(),
         description: $('#description').val()
     });
+    $('#newRoomModal').modal('toggle');
 }
 
 //requests server to join a room
@@ -38,8 +39,11 @@ const joinRoom = (room) => {
 }
 
 //requests server to leave a room
-const leaveRoom = (room) => {
-    const room_id = convertIntoId(room);
+
+
+function leaveRoom(room) {
+    var room_id = convertIntoId(room);
+    document.getElementById(`lobby-msg`).classList.add("active");
     socket.emit('leave room', {
         name: room
     });
@@ -121,13 +125,16 @@ socket.on('user set', (data) => {
 //notifies users that someone joined baat-cheet
 socket.on('user joined', (data) => {
     $.notify(data.username + " just joined", "info");
+
+socket.on('user joined', function(data) {
+    notify(data.username + " just joined", "info");
     $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
     $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 //notifies users that someone left
-socket.on('user left', (data) => {
-    $.notify(data.username + " just left", "error");
+socket.on('user left', function(data) {
+    notify(data.username + " just left", "error");
 });
 
 
@@ -135,9 +142,9 @@ socket.on('user left', (data) => {
 socket.on('user join', (data) => {
     const room_id = convertIntoId(data.room);
     if (data.room != "lobby") {
-        $.notify(data.username + " just joined " + data.room + " room!", "info");
-        $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+        notify(data.username + " just joined " + data.room + " room!", "info");
+        $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
     }
 });
 
@@ -217,8 +224,8 @@ socket.on('Display Message', (data) => {
     let isJoined = $(`#${room_id}-msg`).attr("data-joined");
 
     if (socket.username != data.user && currRoom != data.room && isJoined == 1) {
-        const p_notif=data.msg;
-        $.notify(`Room ${data.room}-\n${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
+        var p_notif=data.msg;
+        notify(`Room ${data.room} | ${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
     }
 });
 
@@ -240,10 +247,6 @@ socket.on('room created self', (data) =>  {
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
     $('#roomName').val("");
     $('#description').val("");
-
-    jQuery.noConflict(); 
-    $(".modal-backdrop").remove();
-    $("#newRoomModal").modal('hide');
 });
 
 //displays room to the others
