@@ -278,75 +278,14 @@ body {
   padding-left: 0;
 }
 
-.app-container .right .card .info {
-  color: rgba(1, 1, 1, 0.7);
-  position: relative;
-  display: inline-block;
-  clear: both;
-}
-
 .app-container .right .card.others {
   float: left;
-  color: #fff;
-  -webkit-align-self: flex-start;
-  align-self: flex-start;
-  -moz-animation-name: slideFromLeft;
-  -webkit-animation-name: slideFromLeft;
-  animation-name: slideFromLeft;
-}
-
-.app-container .right .card.others:before {
-  left: -3px;
-  background-color: #007bff;
-}
-
-.app-container .right .self {
-  -webkit-align-self: flex-end;
-  align-self: flex-end;
 }
 
 .app-container .right .card.self {
   float: right;
-  color: #1a1a1a;
-  background-color: #eceff1;
   -webkit-align-self: flex-end;
   align-self: flex-end;
-}
-
-.app-container .right .card.self:before {
-  right: -3px;
-  background-color: #eceff1;
-}
-
-.app-container .right .conversation-start {
-  position: relative;
-  width: 100%;
-  margin-bottom: 27px;
-  text-align: center;
-}
-
-.app-container .right .conversation-start span {
-  font-size: 14px;
-  display: inline-block;
-  color: #999;
-}
-
-.app-container .right .conversation-start span:before, .app-container .right .conversation-start span:after {
-  position: absolute;
-  top: 10px;
-  display: inline-block;
-  width: 30%;
-  height: 1px;
-  content: '';
-  background-color: #e6e6e6;
-}
-
-.app-container .right .conversation-start span:before {
-  left: 0;
-}
-
-.app-container .right .conversation-start span:after {
-  right: 0;
 }
 
 #newRoom {
@@ -404,6 +343,7 @@ body {
   float: left;
   padding: 3px;
 }
+
 /* Left Side Bar Section */
 /* Overriding columns to 1 in side bar */
 .card-columns {
@@ -445,14 +385,16 @@ body {
 /* Toast notifications */
 .toast-wrapper {
   z-index: 2;
-  position: absolute; 
-  top: 1em; 
+  position: absolute;
+  top: 1em;
   right: .25em;
 }
+
 .toast-header {
   background-color: #007bff;
   color: #fff;
 }
+
 .toast {
   min-width: 200px;
 }
