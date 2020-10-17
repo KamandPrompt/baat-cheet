@@ -100,7 +100,7 @@ io.on('connection', (socket) => {
 			}
 		}
 
-		//room not taken so insert into room array 
+		//room not taken so insert into room array
 		rooms.push({name: data.room_name, description: data.description, num_users: 1, users: [socket.username]});
 		socket.join(data.room_name);
 		socket.emit('room created self', {room_name: data.room_name, description: data.description, online: 1, online_users: [socket.username]});
@@ -137,7 +137,7 @@ io.on('connection', (socket) => {
 	socket.on('leave room', (room) => {
 		socket.leave(room.name);
 
-		const num_rooms = rooms.length;
+		let num_rooms = rooms.length;
 		let num_users;
 		let room_index = 0;
 
@@ -170,11 +170,11 @@ io.on('connection', (socket) => {
 	//When user disconnets remove user from users
 	socket.on('disconnecting', () => {
 
-		const num_rooms = rooms.length;
+		let num_rooms = rooms.length;
 
-		//update number of users in rooms 
+		//update number of users in rooms
 		for(let i = 0; i < num_rooms; i++) {
-			if(socket.rooms[rooms[i].name]) {	
+			if(socket.rooms[rooms[i].name]) {
 				rooms[i].num_users--;
 				const index = rooms[i].users.indexOf(socket.username);
 				if(index != -1) {
