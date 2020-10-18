@@ -35,7 +35,7 @@ const joinRoom = (room) => {
     });
     $(".error").hide();
     $(`#${room_id}-msg`).attr("data-joined", 1);
-    $(`#${room_id}-msg,.write`).show();
+    $(`#${room_id}-msg`).show();
 }
 
 //requests server to leave a room
@@ -50,7 +50,7 @@ function leaveRoom(room) {
     $(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
 
     $(`#${room_id}-msg`).attr("data-joined", 0);
-    $(`#${room_id}-msg,.write`).hide();
+    $(`#${room_id}-msg`).hide();
     $(".error").show();
 }
 
@@ -311,7 +311,6 @@ socket.on('destroy room', function(data) {
     }
 
     $(".error").hide();
-    $(".write").css("display", "initial");
 
     var room_id = convertIntoId(data);
     $(`#${room_id}`).remove();

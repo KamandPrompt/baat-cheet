@@ -117,3 +117,6 @@ dist
 
 # For macOS
 .DS_Store
+
+# Adding package-lock.json as this is not expected to be published
+package-lock.json
