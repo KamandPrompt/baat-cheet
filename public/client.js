@@ -83,7 +83,7 @@ const appendUserInfo = (room_name, description) => {
 
 // Appending the content
 const appendContentInfo = (room_name, online, data_joined) => {
-    const $write = $("#write");
+    emobox = document.getElementById(`emobox`).outerHTML;
     const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
@@ -94,8 +94,17 @@ const appendContentInfo = (room_name, online, data_joined) => {
                                     <span></span>
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
-                                <div class="write">
-                                    ${$write.html()}
+                                <div class="input-group write">
+                                  <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                                  <div class="input-group-append">
+                                    <button class="btn smiley text-primary" type="button">
+                                      <i class="far fa-smile icon"></i>
+                                      ${emobox}
+                                    </button>
+                                    <button class="btn send text-primary" type="button">
+                                      <i class="fas fa-paper-plane icon"></i>
+                                    </button>
+                                  </div>
                                 </div>
                             </div>
                         `;
@@ -201,7 +210,7 @@ socket.on('Display Message', (data) => {
     div.setAttribute("data-chat", "person1")
     username.innerText = data.user;
     timestamp.innerText = hours + ":" + mins + ":" + secs + ", " + month + " " + day;
-    userMsg.innerHTML = p;
+    userMsg.innerHTML = p.replace(/\n/g, '<br>');
     if (class_name == 'self') {
         username.classList.add("text-secondary");
         timestamp.classList.add("text-secondary");
@@ -253,7 +262,6 @@ socket.on('room created other', (data) =>{
         const { description, room_name, online, online_users } = data;
         var date = new Date();
         var room_id = convertIntoId(room_name);
-        const $write = $("#write");
         const $userInfo = `
                             <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
                                 <span class='name'>${room_name}</span><br>
@@ -261,7 +269,7 @@ socket.on('room created other', (data) =>{
                             </li>
                         `;
         $('.people').append($userInfo);
-
+        emobox = document.getElementById(`emobox`).outerHTML;
         const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
@@ -272,8 +280,17 @@ socket.on('room created other', (data) =>{
                                     <span></span>
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
-                                <div class="write">
-                                    ${$write.html()}
+                                <div class="input-group write">
+                                  <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                                  <div class="input-group-append">
+                                    <button class="btn smiley text-primary" type="button">
+                                      <i class="far fa-smile icon"></i>
+                                      ${emobox}
+                                    </button>
+                                    <button class="btn send text-primary" type="button">
+                                      <i class="fas fa-paper-plane icon"></i>
+                                    </button>
+                                  </div>
                                 </div>
                             </div>
                         `;

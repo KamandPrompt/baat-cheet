@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+/* To style icons of font-awesome */
+.icon {
+  font-size: 2rem
+}
+
 li {
   list-style: none;
 }
@@ -200,84 +205,6 @@ body {
   }
 }
 
-.write {
-  z-index: 10;
-  position: absolute;
-  bottom: 16px;
-  height: 42px;
-  width: 95% !important;
-  margin-left: 1em;
-  border: 1px solid #e6e6e6;
-  background-color: #eceff1;
-  width: inherit;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.write input {
-  font-size: 16px;
-  float: left;
-  width: -moz-calc(100% - 90px);
-  width: -webkit-calc(100% - 90px);
-  width: -o-calc(100% - 90px);
-  width: calc(100% - 90px);
-  height: 40px;
-  padding: 0 10px;
-  color: #1a1a1a;
-  border: 0;
-  outline: none;
-  background-color: transparent;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 400;
-}
-
-.write-right {
-  float: right;
-}
-
-.write .write-link.smiley:before {
-  display: inline-block;
-  float: left;
-  width: 40px;
-  height: 42px;
-  content: '';
-  background-size: 30px 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* font-awesome smiley */
-.fa-smile {
-  position: absolute;
-  font-size: 32px;
-  right: 3.5rem;
-  bottom: 0.3rem;
-  color: #57585a;
-}
-
-.write .write-link.send {
-  display: inline-block;
-  float: left;
-  width: 42px;
-  height: 42px;
-  margin-left: 5px;
-  content: '';
-  background-size: 38px 38px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/* font-awesome send */
-.fa-paper-plane {
-  font-size: 30px;
-  margin-top: 0.3rem;
-}
-
-.write#join {
-  padding-left: 0;
-}
-
 .app-container .right .card.others {
   float: left;
 }
@@ -298,11 +225,6 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40px 42px;
-}
-
-/* font-awesome class */
-.fa-plus-circle {
-  font-size: 40px;
 }
 
 #newRoom:hover, #submit:hover, #cancel:hover {
