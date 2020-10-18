@@ -5,7 +5,8 @@ $(document).ready(function() {
 
   // event listener to dynamic element
   $("body").on("keypress", '.textarea', function(val) {
-    if (val.which == 13) {
+    if (val.which == 13 && val.shiftKey) {
+      val.preventDefault();
       sendMessage($(this).val());
       $(this).val("");
     }
@@ -15,6 +16,7 @@ $(document).ready(function() {
     const input = $(this).parents('.write').find('.textarea');
     sendMessage(input.val());
     input.val("");
+    input.focus();
   });
 
   // Prevent new room modal from closing on Enter key
@@ -57,10 +59,9 @@ const showRoom = (name) => {
   if ($(`#${room_id}-msg`).attr("data-joined") == 0) {
     $(".error").css("display", "inherit");
     $(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom(\'' + name.id + '\')" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
-    $(`#${room_id}-msg,.write`).hide();
+    $(`#${room_id}-msg`).hide();
   } else {
     $(".error").hide();
-    $(".write").css("display", "initial");
   }
 
 };
@@ -112,7 +113,7 @@ function closeSidebar() {
   toggle.className += 'fa fa-angle-right';
 }
 
-function openSidebar() { 
+function openSidebar() {
   const navbar = document.querySelector(".left");
   navbar.classList.remove('menu-closed')
   navbar.classList.add('open-menu')
@@ -125,30 +126,30 @@ function SidebarToggle() {
   const navbar = document.querySelector(".left");
   if (!navbar.classList.contains('menu-closed') && navbar.classList.contains('open-menu')) {
     closeSidebar();
-  } 
+  }
   else {
     openSidebar();
     document.body.addEventListener('click', function(event) {
       const sidebar = document.getElementsByClassName('left')[0]; //Ensuring that clicks inside the sidebar(outside lobbies) don't make the sidebar collapse
       const lobbyName = document.getElementsByClassName('person'); //In case user clicks a lobby from the sidebar, the sidebar collapse. This is a list of classes
       const addLobbyPage = document.getElementById('room'); //Ensuring that clicks on page to add lobby names doesn't make the sidebar collapse
-      for (let i=0; i<lobbyName.length; i++) { 
+      for (let i=0; i<lobbyName.length; i++) {
         if(lobbyName[i].contains(event.target)) {
-          closeSidebar(); 
+          closeSidebar();
           return;
         }
       }
-      if(!sidebar.contains(event.target) && !addLobbyPage.contains(event.target)) { 
-        closeSidebar(); 
+      if(!sidebar.contains(event.target) && !addLobbyPage.contains(event.target)) {
+        closeSidebar();
       }
-    }, false); 
+    }, false);
   }
 }
 
 function notify(data, type){
   var msgHeader;
-  var msgBody;  
-  
+  var msgBody;
+
   if(data.indexOf('|') > -1){
     var notfication = data.split('|');
     msgHeader = notfication[0];
@@ -168,7 +169,7 @@ function notify(data, type){
                         </div>
                         <div class="toast-body">${msgBody}</div>
                       </div>`;
-  
+
   $('#toast-wrapper').append(toastTemplate);
   // Init notiifications
   $('.toast').toast({delay: 3000});
