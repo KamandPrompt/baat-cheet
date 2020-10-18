@@ -178,3 +178,17 @@ function notify(data, type){
     $(`#${notficationID}`).remove();
   });
 }
+// swipeable side bar
+$(".swipe-area").swipe({
+  swipeStatus:function(event, phase, direction, distance, duration, fingers)
+    {
+      if (phase=="move" && direction =="right") {
+         $(".left").addClass("open-menu");
+         openSidebar();
+      }
+      if (phase=="move" && direction =="left") {
+         $(".left").removeClass("open-menu");
+         closeSidebar();
+      }
+    }
+});
