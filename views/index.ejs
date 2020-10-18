@@ -13,7 +13,7 @@
 <body>
   <%- include('user', {title: title}); %>
   <div class="wrapper">
-    <div class="app-container">
+    <div class="app-container swipe-area">
       <div id='toast-wrapper' class="toast-wrapper" aria-live="polite" aria-atomic="true"></div>
       <div class="left">
         <div class="form-group mb-0 px-3 pt-4">
@@ -45,7 +45,7 @@
           </button>
         </div>
       </div>
-      <div class="swipe-area right active" id="lobby-msg" data-joined="1">
+      <div class="right active" id="lobby-msg" data-joined="1">
 
         <div class="top" data-chat="person1">
           <center id="online"><span>Lobby</span></center>

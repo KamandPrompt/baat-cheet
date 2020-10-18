@@ -85,7 +85,7 @@ const appendUserInfo = (room_name, description) => {
 const appendContentInfo = (room_name, online, data_joined) => {
     emobox = document.getElementById(`emobox`).outerHTML;
     const $contentInfo = `
-                            <div class='right swipe-area' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
+                            <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
                                     <center><button class='btn btn-sm p-0' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
                                 </div>
@@ -271,7 +271,7 @@ socket.on('room created other', (data) =>{
         $('.people').append($userInfo);
         emobox = document.getElementById(`emobox`).outerHTML;
         const $contentInfo = `
-                            <div class='right swipe-area' id='${room_name}-msg' data-joined='0' style='display:none;'>
+                            <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
                                     <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
                                 </div>
