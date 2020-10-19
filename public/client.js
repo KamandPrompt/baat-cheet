@@ -1,17 +1,18 @@
 // Getting JSON data of emojis
-var emoji_data = {};
+var emojiData = {};
 $.getJSON('./emojimap.json', function(result) {
-	emoji_data = result.data;
+	emojiData = result.data;
 	emobox = document.getElementById('emobox');
 
 	// Adding emojis with their code names to front end
-	for (var i = 0; i < emoji_data.ids.length; i++) {
+	for (var i = 0; i < emojiData.ids.length; i++) {
 		var listElement = document.createElement('li');
 		var imgElement = document.createElement('img');
-		imgElement.src = '/images/emoji/' + emoji_data.ids[i] + '.png';
-		imgElement.id = emoji_data.names[i];
+		imgElement.src = '/images/emoji/' + emojiData.ids[i] + '.png';
+		imgElement.id = emojiData.names[i];
+		imgElement.title = emojiData.names[i];
+		imgElement.setAttribute('onclick', 'writeEmoji(this)');
 		listElement.appendChild(imgElement);
-		listElement.setAttribute('onclick', 'writeEmoji(this)');
 		emobox.appendChild(listElement);
 	}
 });
@@ -188,9 +189,9 @@ socket.on('Display Message', (data) => {
         let colon2 = p.indexOf(":", colon1 + 1);
         if (colon2 != -1) {
             emoji_name = p.slice(colon1 + 1, colon2);
-            position = emoji_data.names.indexOf(emoji_name)
+            position = emojiData.names.indexOf(emoji_name)
             if (position != -1) {
-                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emoji_data.ids[position] + ".png\">" + p.slice(colon2 + 1);
+                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojiData.ids[position] + ".png\">" + p.slice(colon2 + 1);
             }
             colon1 = p.indexOf(":", colon2 + 1);
         } else {
