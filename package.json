@@ -10,7 +10,7 @@
   },
   "engines": {
     "npm": "3.10.10",
-    "node": "6.9.4"
+    "node": "12.19.0"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
-    "mocha": "6.2.3",
+    "mocha": "8.2.0",
     "socket.io-client": "2.3.1"
   }
 }
