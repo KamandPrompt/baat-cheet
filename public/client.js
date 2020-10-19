@@ -1,17 +1,20 @@
 // Getting JSON data of emojis
-const emoji_data = require('./emojimap.json').data;
+var emoji_data = {};
+$.getJSON('./emojimap.json', function(result) {
+	emoji_data = result.data;
 
-// Adding emojis with their code names to front end
-emojiStr = "";
-for (key in emoji_data) {
-    emojiStr +=
-        '<li><img src="/images/emoji/' +
-        key +
-        '.png" id="' +
-        emoji_data[key] +
-        '" onclick="writeEmoji(this)"/></li>';
-}
-document.getElementById("emobox").innerHTML = emojiStr;
+	// Adding emojis with their code names to front end
+	emojiStr = "";
+	for (var i = 0; i < emoji_data.ids.length; i++) {
+	    emojiStr +=
+	        '<li><img src="/images/emoji/' +
+	        emoji_data.ids[i] +
+	        '.png" id="' +
+	        emoji_data.names[i] +
+	        '" onclick="writeEmoji(this)"/></li>';
+	}
+	document.getElementById("emobox").innerHTML = emojiStr;
+});
 
 const socket = io();
 let username, scrollDiff;
@@ -185,9 +188,9 @@ socket.on('Display Message', (data) => {
         let colon2 = p.indexOf(":", colon1 + 1);
         if (colon2 != -1) {
             emoji_name = p.slice(colon1 + 1, colon2);
-            position = emoji_names.indexOf(emoji_name)
+            position = emoji_data.names.indexOf(emoji_name)
             if (position != -1) {
-                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojis[position] + ".png\">" + p.slice(colon2 + 1);
+                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emoji_data.ids[position] + ".png\">" + p.slice(colon2 + 1);
             }
             colon1 = p.indexOf(":", colon2 + 1);
         } else {
