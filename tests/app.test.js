@@ -34,9 +34,8 @@ describe("App.js", () => {
       assert.isTrue(client.connected);
 
       client.on("user invalid", (data) => {
-        assert.isObject(data);
-        assert.hasAllKeys(data, "username");
-        assert.strictEqual(data.username, " is invalid.");
+        assert.isString(data);
+        assert.strictEqual(data, "This user name is invalid.");
         done();
       });
 

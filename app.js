@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
 		name = (name || "").trim()
 
 		//if name is empty(null), do nothing
-		if(!name) return socket.emit('user invalid', {username: `${name} is invalid.`});
+		if(!name) return socket.emit('user invalid', `This user name is invalid.`);
 		
 		//if username is not taken
 		else if(rooms[0].users.indexOf(name) == -1) {
