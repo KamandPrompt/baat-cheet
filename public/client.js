@@ -2,18 +2,18 @@
 var emoji_data = {};
 $.getJSON('./emojimap.json', function(result) {
 	emoji_data = result.data;
+	emobox = document.getElementById('emobox');
 
 	// Adding emojis with their code names to front end
-	emojiStr = "";
 	for (var i = 0; i < emoji_data.ids.length; i++) {
-	    emojiStr +=
-	        '<li><img src="/images/emoji/' +
-	        emoji_data.ids[i] +
-	        '.png" id="' +
-	        emoji_data.names[i] +
-	        '" onclick="writeEmoji(this)"/></li>';
+		var listElement = document.createElement('li');
+		var imgElement = document.createElement('img');
+		imgElement.src = '/images/emoji/' + emoji_data.ids[i] + '.png';
+		imgElement.id = emoji_data.names[i];
+		listElement.appendChild(imgElement);
+		listElement.setAttribute('onclick', 'writeEmoji(this)');
+		emobox.appendChild(listElement);
 	}
-	document.getElementById("emobox").innerHTML = emojiStr;
 });
 
 const socket = io();
