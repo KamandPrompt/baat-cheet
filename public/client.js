@@ -1,3 +1,18 @@
+// Getting JSON data of emojis
+const emoji_data = require('./emojimap.json').data;
+
+// Adding emojis with their code names to front end
+emojiStr = "";
+for (key in emoji_data) {
+    emojiStr +=
+        '<li><img src="/images/emoji/' +
+        key +
+        '.png" id="' +
+        emoji_data[key] +
+        '" onclick="writeEmoji(this)"/></li>';
+}
+document.getElementById("emobox").innerHTML = emojiStr;
+
 const socket = io();
 let username, scrollDiff;
 
