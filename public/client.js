@@ -112,6 +112,13 @@ const appendContentInfo = (room_name, online, data_joined) => {
     $('.app-container').append($contentInfo);
 }
 
+socket.on('user invalid', (data) => {
+    if(data === "This user name is invalid.") {
+        nameError = document.getElementById('nicknameError');
+        nameError.innerHTML = data;
+    }
+})
+
 //if server emits user exists, propmt for changing username
 socket.on('user exists', (data) => {
     nameError = document.getElementById('nicknameError');
@@ -132,7 +139,6 @@ socket.on('user set', (data) => {
 });
 
 //notifies users that someone joined baat-cheet
-
 socket.on('user joined', function(data) {
     notify(data.username + " just joined", "info");
     $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
