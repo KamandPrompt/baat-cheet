@@ -4,7 +4,9 @@
   "description": "An anonymous chat site",
   "main": "index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test:watch": "mocha --watch ./*.test.js",
+    "test": "mocha ./*.test.js"
   },
   "engines": {
     "npm": "3.10.10",
@@ -26,7 +28,7 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "mocha": "^8.2.0"
+    "mocha": "^8.2.0",
+    "socket.io-client": "^2.3.1"
   }
 }
