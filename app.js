@@ -53,6 +53,9 @@ io.on('connection', (socket) => {
 				online_users: rooms[0].users
 			});
 			socket.username = name;
+
+			welcomeUser(socket, {user: name, room: rooms[0].name});
+
 			for (let i = 1; i < rooms.length; i++) {
 				socket.emit('room created other', {
 					room_name: rooms[i].name,
@@ -67,6 +70,13 @@ io.on('connection', (socket) => {
 			socket.emit('user exists', name);
 		}
 	});
+
+
+	// Welcome the user to the app
+	const welcomeUser = (socket, data) => {
+		io.to(socket.id).emit('welcome user', data)
+	}
+
 	//When client sends message
 	socket.on('Message Request', (data) => {
 		//if message is valid
@@ -165,11 +175,11 @@ io.on('connection', (socket) => {
 			if (room.name == rooms[i].name) {
 				rooms[i].num_users--;
 				num_users = rooms[i].num_users;
-				for (let j = 0; j < rooms[i].users.length; j++) {
-					if (rooms[i].users[j] === socket.username) {
-						rooms[i].users.splice(j, 1);
-						j--;
-					}
+				for( let j = 0; j < rooms[i].users.length; j++){
+				  if ( rooms[i].users[j] === socket.username) {
+				    rooms[i].users.splice(j, 1);
+					  j--;
+				  }
 				}
 				room_index = i;
 				//if users become 0, destroy/delete the room
