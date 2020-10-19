@@ -30,8 +30,6 @@ $(document).ready(function() {
 });
 
 $(".searchtext").on("keyup", () => search());
-
-
 $(".search").click(() => search());
 
 const search = () => {
@@ -73,11 +71,11 @@ function collap(room_id) {
   room_id = convertIntoId(room_id);
   var height = $(`#${room_id}-msg`).find('.Participants').css('opacity');
   if(height == '0') {
-   $(`#${room_id}-msg`).find('.Participants').css({"opacity":"1" , "z-index":"10"});
-  $(`#${room_id}-msg`).find('.btn').addClass('viewUsers');
+    $(`#${room_id}-msg`).find('.Participants').css({"opacity":"1" , "z-index":"10"});
+    $(`#${room_id}-msg`).find('.btn').addClass('viewUsers');
   } else {
-   $(`#${room_id}-msg`).find('.Participants').css({"opacity":"0" , "z-index":"-10"});
-  $(`#${room_id}-msg`).find('.btn').removeClass('viewUsers');
+    $(`#${room_id}-msg`).find('.Participants').css({"opacity":"0" , "z-index":"-10"});
+    $(`#${room_id}-msg`).find('.btn').removeClass('viewUsers');
   }
 }
 
@@ -146,7 +144,12 @@ function SidebarToggle() {
   }
 }
 
-function notify(data, type){
+
+/**
+ * Notify method called when toast notification should be shown
+ * @param {object} data Object with data 
+ */
+function notify(data){
   var msgHeader;
   var msgBody;
 
@@ -178,3 +181,67 @@ function notify(data, type){
     $(`#${notficationID}`).remove();
   });
 }
+
+
+
+/**
+ * Method called to show the chat message
+ * @param {object} socket The socket instance
+ * @param {object} data The data object with msg, username, room, etc
+ */
+function displayMessage(socket = null, data){
+    let { msg } = data;
+    const { user, room } = data;
+    let class_name;
+
+    if (socket.username == user) {
+      class_name = 'self';
+    } else {
+      class_name = 'others'
+    }
+
+    // Adding Emoji
+    let p;
+    let colon1 = msg.indexOf(":");
+    while (colon1 != -1) {
+      let colon2 = msg.indexOf(":", colon1 + 1);
+      if (colon2 != -1) {
+          emoji_name = msg.slice(colon1 + 1, colon2);
+          position = emoji_names.indexOf(emoji_name)
+          if (position != -1) {
+              msg = msg.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojis[position] + ".png\">" + msg.slice(colon2 + 1);
+          }
+          colon1 = msg.indexOf(":", colon2 + 1);
+      } else {
+          break;
+      }
+    }
+
+    // Format the current timestamp
+    const timestamp = dateFns.format(new Date(), 'H:mm:ss MMM DD');
+
+    // Create msg HTML
+    const msg_template = `<div class="card mb-3 w-75 ${user === 'system' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
+      <div class="card-body">
+        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${user === 'system' ? '🤖 Baat Cheet' : user}</small>
+        <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
+        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${timestamp}</small>
+      </div>
+    </div>`;
+
+    let room_id = convertIntoId(room);
+    
+    // Append the template into the conversation window
+    $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(msg_template)
+
+    room_id = convertIntoId($(".active").attr("id"));
+    const height = $(`#${room_id}-msg`).children(".chat")[0].scrollHeight;
+    $(`#${room_id}-msg`).children(".chat").scrollTop(height);
+
+    let currRoom = $(".active").attr("id");
+    let isJoined = $(`#${room_id}-msg`).attr("data-joined");
+
+    if (socket.username != user && currRoom != room && isJoined == 1) {
+      notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`, "info");
+    }
+  }

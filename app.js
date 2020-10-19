@@ -1,5 +1,5 @@
 //setup basic express server
-const express = require('express')
+const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
@@ -49,6 +49,8 @@ io.on('connection', (socket) => {
 			socket.broadcast.emit('user joined', {username: name, online: rooms[0].num_users, online_users: rooms[0].users});
 			socket.username = name;
 
+			welcomeUser(socket, {user: name, room: rooms[0].name});
+
 			for (let i = 1; i < rooms.length; i++) {
 				socket.emit('room created other', {room_name: rooms[i].name, description: rooms[i].description, online: rooms[i].num_users, online_users: rooms[0].users});
 			}
@@ -58,6 +60,12 @@ io.on('connection', (socket) => {
 			socket.emit('user exists', name);
 		}
 	});
+
+
+	// Welcome the user to the app
+	const welcomeUser = (socket, data) => {
+		io.to(socket.id).emit('welcome user', data)
+	}
 
 	//When client sends message
 	socket.on('Message Request', (data) => {
@@ -147,10 +155,10 @@ io.on('connection', (socket) => {
 				rooms[i].num_users--;
 				num_users = rooms[i].num_users;
 				for( let j = 0; j < rooms[i].users.length; j++){
-				   if ( rooms[i].users[j] === socket.username) {
-				     rooms[i].users.splice(j, 1);
-				     j--;
-				   }
+					if ( rooms[i].users[j] === socket.username) {
+						rooms[i].users.splice(j, 1);
+						j--;
+					}
 				}
 				room_index = i;
 				//if users become 0, destroy/delete the room
