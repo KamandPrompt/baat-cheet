@@ -155,10 +155,10 @@ io.on('connection', (socket) => {
 				rooms[i].num_users--;
 				num_users = rooms[i].num_users;
 				for( let j = 0; j < rooms[i].users.length; j++){
-					if ( rooms[i].users[j] === socket.username) {
-						rooms[i].users.splice(j, 1);
-						j--;
-					}
+				  if ( rooms[i].users[j] === socket.username) {
+				    rooms[i].users.splice(j, 1);
+					  j--;
+				  }
 				}
 				room_index = i;
 				//if users become 0, destroy/delete the room
