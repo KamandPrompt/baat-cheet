@@ -192,3 +192,19 @@ $(".swipe-area").swipe({
       }
     }
 });
+ 
+let isClicked = false;
+
+const clickHandler = () => {
+  isClicked = true;
+}
+
+const textarea = $("textarea");
+textarea.on('click',clickHandler);
+
+const isTextareaClicked = () => {
+  if(isClicked === true){
+    $(".app-container").removeClass("swipe-area")
+  }
+};
+setInterval(isTextareaClicked,1000);
