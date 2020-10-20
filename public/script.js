@@ -96,9 +96,8 @@ $("body").on("click", '.smiley', function() {
 });
 
 function writeEmoji(emoji) {
-  var emojiName = emoji.id;
-  const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".textarea");
-  textarea.val(textarea.val() + ":" + emojiName + ":");
+  const textarea = document.getElementById("textarea");
+  textarea.value =`${textarea.value}:${emoji.id}:`;
   textarea.focus();
 }
 
@@ -146,11 +145,11 @@ function SidebarToggle() {
   }
 }
 
-function notify(data, type){
+function notify(data, type) {
   var msgHeader;
   var msgBody;
 
-  if(data.indexOf('|') > -1){
+  if (data.indexOf('|') > -1) {
     var notfication = data.split('|');
     msgHeader = notfication[0];
     msgBody = notfication[1];
