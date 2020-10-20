@@ -78,16 +78,16 @@ const appendContentInfo = (room_name, online, data_joined) => {
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
                                 <div class="input-group write">
-                                    <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
-                                    <div class="input-group-append">
-                                        <button class="btn smiley text-primary" type="button">
-                                            <i class="far fa-smile icon"></i>
-                                            ${emobox}
-                                        </button>
-                                        <button class="btn send text-primary" type="button">
-                                            <i class="fas fa-paper-plane icon"></i>
-                                        </button>
-                                    </div>
+                              <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                              <div class="input-group-append">
+                                      <button class="btn smiley text-primary" type="button">
+                                      <i class="far fa-smile icon"></i>
+                                      ${emobox}
+                                      </button>
+                                      <button class="btn send text-primary" type="button">
+                                      <i class="fas fa-paper-plane icon"></i>
+                                      </button>
+                              </div>
                                 </div>
                             </div>
                         `;
@@ -146,8 +146,6 @@ socket.on('user join', (data) => {
 });
 
 // displays message to users
-// TODO: this method is GIANT and should be broken into smaller parts
-// It's also very brittle, relying on the format of the msg
 socket.on('Display Message', (data) => {
     displayMessage(socket, data);
 });
@@ -196,18 +194,18 @@ socket.on('room created other', (data) =>{
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
                                 <div class="input-group write">
-                                    <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
-                                    <div class="input-group-append">
-                                    <button class="btn smiley text-primary" type="button">
-                                        <i class="far fa-smile icon"></i>
-                                        ${emobox}
-                                    </button>
-                                    <button class="btn send text-primary" type="button">
-                                        <i class="fas fa-paper-plane icon"></i>
-                                    </button>
+                                  <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                                  <div class="input-group-append">
+                                  <button class="btn smiley text-primary" type="button">
+                                      <i class="far fa-smile icon"></i>
+                                      ${emobox}
+                                  </button>
+                                  <button class="btn send text-primary" type="button">
+                                      <i class="fas fa-paper-plane icon"></i>
+                                  </button>
                                 </div>
                                 </div>
-                            </div>
+                          </div>
                         `;
         $('.app-container').append($contentInfo);
         appendUserInfo(room_name, description);
