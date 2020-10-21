@@ -1,3 +1,15 @@
+// Adding emojis in emoji-box
+emobox = document.getElementById('emobox');
+for (var i = 0; i < emojiCodes.length; i++) {
+	var listElement = document.createElement('li');
+	var imgElement = document.createElement('img');
+	imgElement.src = '/images/emoji/' + emojiCodes[i] + '.png';
+	imgElement.id = emojiNames[i];
+	imgElement.title = emojiNames[i].replace(/_/g, ' ');
+	imgElement.setAttribute('onclick', 'writeEmoji(this)');
+	listElement.appendChild(imgElement);
+	emobox.appendChild(listElement);
+}
 const socket = io();
 let username, scrollDiff;
 
@@ -170,9 +182,9 @@ socket.on('Display Message', (data) => {
         let colon2 = p.indexOf(":", colon1 + 1);
         if (colon2 != -1) {
             emoji_name = p.slice(colon1 + 1, colon2);
-            position = emoji_names.indexOf(emoji_name)
+            position = emojiNames.indexOf(emoji_name)
             if (position != -1) {
-                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojis[position] + ".png\">" + p.slice(colon2 + 1);
+                p = p.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojiCodes[position] + ".png\">" + p.slice(colon2 + 1);
             }
             colon1 = p.indexOf(":", colon2 + 1);
         } else {
