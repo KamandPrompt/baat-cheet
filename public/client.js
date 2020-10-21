@@ -1,6 +1,6 @@
 // Getting JSON data of emojis
 var emojiData = {};
-$.getJSON('./emojimap.json', function(result) {
+$.getJSON('./emoji.json', function(result) {
 	emojiData = result.data;
 	emobox = document.getElementById('emobox');
 
