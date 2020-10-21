@@ -1,11 +1,11 @@
 # Getting Started
 
-- View the [README](https://github.com/KamandPrompt/baat-cheet/blob/master/README.md) to get your development environment up and running. 
+- View the [README](https://github.com/KamandPrompt/baat-cheet/blob/master/README.md) to get your development environment up and running.
 - Learn how to [format pull requests](#submitting-a-pull-request).
 - Read how to [rebase/merge upstream branches](#configuring-remotes).
 - Follow our [code of conduct](https://github.com/KamandPrompt/baat-cheet/blob/master/CODE_OF_CONDUCT.md).
 - [Find an issue to work on](https://github.com/KamandPrompt/baat-cheet/issues) and start smashing!
-- [Ask a question on Zulip](https://kamandprompt.zulipchat.com/login/#narrow/stream/201590-Baat-Cheet.20Project).
+- [Ask a question on Zulip](https://kamandprompt.zulipchat.com/login/#narrow/stream/201590-Baat-Cheet.20Project) or join [gitter community](https://gitter.im/Baat-Cheet-IIT).
 
 # Contributing Guidelines [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/KamandPrompt/baat-cheet/issues)
 
@@ -13,10 +13,19 @@ When contributing to this repository, please first discuss the change you wish t
 
 Make sure you read the [README.md](https://github.com/KamandPrompt/baat-cheet/blob/master/README.md).
 
-Do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests. If you have got any questions, you can also join our [zulip channel](https://kamandprompt.zulipchat.com/login/#narrow/stream/201590-Baat-Cheet.20Project) to chat about your queries in real-time. 
+Do not open issues for general support questions as we want to keep GitHub issues for bug reports and feature requests. If you have got any questions, you can also join our [zulip chat](https://kamandprompt.zulipchat.com/login/#narrow/stream/201590-Baat-Cheet.20Project) or you are always welcome to join our [gitter community](https://gitter.im/Baat-Cheet-IIT) to chat about your queries in real-time.
 
 Remember that this is an inclusive community, commited to creating a safe, positive environment. See the whole [Code of Conduct](https://github.com/KamandPrompt/baat-cheet/blob/master/CODE_OF_CONDUCT.md) and please follow it in all your interactions with the project.
 
+## Format rules
+  - Indent with two spaces instead of tab.
+  - Insert final new line at the end of each file.
+  - Maximum line length should be 200.
+  - Trim trailing spaces.
+
+If you prefer using [EditorConfig](https://editorconfig.org), these rules are also there in [.editorconfig](.editorconfig).
+
+**Note:** Do not touch [emoji.json](public/emoji.json), this file is intentionally unformatted.
 
 ## Submitting or Requesting an Issue/Enhancement
 
@@ -53,6 +62,8 @@ git checkout -b branch-name
 ```
 git add file-name
 ```
+  - Format your changed files using [EditorConfig](https://editorconfig.org) or follow our [format rules](#format-rules).
+
   - Follow the style conventions for a [meaningful commit message](https://github.com/KamandPrompt/baat-cheet/blob/master/COMMIT_MESSAGE.md).
 ```
 git commit
@@ -63,7 +74,7 @@ git commit --amend
 ```
   - Squash multiple commits to a single commit. (example: squash last two commits done on this branch into one)
 ```
-git rebase --interactive HEAD~2 
+git rebase --interactive HEAD~2
 ```
   - Push this branch to your remote repository on GitHub.
 ```
