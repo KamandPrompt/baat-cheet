@@ -23,8 +23,8 @@ app.use((err, req, res, next) => {
 const rooms = [{
 	name: 'lobby',
 	description: 'Central Lobby',
-	num_users: 0,
-	users: []
+	num_users: 1,
+	users: ['Welcome Bot']
 }];
 io.on('connection', (socket) => {
 	//When client requests for setting username
@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
 		}
 		//if username is not taken
 		else if (rooms[0].users.indexOf(name) == -1) {
+
 			rooms[0].users.push(name);
 			//username is valid so user is set
 			socket.emit('user set', {
@@ -43,6 +44,7 @@ io.on('connection', (socket) => {
 				online: rooms[0].num_users + 1,
 				online_users: rooms[0].users
 			});
+
 			//by default, user joins lobby
 			socket.join('lobby');
 			rooms[0].num_users++;
@@ -54,7 +56,7 @@ io.on('connection', (socket) => {
 			});
 			socket.username = name;
 
-			welcomeUser(socket, {user: name, room: rooms[0].name});
+			welcomeUser(socket, {sender: 'Welcome Bot', user: name, room: rooms[0].name});
 
 			for (let i = 1; i < rooms.length; i++) {
 				socket.emit('room created other', {

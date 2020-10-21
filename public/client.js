@@ -126,10 +126,10 @@ socket.on('user joined', function(data) {
 
 // Welcomes the user to the app
 socket.on('welcome user', function(data) {
-    const { user, room } = data;
+    const { user, room, sender } = data;
     const welcome_msg = `Welcome, <em>${user}</em>! Enjoy your stay!`
 
-    displayMessage(socket, {user: 'system', msg: welcome_msg, room});
+    displayMessage(socket, {user, msg: welcome_msg, room, sender});
 });
 
 //notifies users that someone left

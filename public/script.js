@@ -182,10 +182,10 @@ function notify(data){
  */
 function displayMessage(socket = null, data){
     let { msg } = data;
-    const { user, room } = data;
+    const { user, room, sender } = data;
     let class_name;
 
-    if (socket.username == user) {
+    if (socket.username === user && !sender) {
       class_name = 'self';
     } else {
       class_name = 'others'
@@ -212,9 +212,9 @@ function displayMessage(socket = null, data){
     const timestamp = dateFns.format(new Date(), 'H:mm:ss MMM DD');
 
     // Create msg HTML
-    const msg_template = `<div class="card mb-3 w-75 ${user === 'system' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
+    const msg_template = `<div class="card mb-3 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
       <div class="card-body">
-        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${user === 'system' ? '🤖 Baat Cheet' : user}</small>
+        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
         <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
         <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${timestamp}</small>
       </div>
