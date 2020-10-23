@@ -1,11 +1,21 @@
+// Adding emojis in emoji-box
+emobox = document.getElementById('emobox');
+for (var i = 0; i < emojiCodes.length; i++) {
+	var listElement = document.createElement('li');
+	var imgElement = document.createElement('img');
+	imgElement.src = '/images/emoji/' + emojiCodes[i] + '.png';
+	imgElement.id = emojiNames[i];
+	imgElement.title = emojiNames[i].replace(/_/g, ' ');
+	imgElement.setAttribute('onclick', 'writeEmoji(this)');
+	listElement.appendChild(imgElement);
+	emobox.appendChild(listElement);
+}
 const socket = io();
 let username, scrollDiff;
-
 //sets client username
-const setUsername = ()=>  {
-    socket.emit('set username', $('#userN').val());
+const setUsername = () => {
+	socket.emit('set username', $('#userN').val());
 };
-
 //sends a message
 const sendMessage = (msg)=>  {
     msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -18,42 +28,39 @@ const sendMessage = (msg)=>  {
 
 // Creates a new room
 const createRoom = () => {
-    if ($("#roomName").val() == '') return;
-    socket.emit('create room', {
-        room_name: $('#roomName').val(),
-        description: $('#description').val()
-    });
-    $('#newRoomModal').modal('toggle');
+	if ($("#roomName").val() == '') return;
+	socket.emit('create room', {
+		room_name: $('#roomName').val(),
+		description: $('#description').val()
+	});
+	$('#newRoomModal').modal('toggle');
 }
 
 // Requests server to join a room
 const joinRoom = (room) => {
-    const room_id = convertIntoId(room);
-    socket.emit('join room', {
-        name: room
-    });
-    $(".error").hide();
-    $(`#${room_id}-msg`).attr("data-joined", 1);
-    $(`#${room_id}-msg`).show();
+	const room_id = convertIntoId(room);
+	socket.emit('join room', {
+		name: room
+	});
+	$(".error").hide();
+	$(`#${room_id}-msg`).attr("data-joined", 1);
+	$(`#${room_id}-msg`).show();
 }
-
 //requests server to leave a room
 function leaveRoom(room) {
-    var room_id = convertIntoId(room);
-    document.getElementById(`lobby-msg`).classList.add("active");
-    socket.emit('leave room', {
-        name: room
-    });
-    $(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
-
-    $(`#${room_id}-msg`).attr("data-joined", 0);
-    $(`#${room_id}-msg`).hide();
-    $(".error").show();
+	var room_id = convertIntoId(room);
+	document.getElementById(`lobby-msg`).classList.add("active");
+	socket.emit('leave room', {
+		name: room
+	});
+	$(".error").html('<span id="error">You haven\'t joined this room yet. <a onclick="joinRoom( \'' + room + '\' )" id="joinBtn" href="#">Join</a> to see the conversation.</span>');
+	$(`#${room_id}-msg`).attr("data-joined", 0);
+	$(`#${room_id}-msg`).hide();
+	$(".error").show();
 }
-
 // Appending the user info into left side card
 const appendUserInfo = (room_name, description) => {
-    const $userInfo = `
+	const $userInfo = `
                     <div data-chat='person1' id='${room_name}' onclick='showRoom(this)' class="card person">
                         <div class="card-body">
                             <h5 class="card-title name">${room_name}</h5>
@@ -63,11 +70,10 @@ const appendUserInfo = (room_name, description) => {
                     `;
     $('.card-columns').append($userInfo);
 }
-
 // Appending the content
 const appendContentInfo = (room_name, online, data_joined) => {
-    emobox = document.getElementById(`emobox`).outerHTML;
-    const $contentInfo = `
+	emobox = document.getElementById(`emobox`).outerHTML;
+	const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
                                     <center><button class='btn btn-sm p-0' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
@@ -91,27 +97,24 @@ const appendContentInfo = (room_name, online, data_joined) => {
                                 </div>
                             </div>
                         `;
-
-    $('.app-container').append($contentInfo);
+	$('.app-container').append($contentInfo);
 }
-
 //if server emits user exists, propmt for changing username
 socket.on('user exists', (data) => {
-    nameError = document.getElementById('nicknameError');
-    nameError.innerHTML = 'There is already one person with this nickname, try another one.';
+	nameError = document.getElementById('nicknameError');
+	nameError.innerHTML = 'There is already one person with this nickname, try another one.';
 });
-
 //if server emits user set, display rooms to user
 socket.on('user set', (data) => {
-    username = data.username;
-    $("#user").fadeOut();
-    $("body").css("background-color", "#f8f8f8");
-    $(".wrapper").fadeIn();
-    // $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
-    $(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
-    $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
-    socket.username = data.username;
-    scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
+	username = data.username;
+	$("#user").fadeOut();
+	$("body").css("background-color", "#f8f8f8");
+	$(".wrapper").fadeIn();
+	// $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
+	$(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
+	$(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
+	socket.username = data.username;
+	scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
 
 // Notifies users that someone joined baat-cheet
@@ -123,26 +126,24 @@ socket.on('user joined', function(data) {
 
 // Welcomes the user to the app
 socket.on('welcome user', function(data) {
-    const { user, room } = data;
+    const { user, room, sender } = data;
     const welcome_msg = `Welcome, <em>${user}</em>! Enjoy your stay!`
 
-    displayMessage(socket, {user: 'system', msg: welcome_msg, room});
+    displayMessage(socket, {user, msg: welcome_msg, room, sender});
 });
 
 //notifies users that someone left
-socket.on('user left', function(data) {
-    notify(data.username + " just left", "error");
+socket.on('user left', function (data) {
+	notify(data.username + " just left", "error");
 });
-
-
 //notifies users that someone joined a room
 socket.on('user join', (data) => {
-    const room_id = convertIntoId(data.room);
-    if (data.room != "lobby") {
-        notify(data.username + " just joined " + data.room + " room!", "info");
-        $("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-        $("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
-    }
+	const room_id = convertIntoId(data.room);
+	if (data.room != "lobby") {
+		notify(data.username + " just joined " + data.room + " room!", "info");
+		$("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
+		$("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+	}
 });
 
 // displays message to users
@@ -181,9 +182,9 @@ socket.on('room created other', (data) =>{
                                 <span class='preview'>${description}</span>
                             </li>
                         `;
-        $('.people').append($userInfo);
-        emobox = document.getElementById(`emobox`).outerHTML;
-        const $contentInfo = `
+		$('.people').append($userInfo);
+		emobox = document.getElementById(`emobox`).outerHTML;
+		const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
                                 <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
                                     <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
@@ -207,11 +208,11 @@ socket.on('room created other', (data) =>{
                                 </div>
                           </div>
                         `;
-        $('.app-container').append($contentInfo);
-        appendUserInfo(room_name, description);
-        appendContentInfo(room_name,online,0);
-        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
-    }
+		$('.app-container').append($contentInfo);
+		appendUserInfo(room_name, description);
+		appendContentInfo(room_name, online, 0);
+		$(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
+	}
 });
 
 // destroys room because there are no users in it
