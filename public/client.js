@@ -169,6 +169,7 @@ socket.on('Display Message', (data) => {
 	}
 	var dateTime = new Date();
 	const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	var year = dateTime.getFullYear().toString();
 	var month = months[dateTime.getMonth()];
 	var day = dateTime.getDate().toString();
 	var hours = dateTime.getHours().toString();
@@ -190,21 +191,22 @@ socket.on('Display Message', (data) => {
 	const userMsg = document.createElement('p');
 	//const br = document.createElement('br');
 	div.classList.add("card", "mb-3", "w-75", class_name);
-	username.classList.add("d-block");
-	timestamp.classList.add("d-block");
+	username.classList.add("d-inline-block");
+	timestamp.classList.add("d-inline-block", "mx-2", "message-timestamp");
 	userMsg.classList.add("card-text", "mb-0");
 	div.setAttribute("data-chat", "person1")
 	username.innerText = data.user;
 	timestamp.innerText = hours + ":" + mins + ":" + secs + ", " + month + " " + day;
+	timestamp.setAttribute("data-timestamp", dateTime.getTime());
 	userMsg.innerHTML = p.replace(/\n/g, '<br>');
 	if (class_name == 'self') {
 		username.classList.add("text-secondary");
 		timestamp.classList.add("text-secondary");
 		userMsg.classList.add("text-primary");
-		div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML + "</div>";
+		div.innerHTML += "<div class='card-body'>" + username.outerHTML + timestamp.outerHTML + userMsg.outerHTML + "</div>";
 	} else {
 		div.classList.add("bg-primary");
-		div.innerHTML += "<div class='card-body'>" + username.outerHTML + userMsg.outerHTML + timestamp.outerHTML + "</div>";
+		div.innerHTML += "<div class='card-body'>" + username.outerHTML + timestamp.outerHTML + userMsg.outerHTML + "</div>";
 	}
 	let room_id = convertIntoId(data.room);
 	$(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(div)
@@ -217,6 +219,37 @@ socket.on('Display Message', (data) => {
 		var p_notif = data.msg;
 		notify(`Room ${data.room} | ${data.user}: ${(p_notif.length >= 20) ? p_notif.substr(0, 20) + '...' : p_notif}`, "info");
 	}
+
+    // Update timestamps of all messages when new message comes
+    var ts_el = document.querySelectorAll(".message-timestamp");
+    ts_el.forEach(function (el) {
+        var ts = el.getAttribute("data-timestamp");
+        var sent_date = new Date(parseInt(ts, 10));
+
+        var sent_year = sent_date.getFullYear().toString();
+        var sent_month = months[sent_date.getMonth()];
+        var sent_day = sent_date.getDate().toString();
+        var sent_hours = sent_date.getHours().toString();
+        var sent_mins = sent_date.getMinutes().toString();
+        var sent_secs = sent_date.getSeconds().toString();
+        if (sent_hours.length == 1) {
+            sent_hours = '0' + sent_hours;
+        }
+        if (sent_mins.length == 1) {
+            sent_mins = '0' + sent_mins;
+        }
+        if (sent_secs.length == 1) {
+            sent_secs = '0' + sent_secs;
+        }
+
+        if (day === sent_day && month === sent_month && year === sent_year) {
+            // Sent time is on today
+            el.innerText = sent_hours + ":" + sent_mins + ":" + sent_secs;
+        } else {
+            // Sent time is on others day
+            el.innerText = sent_hours + ":" + sent_mins + ":" + sent_secs + ", " + sent_month + " " + sent_day;
+        }
+    });
 });
 //if room exists, then prompt for another room name
 socket.on('room exists', function (data) {
