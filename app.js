@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 
 		//if name is empty(null), do nothing
 		if(!name) return socket.emit('user invalid', `This user name is invalid.`);
-		
+
 
 		//if username is not taken
 		else if (rooms[0].users.indexOf(name) == -1) {
@@ -99,23 +99,21 @@ io.on('connection', (socket) => {
 		if (data.room_name == null) {
 			return;
 		}
-		let num_rooms = rooms.length
 		//limit length of room name/description
-		var maxRoomNameLength = 20;
-		var maxDescriptionLength = 45;
-		if (data.room_name.length > maxRoomNameLength) {
+		const maxRoomNameLength = 20;
+		const maxDescriptionLength = 45;
+
+		if(data.room_name.length > maxRoomNameLength) {
 			data.room_name = data.room_name.substring(0, maxRoomNameLength - 1).concat("...");
 		}
 		if (data.description.length > maxDescriptionLength) {
 			data.description = data.description.substring(0, maxDescriptionLength - 1).concat("...");
 		}
 		//check if room exists
-		for (let i = 0; i < num_rooms; ++i) {
-			//if room name is taken
-			if (rooms[i].name == data.room_name) {
-				socket.emit('room exists', data.room_name);
-				return;
-			}
+		const roomIfExists = rooms.find(eachRoom => eachRoom.name === data.room_name);
+		if (roomIfExists !== undefined) {
+			socket.emit('room exists', data.room_name);
+			return;
 		}
 		//room not taken so insert into room array
 		rooms.push({
@@ -137,69 +135,60 @@ io.on('connection', (socket) => {
 			online_users: [socket.username]
 		});
 	});
+
 	//When user requests to join the room
 	socket.on('join room', (room) => {
 		socket.join(room.name);
-		let num_rooms = rooms.length;
-		let num_users;
-		let room_index = 0;
+
 		//update number of users in room
-		for (let i = 0; i < num_rooms; i++) {
-			if (room.name == rooms[i].name) {
-				rooms[i].num_users++;
-				num_users = rooms[i].num_users;
-				rooms[i].users.push(socket.username);
-				room_index = i;
-				break;
-			}
+		const fetchedRoom = rooms.find(each => each.name === room.name);
+		if (fetchedRoom !== undefined) {
+			fetchedRoom.num_users++;
+			fetchedRoom.users.push(socket.username);
+
+			//update the user's info
+			socket.emit('room joined', {
+				name: room.name,
+				online: fetchedRoom.num_users,
+				online_users: fetchedRoom.users
+			});
+
+			//notify other users in room that someone joined
+			socket["to"](room.name).broadcast.emit('user join', {
+				username: socket.username,
+				room: room.name,
+				online: fetchedRoom.num_users,
+				online_users: fetchedRoom.users
+			});
 		}
-		//update the user's info
-		socket.emit('room joined', {
-			name: room.name,
-			online: num_users,
-			online_users: rooms[room_index].users
-		});
-		//notify other users in room that someone joined
-		socket["to"](room.name).broadcast.emit('user join', {
-			username: socket.username,
-			room: room.name,
-			online: num_users,
-			online_users: rooms[room_index].users
-		});
 	});
 	//When user requests to leave the room
 	socket.on('leave room', (room) => {
 		socket.leave(room.name);
-		let num_rooms = rooms.length;
-		let num_users;
-		let room_index = 0;
+
 		//update number of users in room
-		for (let i = 0; i < num_rooms; i++) {
-			if (room.name == rooms[i].name) {
-				rooms[i].num_users--;
-				num_users = rooms[i].num_users;
-				for( let j = 0; j < rooms[i].users.length; j++){
-				  if ( rooms[i].users[j] === socket.username) {
-				    rooms[i].users.splice(j, 1);
-					  j--;
-				  }
-				}
-				room_index = i;
-				//if users become 0, destroy/delete the room
-				if (rooms[i].num_users == 0) {
-					io.sockets.emit('destroy room', room.name);
-					rooms.splice(i, 1);
-					return;
-				}
-				break;
+		const fetchedRoom = rooms.find(each => each.name === room.name);
+		if (fetchedRoom !== undefined) {
+			fetchedRoom.num_users--;
+			const userIndexInRoom = fetchedRoom.users.indexOf(socket.username);
+			if (userIndexInRoom > -1) {
+				fetchedRoom.users.splice(userIndexInRoom, 1);
 			}
 		}
+
+		//if users become 0, destroy/delete the room
+		if (fetchedRoom !== undefined && fetchedRoom.num_users === 0) {
+			io.sockets.emit('destroy room', room.name);
+			rooms.splice(rooms.findIndex(eachRoom => eachRoom.name === room.name), 1);
+			return;
+		}
+
 		//notify other users in room that someone left
 		socket["to"](room.name).broadcast.emit('user left room', {
 			username: socket.username,
 			room: room.name,
-			online: num_users,
-			online_users: rooms[room_index].users
+			online: fetchedRoom.num_users,
+			online_users: fetchedRoom.users
 		});
 	});
 	//When user disconnets remove user from users

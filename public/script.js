@@ -112,10 +112,9 @@ $("body").on("click", '.smiley', function () {
 });
 
 function writeEmoji(emoji) {
-	var emojiName = emoji.id;
-	const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".message-area");
-	textarea.val(textarea.val() + ":" + emojiName + ":");
-	textarea.focus();
+  const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".message-area");
+  textarea.val(textarea.val() + ":" + emoji.id + ":");
+  textarea.focus();
 }
 // For sidebar to work on small screens
 function closeSidebar() {
