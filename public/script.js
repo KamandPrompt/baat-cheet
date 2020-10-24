@@ -134,19 +134,26 @@ function SidebarToggle() {
 	}
 }
 
-function notify(data, type) {
-	var msgHeader;
-	var msgBody;
-	if (data.indexOf('|') > -1) {
-		var notfication = data.split('|');
-		msgHeader = notfication[0];
-		msgBody = notfication[1];
-	} else {
-		msgHeader = 'Info';
-		msgBody = data;
-	}
-	var notficationID = Date.now();
-	var toastTemplate = `<div class="toast" id="${notficationID}">
+
+/**
+ * Notify method called when toast notification should be shown
+ * @param {object} data Object with data
+ */
+function notify(data){
+  var msgHeader;
+  var msgBody;
+
+  if(data.indexOf('|') > -1){
+    var notfication = data.split('|');
+    msgHeader = notfication[0];
+    msgBody = notfication[1];
+  } else {
+    msgHeader = 'Info';
+    msgBody = data;
+  }
+
+  var notficationID = Date.now();
+  var toastTemplate = `<div class="toast" id="${notficationID}">
                         <div class="toast-header">
                           <strong class="mr-auto">${msgHeader}</strong>
                             <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
@@ -165,3 +172,67 @@ function notify(data, type) {
 		$(`#${notficationID}`).remove();
 	});
 }
+
+
+
+/**
+ * Method called to show the chat message
+ * @param {object} socket The socket instance
+ * @param {object} data The data object with msg, username, room, etc
+ */
+function displayMessage(socket = null, data){
+    let { msg } = data;
+    const { user, room, sender } = data;
+    let class_name;
+
+    if (socket.username === user && !sender) {
+      class_name = 'self';
+    } else {
+      class_name = 'others'
+    }
+
+    // Adding Emoji
+    let p;
+    let colon1 = msg.indexOf(":");
+    while (colon1 != -1) {
+      let colon2 = msg.indexOf(":", colon1 + 1);
+      if (colon2 != -1) {
+          emoji_name = msg.slice(colon1 + 1, colon2);
+          position = emojiNames.indexOf(emoji_name)
+          if (position != -1) {
+              msg = msg.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojiCodes[position] + ".png\">" + msg.slice(colon2 + 1);
+          }
+          colon1 = msg.indexOf(":", colon2 + 1);
+      } else {
+          break;
+      }
+    }
+
+    // Format the current timestamp
+    const timestamp = dateFns.format(new Date(), 'H:mm:ss MMM DD');
+
+    // Create msg HTML
+    const msg_template = `<div class="card mb-3 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
+      <div class="card-body">
+        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
+        <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
+        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${timestamp}</small>
+      </div>
+    </div>`;
+
+    let room_id = convertIntoId(room);
+
+    // Append the template into the conversation window
+    $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(msg_template)
+
+    room_id = convertIntoId($(".active").attr("id"));
+    const height = $(`#${room_id}-msg`).children(".chat")[0].scrollHeight;
+    $(`#${room_id}-msg`).children(".chat").scrollTop(height);
+
+    let currRoom = $(".active").attr("id");
+    let isJoined = $(`#${room_id}-msg`).attr("data-joined");
+
+    if (socket.username != user && currRoom != room && isJoined == 1) {
+      notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`, "info");
+    }
+  }
