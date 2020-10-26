@@ -1,3 +1,8 @@
+window.addEventListener('beforeunload', function (e) {
+  e.preventDefault();
+  e.returnValue = 'Are you sure you want to leave? All messages will be deleted once you close this tab';
+});
+
 $(document).ready(function () {
 	$("#userN").on("keypress", (val) => {
 		if (val.which == 13) setUsername();
