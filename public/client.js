@@ -11,7 +11,7 @@ for (var i = 0; i < emojiCodes.length; i++) {
 	emobox.appendChild(listElement);
 }
 const socket = io();
-let username, scrollDiff;
+
 //sets client username
 const setUsername = () => {
 	socket.emit('set username', $('#userN').val());
@@ -106,15 +106,12 @@ socket.on('user exists', (data) => {
 });
 //if server emits user set, display rooms to user
 socket.on('user set', (data) => {
-	username = data.username;
 	$("#user").fadeOut();
 	$("body").css("background-color", "#f8f8f8");
 	$(".wrapper").fadeIn();
-	// $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
 	$(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
 	$(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 	socket.username = data.username;
-	scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
 
 // Notifies users that someone joined baat-cheet
@@ -172,7 +169,7 @@ socket.on('room created self', (data) =>  {
 
 // displays room to the others
 socket.on('room created other', (data) =>{
-    if (username) {
+    if (data.username) {
         const { description, room_name, online, online_users } = data;
         var date = new Date();
         var room_id = convertIntoId(room_name);

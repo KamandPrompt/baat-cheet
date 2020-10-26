@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="keywords" content="Baat-cheet, Kamand Prompt, IIT Mandi, India">
@@ -12,11 +11,22 @@
   <!-- iOS Safari -->
   <meta name="apple-mobile-web-app-status-bar-style" content="rgb(2, 117, 216)">
   <title><%= title %></title>
-  <%- include('head_imports'); %>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/emojify.css">
 </head>
-
 <body>
-  <%- include('user', {title: title}); %>
+  <div id="user" class="text-center align-items-center justify-content-center h-100 w-100 position-fixed text-white">
+    <div class="d-flex">
+      <div class="jumbotron p-auto m-5 border border-primary bg-transparent">
+        <h1 class="position-relative display-1"><%= title %></h1>
+        <input type="text" autocomplete="off" placeholder="What should we call you?" class="position-relative bg-transparent text-white text-center w-100 p-3 border-top-0 border-right-0 border-left-0 border-bottom" autofocus="true" id="userN"
+          name="username">
+        <p id="nicknameError" class="position-relative m-2"></p>
+      </div>
+    </div>
+  </div>
   <div class="wrapper">
     <div class="app-container">
       <div id='toast-wrapper' class="toast-wrapper" aria-live="polite" aria-atomic="true"></div>
@@ -85,10 +95,45 @@
       <div class="error jumbotron text-center"></div>
     </div>
   </div>
-  <%- include('modal'); %>
-</body>
-<footer>
-  <%- include('footer_imports'); %>
-</footer>
+  <div id="room">
+    <div class="modal fade" id="newRoomModal" tabindex="-1" role="dialog" aria-labelledby="newRoomModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add your desired room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form onsubmit="return false;">
+              <div class="form-group">
+                <label for="roomName">Room Name</label>
+                <input type="text" name="roomName" class="form-control" id="roomName" placeholder="Your new room name" />
+              </div>
+              <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea name="description" class="form-control" id="description" rows="3" placeholder="Description of your room"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" onclick="submitRoom()" class="btn btn-primary btn-lg btn-block" id="submit"> Add Room </button>
+            <br>
+          </div>
+          <span id="roomError" class="ml-auto p-2"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.30.1/date_fns.min.js" integrity="sha512-F+u8eWHrfY8Xw9BLzZ8rG/0wIvs0y+JyRJrXjp3VjtFPylAEEGwKbua5Ip/oiVhaTDaDs4eU2Xtsxjs/9ag2bQ==" crossorigin="anonymous"></script>
+  <script src='/utils.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.js"></script>
+  <script type="text/javascript" src="/emoji.json"></script>
+  <script src='/script.js'></script>
+  <script src="/client.js"></script>
+</body>
 </html>
