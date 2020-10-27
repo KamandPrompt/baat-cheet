@@ -210,14 +210,18 @@ function displayMessage(socket = null, data){
 
     // Format the current timestamp
     const current_date = new Date();
-    // Assume new message is sent on today
-    const timestamp = dateFns.format(current_date, 'H:mm:ss');
+    const fulldatetime = dateFns.format(current_date, 'MMM DD H:mm:ss');
+    const timestamp = dateFns.distanceInWords(
+      current_date,
+      current_date,
+      { addSuffix: true }
+    );
 
     // Create msg HTML
     const msg_template = `<div class="card mb-3 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
       <div class="card-body">
         <small class="d-inline-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
-        <small class="d-inline-block mx-2 message-today ${class_name === 'self' ? 'text-secondary' : ''}" data-timestamp="${current_date.getTime()}">${timestamp}</small>
+        <small class="d-inline-block mx-2 message-ts ${class_name === 'self' ? 'text-secondary' : ''}" data-timestamp="${current_date.getTime()}" title="${fulldatetime}">${timestamp}</small>
         <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
       </div>
     </div>`;
@@ -237,8 +241,6 @@ function displayMessage(socket = null, data){
     if (socket.username != user && currRoom != room && isJoined == 1) {
       notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`, "info");
     }
-
-    updateTimestamps(current_date);
   }
 
 /**
@@ -246,18 +248,16 @@ function displayMessage(socket = null, data){
  * @param {object} current_date The current date time when message comes
  */
 function updateTimestamps(current_date) {
-  const ts_el = document.querySelectorAll(".message-today");
-  const current_ymd = dateFns.format(current_date, 'YYYY-MM-DD');
+  const ts_el = document.querySelectorAll(".message-ts");
 
   ts_el.forEach(function (el) {
     const ts = el.getAttribute("data-timestamp");
     const sent_date = new Date(parseInt(ts, 10));
-    const sent_ymd = dateFns.format(sent_date, 'YYYY-MM-DD');
 
-    if (sent_ymd !== current_ymd) {
-      // Sent time is not on today, update innerText to have month and day
-      el.innerText = dateFns.format(sent_date, 'H:mm:ss MMM DD');
-      el.classList.remove('message-today');
-    }
+    el.innerText = dateFns.distanceInWords(
+      sent_date,
+      current_date,
+      { addSuffix: true }
+    );
   });
 }
