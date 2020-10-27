@@ -99,11 +99,20 @@ const appendContentInfo = (room_name, online, data_joined) => {
                         `;
 	$('.app-container').append($contentInfo);
 }
+
+socket.on('user invalid', (data) => {
+    if(data === "This user name is invalid.") {
+        nameError = document.getElementById('nicknameError');
+        nameError.innerHTML = data;
+    }
+})
+
 //if server emits user exists, propmt for changing username
 socket.on('user exists', (data) => {
 	nameError = document.getElementById('nicknameError');
 	nameError.innerHTML = 'There is already one person with this nickname, try another one.';
 });
+
 //if server emits user set, display rooms to user
 socket.on('user set', (data) => {
 	username = data.username;
@@ -116,6 +125,7 @@ socket.on('user set', (data) => {
 	socket.username = data.username;
 	scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
+
 
 // Notifies users that someone joined baat-cheet
 socket.on('user joined', function(data) {

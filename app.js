@@ -29,11 +29,12 @@ const rooms = [{
 io.on('connection', (socket) => {
 	//When client requests for setting username
 	socket.on('set username', (name) => {
-		name = name.trim()
+		name = (name || "").trim()
+
 		//if name is empty(null), do nothing
-		if (name == "" || name == null) {
-			return;
-		}
+		if(!name) return socket.emit('user invalid', `This user name is invalid.`);
+		
+
 		//if username is not taken
 		else if (rooms[0].users.indexOf(name) == -1) {
 
@@ -229,3 +230,5 @@ io.on('connection', (socket) => {
 		io.sockets.emit('update info', rooms);
 	});
 });
+
+module.exports = app;
