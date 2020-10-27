@@ -4,9 +4,7 @@
         "commonjs": true,
         "es2020": true
     },
-    "extends": [
-        "airbnb-base"
-    ],
+    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 11
     },
