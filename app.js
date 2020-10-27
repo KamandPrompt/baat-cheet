@@ -2,6 +2,9 @@
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
+var linkify = require('linkifyjs');
+require('linkifyjs/plugins/hashtag')(linkify); // optional
+var linkifyHtml = require('linkifyjs/html');
 const io = require('socket.io')(http);
 const index = require('./serve/index.js');
 const port = process.env.PORT || 3000;
@@ -30,14 +33,10 @@ io.on('connection', (socket) => {
 	//When client requests for setting username
 	socket.on('set username', (name) => {
 		name = (name || "").trim()
-
 		//if name is empty(null), do nothing
-		if(!name) return socket.emit('user invalid', `This user name is invalid.`);
-
-
+		if (!name) return socket.emit('user invalid', `This user name is invalid.`);
 		//if username is not taken
 		else if (rooms[0].users.indexOf(name) == -1) {
-
 			rooms[0].users.push(name);
 			//username is valid so user is set
 			socket.emit('user set', {
@@ -45,7 +44,6 @@ io.on('connection', (socket) => {
 				online: rooms[0].num_users + 1,
 				online_users: rooms[0].users
 			});
-
 			//by default, user joins lobby
 			socket.join('lobby');
 			rooms[0].num_users++;
@@ -56,9 +54,11 @@ io.on('connection', (socket) => {
 				online_users: rooms[0].users
 			});
 			socket.username = name;
-
-			welcomeUser(socket, {sender: 'Welcome Bot', user: name, room: rooms[0].name});
-
+			welcomeUser(socket, {
+				sender: 'Welcome Bot',
+				user: name,
+				room: rooms[0].name
+			});
 			for (let i = 1; i < rooms.length; i++) {
 				socket.emit('room created other', {
 					room_name: rooms[i].name,
@@ -73,18 +73,17 @@ io.on('connection', (socket) => {
 			socket.emit('user exists', name);
 		}
 	});
-
-
 	// Welcome the user to the app
 	const welcomeUser = (socket, data) => {
 		io.to(socket.id).emit('welcome user', data)
 	}
-
 	//When client sends message
 	socket.on('Message Request', (data) => {
 		//if message is valid
 		if (data.msg) {
-			//display message to all clients in room including sender
+			// Display message to all clients in room including sender
+			// Linkify msg
+			data.msg = linkifyHtml(data.msg);
 			io.sockets["in"](data.room).emit('Display Message', {
 				msg: data.msg,
 				user: socket.username,
@@ -219,5 +218,4 @@ io.on('connection', (socket) => {
 		io.sockets.emit('update info', rooms);
 	});
 });
-
 module.exports = app;
