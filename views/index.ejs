@@ -3,9 +3,14 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Baat Cheet is an anonymous chat app">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Baat-cheet, Kamand Prompt, IIT Mandi, India">
+  <meta name="author" content="Kamand Prompt-IIT Mandi">
+  <meta name="description" content="Baat-Cheet is an anonymous chat application developed by IIT Mandi">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="rgb(2, 117, 216)">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-status-bar-style" content="rgb(2, 117, 216)">
   <title><%= title %></title>
   <%- include('head_imports'); %>
 </head>
@@ -37,7 +42,9 @@
                   <i class="fas fa-plus-circle"></i>
                 </a>
               </p>
-              <p class="card-text text-primary"><small>Click to add new Room</small></p>
+              <p class="card-text text-primary">
+                <small>Click to add new Room</small>
+              </p>
             </div>
           </div>
           <button class="sidebar-btn btn btn-primary btn-group btn-lg" type="button" onclick="SidebarToggle()">
@@ -46,10 +53,14 @@
         </div>
       </div>
       <div class="right active" id="lobby-msg" data-joined="1">
-
         <div class="top" data-chat="person1">
-          <center id="online"><span>Lobby</span></center>
-          <center><button class="btn btn-sm p-0" onclick="collap('lobby')"><span></span></button></center>
+          <center id="online">
+            <span>Lobby</span>
+          </center>
+          <center>
+            <button class="btn btn-sm p-0" onclick="collap('lobby')">
+              <span></span></button>
+          </center>
         </div>
         <div class="Participants">
           <center>
@@ -57,9 +68,7 @@
           </center>
           <span></span>
         </div>
-        <div class="chat" data-chat="person1">
-
-        </div>
+        <div class="chat" data-chat="person1"></div>
         <div class="input-group write">
           <textarea type="text" class="textarea form-control" placeholder="Message to lobby..." data-active="lobby" rows="2"></textarea>
           <div class="input-group-append">
@@ -74,7 +83,6 @@
         </div>
       </div>
       <div class="error jumbotron text-center"></div>
-
     </div>
   </div>
   <%- include('modal'); %>
@@ -82,4 +90,5 @@
 <footer>
   <%- include('footer_imports'); %>
 </footer>
+
 </html>
