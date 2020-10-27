@@ -1,16 +1,19 @@
 $(document).ready(function () {
 	$("#userN").on("keypress", (val) => {
 		if (val.which == 13) setUsername();
-	});
-	// event listener to dynamic element
-	$("body").on("keypress", '.textarea', function (val) {
-		if (val.which == 13 && val.shiftKey) {
-			val.preventDefault();
-			sendMessage($(this).val());
+  });
+
+	// event listener for the main textarea
+	$("textarea").on("keyup",function (event) {
+		if (event.which == 13 && event.shiftKey) {
+			event.preventDefault();
+		} else if (event.which == 13) {
+      event.preventDefault();
+      sendMessage($(this).val());
 			$(this).val("");
-		}
+    }
 	});
-	$("body").on("click", '.send', function () {
+	$(".send").on("click", function () {
 		const input = $(this).parents('.write').find('.textarea');
 		sendMessage(input.val());
 		input.val("");
