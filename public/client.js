@@ -343,4 +343,3 @@ socket.on('room joined', function(data) {
     $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = online + " user(s) online";
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
 });
-
