@@ -16,9 +16,9 @@
     - Unwelcome sexual attention.
     - Advocating for, or encouraging, any of the above behavior.
     - Repeated harassment of others. In general, if someone asks you to stop, then stop.
-  
+
 - How to report unacceptable behavior?
-  If any member of the club violates the above guidelines, please report to any of the club coordinators or core team members. If the report has to be against one of the core team members, please report to the coordinators. 
+  If any member of the club violates the above guidelines, please report to any of the club coordinators or core team members. If the report has to be against one of the core team members, please report to the coordinators.
 
 - What will happen if people break the above guidelines?
   If someone breaks one or more of the above guidelines, there will be penalty based on the intensity of the violation which will be decided by the Club Coordinator and/or the Faculty Advisor. This penalty includes but not limited to suspension from all club activities for some amount of time, suspension from college and/or monetory fines.
