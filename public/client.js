@@ -258,3 +258,22 @@ socket.on('room joined', function(data) {
     $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = online + " user(s) online";
     $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
 });
+
+// Schedule update of timestamps at 12:00am
+function scheduleUpdateTs () {
+  let current_date = new Date();
+  let today_date = new Date(current_date.getFullYear(), current_date.getMonth(), current_date.getDate(), 0, 0, 0);
+  let next_date = dateFns.addDays(today_date, 1);
+  let ts_diff = dateFns.differenceInSeconds(next_date, current_date);
+
+  if (ts_diff > 0) {
+    window.timer = setTimeout(function () {
+      updateTimestamps();
+      clearTimeout(window.timer);
+      scheduleUpdateTs();
+    }, ts_diff * 1000);
+  }
+}
+if (!window.timer) {
+  scheduleUpdateTs();
+}

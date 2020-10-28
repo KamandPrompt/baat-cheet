@@ -220,14 +220,16 @@ function displayMessage(socket = null, data){
     }
 
     // Format the current timestamp
-    const timestamp = dateFns.format(new Date(), 'H:mm:ss MMM DD');
+    const current_date = new Date();
+    const fulldatetime = dateFns.format(current_date, 'MMM DD H:mm:ss');
+    const timestamp = dateFns.format(current_date, 'H:mm');
 
     // Create msg HTML
     const msg_template = `<div class="card mb-3 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
       <div class="card-body">
-        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
+        <small class="d-inline-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
+        <small class="d-inline-block mx-2 message-today ${class_name === 'self' ? 'text-secondary' : ''}" data-timestamp="${current_date.getTime()}" title="${fulldatetime}">${timestamp}</small>
         <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
-        <small class="d-block ${class_name === 'self' ? 'text-secondary' : ''}">${timestamp}</small>
       </div>
     </div>`;
 
@@ -247,3 +249,20 @@ function displayMessage(socket = null, data){
       notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`, "info");
     }
   }
+
+/**
+ * Method called to check and update timestamp without month and date
+ * @param {object} current_date The current date time when message comes
+ */
+function updateTimestamps() {
+  const ts_el = document.querySelectorAll(".message-today");
+
+  ts_el.forEach(function (el) {
+    const ts = el.getAttribute("data-timestamp");
+    const sent_date = new Date(parseInt(ts, 10));
+
+    // Sent time is not on today, update innerText to have month and day
+    el.innerText = dateFns.format(sent_date, 'MMM DD H:mm');
+    el.classList.remove('message-today');
+  });
+}
