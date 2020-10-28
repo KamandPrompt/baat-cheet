@@ -18,7 +18,19 @@ $(document).ready(function() {
     input.val("");
     input.focus();
   });
-
+  
+  // Handle touch gestures on body
+	let touchstartX, touchstartY, touchendX, touchendY;
+	document.body.addEventListener('touchstart', function(event) {
+		touchstartX = event.changedTouches[0].screenX;
+		touchstartY = event.changedTouches[0].screenY;
+	}, false);
+	document.body.addEventListener('touchend', function (event) {
+		touchendX = event.changedTouches[0].screenX;
+		touchendY = event.changedTouches[0].screenY;
+		workOnTouch(Number(touchendY < touchstartY), Number(touchendX > touchstartX), Number(touchendY > touchstartY), Number(touchendX < touchstartX));
+	}, false);
+  
   // Prevent new room modal from closing on Enter key
   $('#roomName').on("keypress", function(e) {
     if(e.which === 13) {
@@ -28,6 +40,17 @@ $(document).ready(function() {
   });
 
 });
+
+// Work on touch
+const workOnTouch = (U, R, D, L) => {
+	let leftbar = document.querySelector('.left');
+	if (L && leftbar.classList.contains('open-menu')) {
+		closeSidebar();
+	}
+	if (R && leftbar.classList.contains('menu-closed')) {
+		openSidebar();
+	}
+}
 
 $(".searchtext").on("keyup", () => search());
 
@@ -178,33 +201,3 @@ function notify(data, type){
     $(`#${notficationID}`).remove();
   });
 }
-// swipeable side bar
-$(".swipe-area").swipe({
-  swipeStatus:function(event, phase, direction, distance, duration, fingers)
-    {
-      if (phase=="move" && direction =="right") {
-         $(".left").addClass("open-menu");
-         openSidebar();
-      }
-      if (phase=="move" && direction =="left") {
-         $(".left").removeClass("open-menu");
-         closeSidebar();
-      }
-    }
-});
- 
-let isClicked = false;
-
-const clickHandler = () => {
-  isClicked = true;
-}
-
-const textarea = $("textarea");
-textarea.on('click',clickHandler);
-
-const isTextareaClicked = () => {
-  if(isClicked === true){
-    $(".app-container").removeClass("swipe-area")
-  }
-};
-setInterval(isTextareaClicked,1000);
