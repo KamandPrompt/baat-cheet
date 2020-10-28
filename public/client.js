@@ -137,7 +137,7 @@ socket.on('user joined', function(data) {
 // Welcomes the user to the app
 socket.on('welcome user', function(data) {
     const { user, room, sender } = data;
-    const welcome_msg = `Welcome, <em>${user}</em>! Enjoy your stay!`
+    const welcome_msg = `Welcome, <em>${user}</em>! Enjoy your stay! <br /> <small style='color: #75ecff!important'>Remember: if you leave this tab or window, all chat history will be lost!</small>`
 
     displayMessage(socket, {user, msg: welcome_msg, room, sender});
 });
