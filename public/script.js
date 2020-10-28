@@ -3,22 +3,16 @@ $(document).ready(function () {
 		if (val.which == 13) setUsername();
   });
 
-	// event listener for the main textarea
-	$("textarea").on("keyup",function (event) {
+  // event listener for all message areas to send message on pressing 'enter' and add a newline on pressing 'shift+enter'
+	$(".app-container").on("keyup", '.message-area', function (event) {
 		if (event.which == 13 && event.shiftKey) {
 			event.preventDefault();
 		} else if (event.which == 13) {
       event.preventDefault();
-      sendMessage($(this).val());
-			$(this).val("");
+      sendMsg();
     }
 	});
-	$(".send").on("click", function () {
-		const input = $(this).parents('.write').find('.textarea');
-		sendMessage(input.val());
-		input.val("");
-		input.focus();
-	});
+
 	// Prevent new room modal from closing on Enter key
 	$('#roomName').on("keypress", function (e) {
 		if (e.which === 13) {
@@ -27,6 +21,20 @@ $(document).ready(function () {
 		}
 	});
 });
+
+// Sends a message to server
+const sendMsg = () =>  {
+  msgArea = document.querySelector('.right.active').querySelector('.message-area');
+  msg = msgArea.value.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim();
+  room_name = $(".active").attr("id");
+  socket.emit('Message Request', {
+      msg: msg,
+      room: room_name
+  });
+  msgArea.value = '';
+  msgArea.focus();
+}
+
 $(".searchtext").on("keyup", () => search());
 $(".search").click(() => search());
 const search = () => {
@@ -91,7 +99,7 @@ $("body").on("click", '.smiley', function () {
 
 function writeEmoji(emoji) {
 	var emojiName = emoji.id;
-	const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".textarea");
+	const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".message-area");
 	textarea.val(textarea.val() + ":" + emojiName + ":");
 	textarea.focus();
 }

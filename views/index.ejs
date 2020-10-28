@@ -70,13 +70,13 @@
         </div>
         <div class="chat" data-chat="person1"></div>
         <div class="input-group write">
-          <textarea type="text" class="textarea form-control" placeholder="Message to lobby..." data-active="lobby" rows="2"></textarea>
+          <textarea type="text" class="message-area form-control" placeholder="Message to lobby..." data-active="lobby" rows="2"></textarea>
           <div class="input-group-append">
             <button class="btn smiley text-primary" type="button">
               <i class="far fa-smile icon"></i>
               <ul id="emobox" class="emobox"></ul>
             </button>
-            <button class="btn send text-primary" type="button">
+            <button class="btn send text-primary" type="button" onclick="sendMsg()">
               <i class="fas fa-paper-plane icon"></i>
             </button>
           </div>

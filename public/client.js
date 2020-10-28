@@ -16,15 +16,6 @@ let username, scrollDiff;
 const setUsername = () => {
 	socket.emit('set username', $('#userN').val());
 };
-//sends a message
-const sendMessage = (msg)=>  {
-    msg = msg.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    room_name = $(".active").attr("id");
-    socket.emit('Message Request', {
-        msg: msg,
-        room: room_name
-    });
-}
 
 // Creates a new room
 const createRoom = () => {
@@ -84,13 +75,13 @@ const appendContentInfo = (room_name, online, data_joined) => {
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
                                 <div class="input-group write">
-                              <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                              <textarea type="text" class="message-area form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
                               <div class="input-group-append">
                                       <button class="btn smiley text-primary" type="button">
                                       <i class="far fa-smile icon"></i>
                                       ${emobox}
                                       </button>
-                                      <button class="btn send text-primary" type="button">
+                                      <button class="btn send text-primary" type="button" onclick="sendMsg()">
                                       <i class="fas fa-paper-plane icon"></i>
                                       </button>
                               </div>
@@ -119,7 +110,7 @@ socket.on('user set', (data) => {
 	$("#user").fadeOut();
 	$("body").css("background-color", "#f8f8f8");
 	$(".wrapper").fadeIn();
-	// $(".top[data-chat='person1']").("<center><span> " + data.online + " user(s) online</span><center>");
+  $('.message-area').focus();
 	$(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
 	$(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
 	socket.username = data.username;
@@ -205,13 +196,13 @@ socket.on('room created other', (data) =>{
                                 </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
                                 <div class="input-group write">
-                                  <textarea type="text" class="textarea form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
+                                  <textarea type="text" class="message-area form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
                                   <div class="input-group-append">
                                   <button class="btn smiley text-primary" type="button">
                                       <i class="far fa-smile icon"></i>
                                       ${emobox}
                                   </button>
-                                  <button class="btn send text-primary" type="button">
+                                  <button class="btn send text-primary" type="button" onclick="sendMsg()">
                                       <i class="fas fa-paper-plane icon"></i>
                                   </button>
                                 </div>
