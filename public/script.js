@@ -12,7 +12,7 @@ $(document).ready(function () {
       sendMsg();
     }
 	});
-  
+
   // Handle touch gestures on body
 	let touchstartX, touchstartY, touchendX, touchendY;
 	document.body.addEventListener('touchstart', function(event) {
@@ -24,7 +24,7 @@ $(document).ready(function () {
 		touchendY = event.changedTouches[0].screenY;
 		workOnTouch(Number(touchendY < touchstartY), Number(touchendX > touchstartX), Number(touchendY > touchstartY), Number(touchendX < touchstartX));
 	}, false);
-  
+
 	// Prevent new room modal from closing on Enter key
 	$('#roomName').on("keypress", function (e) {
 		if (e.which === 13) {
@@ -56,6 +56,9 @@ const workOnTouch = (U, R, D, L) => {
 	if (R && leftbar.classList.contains('menu-closed')) {
 		openSidebar();
 	}
+  if (!U && !R && !D && !L) {
+    closeSidebar();
+  }
 }
 
 $(".searchtext").on("keyup", () => search());
@@ -89,22 +92,10 @@ const showRoom = (name) => {
 $('.chat[data-chat=person1]').addClass('active-chat');
 $('.person[data-chat=person1]').addClass('active');
 
-function collap(room_id) {
+function toggleUsers(room_id) {
 	room_id = convertIntoId(room_id);
-	var height = $(`#${room_id}-msg`).find('.Participants').css('opacity');
-	if (height == '0') {
-		$(`#${room_id}-msg`).find('.Participants').css({
-			"opacity": "1",
-			"z-index": "10"
-		});
-		$(`#${room_id}-msg`).find('.btn').addClass('viewUsers');
-	} else {
-		$(`#${room_id}-msg`).find('.Participants').css({
-			"opacity": "0",
-			"z-index": "-10"
-		});
-		$(`#${room_id}-msg`).find('.btn').removeClass('viewUsers');
-	}
+	var el = $(`#${room_id}-msg .room-info .Participants`)[0];
+  el.classList.toggle('d-none');
 }
 
 function active(el) {

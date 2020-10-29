@@ -88,68 +88,18 @@ body {
   transition: 1s;
 }
 
-.app-container .right .top {
-  width: 100%;
-  height: 47px;
-  padding: 40px 29px;
-  background-color: #eceff1;
-}
-
-.app-container .right .top span {
-  font-size: 15px;
-  color: #999;
-}
-
-.app-container .right .top span .name {
-  color: #1a1a1a;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-weight: 600;
-}
-
-.app-container .right .top .btn {
-  border-radius: 5px;
-  border: none;
-}
-
-.app-container .right .top .btn:hover, .app-container .right .top .btn.viewUsers {
-  background-color: white;
+.room-info {
+  background-color: rgb(233, 236, 239);
 }
 
 .app-container .right .Participants {
-  z-index: -10;
-  overflow: auto;
-  background-color: rgb(236 239 241);
-  position: fixed;
-  top: 80px;
-  height: 60%;
-  width: 30%;
-  opacity: 0;
-  /*For transition animation*/
-  transition: opacity .5s ease-out;
-  display: block;
-  left: 0;
-  right: 0;
+  z-index: 900;
+  width: inherit;
   position: absolute;
-  margin: auto;
+  left: 0;
   border-left: solid 5px rgb(9 121 249);
   border-right: solid 5px rgb(9 121 249);
   border-bottom: solid 1px rgb(9 121 249)
-}
-
-.app-container .right .Participants span ul li {
-  color: #261B1B;
-  width: 100%;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.app-container .right .Participants span ul li:before {
-  content: "\f007";
-  font-family: FontAwesome;
-  display: inline-block;
-  margin-left: -1.3em;
-  width: 1.3em;
-  position: absolute;
 }
 
 .app-container .right .chat {

@@ -30,7 +30,7 @@
           <div class="card-columns m-2" name="people">
             <div class="card active person" data-chat="lobby" id="lobby" onclick="showRoom(this)">
               <div class="card-body">
-                <h5 class="card-title name">Lobby</h5>
+                <h5 class="card-title">Lobby</h5>
                 <p class="card-text preview">Central Lobby</p>
               </div>
             </div>
@@ -53,20 +53,11 @@
         </div>
       </div>
       <div class="right active" id="lobby-msg" data-joined="1">
-        <div class="top" data-chat="person1">
-          <center id="online">
-            <span>Lobby</span>
-          </center>
-          <center>
-            <button class="btn btn-sm p-0" onclick="collap('lobby')">
-              <span></span></button>
-          </center>
-        </div>
-        <div class="Participants">
-          <center>
-            <h2>Participants</h2>
-          </center>
-          <span></span>
+        <div class="room-info container-fluid text-center pt-5" data-chat="person1">
+          <p id="online">Lobby</p>
+          <button class="btn p-0" onclick="toggleUsers('lobby')"></button>
+          <div class="Participants bg-light d-none">
+          </div>
         </div>
         <div class="chat" data-chat="person1"></div>
         <div class="input-group write">

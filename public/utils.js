@@ -10,8 +10,15 @@ const convertIntoId = (name) => name.replace(/[!"#$%&'()*+,.\/:;<=>?@[\\\]^{|}~ 
  * @param {array} arr Array of items
  */
 const convertIntoList = (arr) => {
-  let list = ('<ul>');
-  for(let i=0; i<arr.length; i++)	list = list.concat(`<li>${arr[i]}</li>`);
-  list = list.concat('</ul>');
+  let list = `<ul class='pt-2'>`;
+  for(let i=0; i<arr.length; i++) {
+    name = arr[i];
+    if (name.slice(arr[i].length - 3, arr[i].length) == 'Bot') {
+      list = list.concat(`<li><i class="fas fa-robot"></i> ${name}</li>`);
+    } else {
+      list = list.concat(`<li><i class="fas fa-user-circle"></i> ${name}</li>`);
+    }
+  }
+  list = list += `</ul>`;
   return list;
 }

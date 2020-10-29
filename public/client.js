@@ -66,15 +66,14 @@ const appendContentInfo = (room_name, online, data_joined) => {
 	emobox = document.getElementById(`emobox`).outerHTML;
 	const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
-                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn btn-sm p-0' onclick='collap("${room_name}")'><span>${online} user online</span></button></center>
-                                </div>
-                                <div class='Participants'>
-                                    <center><h2>Participants</h2></center>
-                                    <span></span>
-                                </div>
-                                <div class='chat active-chat' data-chat='person1'></div>
-                                <div class="input-group write">
+                            <div class="room-info container-fluid text-center pt-5" data-chat="person1">
+                              <p id="online">${room_name} Room (<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</p>
+                              <button class="btn p-0" onclick="toggleUsers('${room_name}')">${online} user online</button>
+                              <div class="Participants bg-light d-none">
+                              </div>
+                            </div>
+                            <div class='chat active-chat' data-chat='person1'></div>
+                            <div class="input-group write">
                               <textarea type="text" class="message-area form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
                               <div class="input-group-append">
                                       <button class="btn smiley text-primary" type="button">
@@ -111,8 +110,8 @@ socket.on('user set', (data) => {
 	$("body").css("background-color", "#f8f8f8");
 	$(".wrapper").fadeIn();
   $('.message-area').focus();
-	$(".top[data-chat='person1']").find("span")[1].innerHTML = data.online + " user(s) online</span>";
-	$(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
+	$('.room-info button')[0].innerText = data.online + ' user(s) online';
+	$(".Participants")[0].innerHTML = convertIntoList(data.online_users);
 	socket.username = data.username;
 	scrollDiff = $("#lobby-msg").children(".chat")[0].scrollHeight;
 });
@@ -121,8 +120,8 @@ socket.on('user set', (data) => {
 // Notifies users that someone joined baat-cheet
 socket.on('user joined', function(data) {
     notify(data.username + " just joined", "info");
-    $("#lobby-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-    $(".Participants").find('span')[0].innerHTML = convertIntoList(data.online_users);
+    $("#lobby-msg .room-info button")[0].innerHTML = data.online + " user(s) online";
+    $(".Participants")[0].innerHTML = convertIntoList(data.online_users);
 });
 
 // Welcomes the user to the app
@@ -142,8 +141,8 @@ socket.on('user join', (data) => {
 	const room_id = convertIntoId(data.room);
 	if (data.room != "lobby") {
 		notify(data.username + " just joined " + data.room + " room!", "info");
-		$("#" + room_id + "-msg").find('.top').find('span')[1].innerHTML = data.online + " user(s) online";
-		$("#" + room_id + "-msg").find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+		$(`#${room_id}"-msg .room-info button`)[0].innerHTML = data.online + " user(s) online";
+		$(`#${room_id}"-msg .room-info .Participants`)[0].innerHTML = convertIntoList(data.online_users);
 	}
 });
 
@@ -166,7 +165,7 @@ socket.on('room created self', (data) =>  {
     let room_id = convertIntoId(room_name);
     appendUserInfo(room_name,description);
     appendContentInfo(room_name,online,1);
-    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
+    $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(online_users);
     $('#roomName').val("");
     $('#description').val("");
 });
@@ -187,13 +186,12 @@ socket.on('room created other', (data) =>{
 		emobox = document.getElementById(`emobox`).outerHTML;
 		const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
-                                <div class='top'><center id='online'><span>${room_name} Room</span>&nbsp;(<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</center>
-                                    <center><button class='btn' onclick='collap("${room_name}")'><span>${online} users online</span></button></center>
+                              <div class="room-info container-fluid text-center pt-5" data-chat="person1">
+                                <p id="online">${room_name} Room (<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</p>
+                                <button class="btn p-0" onclick="toggleUsers('${room_name}')">${online} users online</button>
+                                <div class="Participants bg-light d-none">
                                 </div>
-                                <div class='Participants'>
-                                    <center><h2>Participants</h2></center>
-                                    <span></span>
-                                </div>
+                              </div>
                                 <div class='chat active-chat' data-chat='person1'></div>
                                 <div class="input-group write">
                                   <textarea type="text" class="message-area form-control" placeholder="Message to ${room_name}..." data-active="lobby" rows="2"></textarea>
@@ -212,7 +210,7 @@ socket.on('room created other', (data) =>{
 		$('.app-container').append($contentInfo);
 		appendUserInfo(room_name, description);
 		appendContentInfo(room_name, online, 0);
-		$(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
+		$(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(online_users);
 	}
 });
 
@@ -236,8 +234,8 @@ socket.on('destroy room', function(data) {
 socket.on('user left room', (data) =>  {
     let room_id = convertIntoId(data.room);
     notify(`${data.username} just left room  ${data.room}`, "error");
-    $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = data.online + ` user(s) online`;
-    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(data.online_users);
+    $(`#${room_id}-msg .room-info button`)[0].innerHTML = data.online + ` user(s) online`;
+    $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(data.online_users);
 });
 
 // updates info about number of users
@@ -246,8 +244,8 @@ socket.on('update info', (rooms)=> {
     // alert(rooms);
     for (let i = 0; i < rooms.length; i++) {
         room_id = convertIntoId(rooms[i].name);
-        $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = rooms[i].num_users + " user(s) online";
-        $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(rooms[i].users);
+        $(`#${room_id}-msg .room-info button`)[0].innerHTML = rooms[i].num_users + " user(s) online";
+        $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(rooms[i].users);
     }
 });
 
@@ -255,8 +253,8 @@ socket.on('update info', (rooms)=> {
 socket.on('room joined', function(data) {
     const { name, online, online_users } = data;
     var room_id = convertIntoId(name);
-    $(`#${room_id}-msg`).find('.top').find('span')[1].innerHTML = online + " user(s) online";
-    $(`#${room_id}-msg`).find('.Participants').find('span')[0].innerHTML = convertIntoList(online_users);
+    $(`#${room_id}-msg .room-info button`)[0].innerHTML = online + " user(s) online";
+    $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(online_users);
 });
 
 // Schedule update of timestamps at 12:00am
