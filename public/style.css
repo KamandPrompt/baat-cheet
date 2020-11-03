@@ -9,6 +9,10 @@
   font-size: 2rem
 }
 
+a {
+  font-weight: bold;
+}
+
 li {
   list-style: none;
 }
@@ -121,6 +125,10 @@ body {
 
 .app-container .right .card.others {
   float: left;
+}
+
+.app-container .right .card.others a {
+  color: white;
 }
 
 .app-container .right .card.self {
