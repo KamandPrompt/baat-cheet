@@ -66,7 +66,7 @@ const appendContentInfo = (room_name, online, data_joined) => {
 	emobox = document.getElementById(`emobox`).outerHTML;
 	const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='${data_joined}' style='display:none;'>
-                            <div class="room-info container-fluid text-center pt-5" data-chat="person1">
+                            <div class="room-info container-fluid text-center pt-1" data-chat="person1">
                               <p id="online">${room_name} Room (<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</p>
                               <button class="btn p-0" onclick="toggleUsers('${room_name}')">${online} user online</button>
                               <div class="Participants bg-light d-none">
@@ -106,9 +106,9 @@ socket.on('user exists', (data) => {
 //if server emits user set, display rooms to user
 socket.on('user set', (data) => {
 	username = data.username;
-	$("#user").fadeOut();
+	$("#user").toggleClass('d-none');
 	$("body").css("background-color", "#f8f8f8");
-	$(".wrapper").fadeIn();
+	$(".app-container").toggleClass('d-none');
   $('.message-area').focus();
 	$('.room-info button')[0].innerText = data.online + ' user(s) online';
 	$(".Participants")[0].innerHTML = convertIntoList(data.online_users);
@@ -186,7 +186,7 @@ socket.on('room created other', (data) =>{
 		emobox = document.getElementById(`emobox`).outerHTML;
 		const $contentInfo = `
                             <div class='right' id='${room_name}-msg' data-joined='0' style='display:none;'>
-                              <div class="room-info container-fluid text-center pt-5" data-chat="person1">
+                              <div class="room-info container-fluid text-center pt-1" data-chat="person1">
                                 <p id="online">${room_name} Room (<a href='#' onclick='leaveRoom("${room_name}")'>Leave room</a>)</p>
                                 <button class="btn p-0" onclick="toggleUsers('${room_name}')">${online} users online</button>
                                 <div class="Participants bg-light d-none">
