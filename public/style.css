@@ -28,30 +28,11 @@ body {
   background-repeat: none;
 }
 
-.wrapper {
-  display: none;
-  position: absolute;
-  left: 50%;
-  width: 99%;
-  height: 100%;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
-}
-
 /* Main App Container */
 .app-container {
   position: absolute;
-  top: 48%;
-  left: 50%;
   width: 100%;
-  height: 99%;
-  background-color: #fff;
-  -moz-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  height: 100%;
 }
 
 .sidebar-btn {
@@ -88,10 +69,6 @@ body {
   transition: 1s;
 }
 
-.room-info {
-  background-color: rgb(233, 236, 239);
-}
-
 .app-container .right .Participants {
   z-index: 900;
   width: inherit;
@@ -105,24 +82,11 @@ body {
 .app-container .right .chat {
   position: relative;
   display: none;
-  overflow: auto;
-  padding: 0 35px 92px;
-  padding-bottom: 0;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  border-bottom: none;
-  border-color: #e6e6e6;
-  height: -moz-calc(90% - 70px);
-  height: -webkit-calc(90% - 70px);
-  height: -o-calc(90% - 70px);
-  height: calc(90% - 70px);
+  overflow-y: scroll;
   flex-flow: column nowrap;
   -webkit-flex-direction: column;
   flex-direction: column;
-}
-
-.app-container .right .chat> :first-child {
-  margin-top: auto !important;
+  height: 80%;
 }
 
 .app-container .right .chat.active-chat {
@@ -163,35 +127,6 @@ body {
   float: right;
   -webkit-align-self: flex-end;
   align-self: flex-end;
-}
-
-#newRoom {
-  position: relative;
-  display: inline-block;
-  content: '';
-  margin-left: 4.2px;
-  width: 40px;
-  height: 42px;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 40px 42px;
-}
-
-#newRoom:hover, #submit:hover, #cancel:hover {
-  border-color: #0b2d63;
-  color: #0b2d63;
-  cursor: pointer;
-}
-
-#newRoom:active, #submit:active, #cancel:active {
-  border-color: #27496d;
-  color: #27496d;
-}
-
-#online {
-  margin-top: -2%;
-  font-size: 15px;
-  color: #999;
 }
 
 #emobox {
@@ -269,4 +204,9 @@ body {
 
 .toast {
   min-width: 200px;
+}
+
+/* Adding some colors to Bootsrap's colors   */
+.bg-light-dark {
+  background-color: rgb(233, 236, 239)
 }

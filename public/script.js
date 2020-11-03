@@ -56,9 +56,6 @@ const workOnTouch = (U, R, D, L) => {
 	if (R && leftbar.classList.contains('menu-closed')) {
 		openSidebar();
 	}
-  if (!U && !R && !D && !L) {
-    closeSidebar();
-  }
 }
 
 $(".searchtext").on("keyup", () => search());
@@ -239,7 +236,7 @@ function displayMessage(socket = null, data){
     const timestamp = dateFns.format(current_date, 'H:mm');
 
     // Create msg HTML
-    const msg_template = `<div class="card mb-3 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
+    const msg_template = `<div class="card m-1 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
       <div class="card-body">
         <small class="d-inline-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
         <small class="d-inline-block mx-2 message-today ${class_name === 'self' ? 'text-secondary' : ''}" data-timestamp="${current_date.getTime()}" title="${fulldatetime}">${timestamp}</small>
