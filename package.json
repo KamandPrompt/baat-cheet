@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "test:watch": "mocha --watch ./tests/**/*.test.js",
-    "test": "mocha ./tests/**/*.test.js"
+    "test": "mocha ./tests/**/*.test.js",
+    "lint": "eslint ."
   },
   "engines": {
     "npm": "6.14.6",
@@ -29,6 +30,9 @@
   },
   "devDependencies": {
     "chai": "4.2.0",
+    "eslint": "^7.12.1",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
     "mocha": "8.2.0",
     "socket.io-client": "2.3.1"
   }
