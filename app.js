@@ -1,4 +1,5 @@
 //setup basic express server
+/* global process, __dirname */
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
@@ -18,7 +19,7 @@ app.set('view options', {
 });
 //routing
 app.use('/', index);
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
 	console.log(err.stack);
 	res.status(500);
 });
@@ -101,8 +102,7 @@ io.on('connection', (socket) => {
 		//limit length of room name/description
 		const maxRoomNameLength = 20;
 		const maxDescriptionLength = 45;
-
-		if(data.room_name.length > maxRoomNameLength) {
+		if (data.room_name.length > maxRoomNameLength) {
 			data.room_name = data.room_name.substring(0, maxRoomNameLength - 1).concat("...");
 		}
 		if (data.description.length > maxDescriptionLength) {
@@ -134,24 +134,20 @@ io.on('connection', (socket) => {
 			online_users: [socket.username]
 		});
 	});
-
 	//When user requests to join the room
 	socket.on('join room', (room) => {
 		socket.join(room.name);
-
 		//update number of users in room
 		const fetchedRoom = rooms.find(each => each.name === room.name);
 		if (fetchedRoom !== undefined) {
 			fetchedRoom.num_users++;
 			fetchedRoom.users.push(socket.username);
-
 			//update the user's info
 			socket.emit('room joined', {
 				name: room.name,
 				online: fetchedRoom.num_users,
 				online_users: fetchedRoom.users
 			});
-
 			//notify other users in room that someone joined
 			socket["to"](room.name).broadcast.emit('user join', {
 				username: socket.username,
@@ -164,7 +160,6 @@ io.on('connection', (socket) => {
 	//When user requests to leave the room
 	socket.on('leave room', (room) => {
 		socket.leave(room.name);
-
 		//update number of users in room
 		const fetchedRoom = rooms.find(each => each.name === room.name);
 		if (fetchedRoom !== undefined) {
@@ -174,14 +169,12 @@ io.on('connection', (socket) => {
 				fetchedRoom.users.splice(userIndexInRoom, 1);
 			}
 		}
-
 		//if users become 0, destroy/delete the room
 		if (fetchedRoom !== undefined && fetchedRoom.num_users === 0) {
 			io.sockets.emit('destroy room', room.name);
 			rooms.splice(rooms.findIndex(eachRoom => eachRoom.name === room.name), 1);
 			return;
 		}
-
 		//notify other users in room that someone left
 		socket["to"](room.name).broadcast.emit('user left room', {
 			username: socket.username,
