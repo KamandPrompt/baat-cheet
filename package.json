@@ -1,6 +1,6 @@
 {
-  "name": "baat-cheet",
-  "version": "0.0.0",
+  "name": "Baat-Cheet",
+  "version": "0.0.128",
   "description": "An anonymous chat site",
   "main": "index.js",
   "scripts": {
@@ -9,31 +9,70 @@
     "test": "mocha ./tests/**/*.test.js",
     "lint": "eslint ."
   },
-  "engines": {
-    "npm": "6.14.6",
-    "node": "12.19.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ssh-iitmandi/baat-cheet.git"
-  },
-  "author": "SSH-IITMandi",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ssh-iitmandi/baat-cheet/issues"
-  },
   "dependencies": {
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "linkifyjs": "^2.1.9",
     "socket.io": "^1.7.2"
   },
+  "engines": {
+    "npm": "^6.14.6",
+    "node": "^12.19.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KamandPrompt/baat-cheet/"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "KamandPrompt",
+    "IITMandi"
+  ],
+  "author": "KamandPrompt <https://github.com/KamandPrompt/>",
+  "contributors": [
+    "abhigyank <https://github.com/abhigyank>",
+    "LalitNM <https://github.com/LalitNM>",
+    "HitRam <https://github.com/HitRam>",
+    "sesamechicken <https://github.com/sesamechicken>",
+    "aroralakshya <https://github.com/aroralakshya>",
+    "guptabhaskar <https://github.com/guptabhaskar>",
+    "Solai-Adithya <https://github.com/Solai-Adithya>",
+    "MonarthS <https://github.com/MonarthS>",
+    "Deepshikha99 <https://github.com/Deepshikha99>",
+    "yatharthMogra <https://github.com/yatharthMogra>",
+    "rs4231199 <https://github.com/rs4231199>",
+    "gitter-badger <https://github.com/gitter-badger>",
+    "Jeconias <https://github.com/Jeconias>",
+    "Ezio-Sarthak <https://github.com/Ezio-Sarthak>",
+    "99neerajsharma <https://github.com/99neerajsharma>",
+    "rohitgeddam <https://github.com/rohitgeddam>",
+    "pancreaflame <https://github.com/pancreaflame>",
+    "namrataaaa <https://github.com/namrataaaa>",
+    "laisfrigerio <https://github.com/laisfrigerio>",
+    "kots14 <https://github.com/kots14>",
+    "jketterer <https://github.com/jketterer>",
+    "divyashk <https://github.com/divyashk>",
+    "bineetNaidu <https://github.com/bineetNaidu>",
+    "ayush015 <https://github.com/ayush015>",
+    "TanmayBhosale <https://github.com/TanmayBhosale>",
+    "Sarthakj0805 <https://github.com/Sarthakj0805>",
+    "Everkers <https://github.com/Everkers>",
+    "DEEPA-CHERI <https://github.com/DEEPA-CHERI>",
+    "ChristineJ82 <https://github.com/ChristineJ82>",
+    "Bisane132 <https://github.com/Bisane132>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KamandPrompt/baat-cheet/issues"
+  },
   "devDependencies": {
-    "chai": "4.2.0",
+    "chai": "^4.2.0",
     "eslint": "^7.12.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1",
-    "mocha": "8.2.0",
-    "socket.io-client": "2.3.1"
+    "mocha": "^8.2.0",
+    "socket.io-client": "^2.3.1"
   }
 }
