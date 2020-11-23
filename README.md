@@ -10,6 +10,10 @@ Just head over to [Baat-cheet](http://baat-cheet-iit.herokuapp.com/) where you c
 
 ## Want to help?
 
-Want to file a bug, request a feature, contribute some code, or improve documentation? Excellent! Read up on our guidelines for [contributing](CONTRIBUTING.md) and then check out one of our [issues](https://github.com/KamandPrompt/baat-cheet/issues). Make sure you follow the guidelines before sending a contribution!
+Want to file a bug, request a feature, contribute some code? Excellent! Read our [contributing guidelines](CONTRIBUTING.md) and then check out one of our [issues](https://github.com/KamandPrompt/baat-cheet/issues). Make sure you follow the guidelines before sending a contribution!
+
+## About the branches
+
+There are two branches, one is `master` and the other is `release`. The `master` branch is main development branch and the `release` branch is for final releases of project, this branch has mostly finished code with minimum bugs.
 
 ### Thanks to [Twemoji](https://twemoji.twitter.com/) project without which we could not add emoji feature here.
