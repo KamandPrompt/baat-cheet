@@ -214,6 +214,21 @@ body {
   min-width: 200px;
 }
 
+/* Emoji */
+.emoji {
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  margin-bottom: -0.25em;
+  background-size: contain;
+}
+
+#emobox {
+  height: 300px;
+  width: 300px;
+  overflow-y: scroll;
+}
+
 /* Adding some colors to Bootsrap's colors   */
 .bg-light-dark {
   background-color: rgb(233, 236, 239)
