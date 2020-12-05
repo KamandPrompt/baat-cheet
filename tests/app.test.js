@@ -1,3 +1,4 @@
+"use strict";
 const {
   assert
 } = require("chai");
@@ -29,7 +30,7 @@ describe("App.js", () => {
       assert.isTrue(client.connected);
       client.on("user invalid", (data) => {
         assert.isString(data);
-        assert.strictEqual(data, "This user name is invalid.");
+        assert.equal(data, "This user name is invalid.");
         done();
       });
       client.emit("set username", undefined);
@@ -49,7 +50,7 @@ describe("App.js", () => {
       localClient.on("user joined", (data) => {
         assert.isObject(data);
         assert.hasAnyKeys(data, "username");
-        assert.strictEqual(data.username, "baatCheet");
+        assert.equal(data.username, "baatCheet");
         localClient.disconnect();
         localSocket.close();
         done();
@@ -66,14 +67,14 @@ describe("App.js", () => {
       client.on("user set", (data) => {
         assert.isObject(data);
         assert.hasAnyKeys(data, "username");
-        assert.strictEqual(data.username, "uniqueName");
+        assert.equal(data.username, "uniqueName");
       });
       client.emit("set username", "uniqueName");
     });
     clienTwo.on("connect", () => {
       assert.isTrue(clienTwo.connected);
       clienTwo.on("user exists", (data) => {
-        assert.strictEqual(data, "uniqueName");
+        assert.equal(data, "uniqueName");
         client.disconnect();
         clienTwo.disconnect();
         socket.close();
