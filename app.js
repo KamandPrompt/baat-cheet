@@ -54,7 +54,7 @@ io.on('connection', (socket) => {
         online_users: rooms[0].users
       });
       socket.username = name;
-      welcomeUser(socket, {
+      welcomeUser({
         sender: 'Welcome Bot',
         user: name,
         room: rooms[0].name
@@ -74,7 +74,7 @@ io.on('connection', (socket) => {
     }
   });
   // Welcome the user to the app
-  const welcomeUser = (socket, data) => {
+  const welcomeUser = (data) => {
     io.to(socket.id).emit('welcome user', data)
   }
   //When client sends message
@@ -186,12 +186,12 @@ io.on('connection', (socket) => {
   socket.on('disconnecting', () => {
     let num_rooms = rooms.length;
     //update number of users in rooms
-    for (let i = 0; i < num_rooms; i++) {
+    for (let i of rooms) {
       if (socket.rooms[rooms[i].name]) {
         rooms[i].num_users--;
-        const index = rooms[i].users.indexOf(socket.username);
-        if (index != -1) {
-          rooms[i].users.splice(index, 1);
+        const roomIndex = rooms[i].users.roomIndexOf(socket.username);
+        if (roomIndex != -1) {
+          rooms[i].users.splice(roomIndex, 1);
         }
         //notify other users in room that user left
         //socket["to"](rooms[i].name).broadcast.emit('user left room', {username: socket.username, room: rooms[i].name});
@@ -199,7 +199,6 @@ io.on('connection', (socket) => {
         if (rooms[i].num_users == 0 && rooms[i].name != 'lobby') {
           io.sockets.emit('destroy room', rooms[i].name);
           rooms.splice(i, 1);
-          i--;
           num_rooms--;
         }
       }

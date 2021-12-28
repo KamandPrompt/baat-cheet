@@ -32,9 +32,9 @@ $(document).ready(function () {
 });
 // Sends a message to server
 const sendMsg = () => {
-  msgArea = document.querySelector('.right.active').querySelector('.message-area');
-  msg = msgArea.value.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim();
-  room_name = $(".active").attr("id");
+  const msgArea = document.querySelector('.right.active').querySelector('.message-area');
+  const msg = msgArea.value.replace(/</g, "&lt;").replace(/>/g, "&gt;").trim();
+  const room_name = $(".active").attr("id");
   socket.emit('Message Request', {
     msg: msg,
     room: room_name
@@ -134,10 +134,10 @@ function SidebarToggle() {
     openSidebar();
     document.body.addEventListener('click', function (event) {
       const sidebar = document.getElementsByClassName('left')[0]; //Ensuring that clicks inside the sidebar(outside lobbies) don't make the sidebar collapse
-      const lobbyName = document.getElementsByClassName('person'); //In case user clicks a lobby from the sidebar, the sidebar collapse. This is a list of classes
+      const lobbyNames = document.getElementsByClassName('person'); //In case user clicks a lobby from the sidebar, the sidebar collapse. This is a list of classes
       const addLobbyPage = document.getElementById('room'); //Ensuring that clicks on page to add lobby names doesn't make the sidebar collapse
-      for (let i = 0; i < lobbyName.length; i++) {
-        if (lobbyName[i].contains(event.target)) {
+      for (let name of lobbyName) {
+        if (lobbyNames[name].contains(event.target)) {
           closeSidebar();
           return;
         }
@@ -188,7 +188,7 @@ function notify(data) {
  * @param {object} socket The socket instance
  * @param {object} data The data object with msg, username, room, etc
  */
-function displayMessage(socket = null, data) {
+function displayMessage(data, socket = null) {
   let {
     msg
   } = data;
@@ -197,20 +197,14 @@ function displayMessage(socket = null, data) {
     room,
     sender
   } = data;
-  let class_name;
-  if (socket.username === user && !sender) {
-    class_name = 'self';
-  } else {
-    class_name = 'others'
-  }
+  const class_name = identifySender(socket.username, user, sender);
   // Adding Emoji
-  let p;
   let colon1 = msg.indexOf(":");
   while (colon1 != -1) {
     let colon2 = msg.indexOf(":", colon1 + 1);
     if (colon2 != -1) {
-      emoji_name = msg.slice(colon1 + 1, colon2);
-      position = emojiNames.indexOf(emoji_name)
+      const emoji_name = msg.slice(colon1 + 1, colon2);
+      const position = emojiNames.indexOf(emoji_name)
       if (position != -1) {
         msg = msg.slice(0, colon1) + "<img class=\"emoji\" src=\"images/emoji/" + emojiCodes[position] + ".png\">" + msg.slice(colon2 + 1);
       }
@@ -219,18 +213,7 @@ function displayMessage(socket = null, data) {
       break;
     }
   }
-  // Format the current timestamp
-  const current_date = new Date();
-  const fulldatetime = dateFns.format(current_date, 'MMM DD H:mm:ss');
-  const timestamp = dateFns.format(current_date, 'H:mm');
-  // Create msg HTML
-  const msg_template = `<div class="card m-1 w-75 ${sender === 'Welcome Bot' ? 'bg-info' : ''} ${class_name === 'self' ? '' : 'bg-primary'} ${class_name}" data-chat="person1">
-      <div class="card-body">
-        <small class="d-inline-block ${class_name === 'self' ? 'text-secondary' : ''}">${sender ? `🤖 ${sender}` : user}</small>
-        <small class="d-inline-block mx-2 message-today ${class_name === 'self' ? 'text-secondary' : ''}" data-timestamp="${current_date.getTime()}" title="${fulldatetime}">${timestamp}</small>
-        <p class="card-text mb-0 ${class_name === 'self' ? 'text-primary' : 'text-white'}">${msg.replace(/\n/g, '<br>')}</p>
-      </div>
-    </div>`;
+  const msg_template = getMessageTemplate(sender, class_name, msg);
   let room_id = convertIntoId(room);
   // Append the template into the conversation window
   $(`#${room_id}-msg`).children(".chat[data-chat='person1']").append(msg_template)
@@ -240,9 +223,68 @@ function displayMessage(socket = null, data) {
   let currRoom = $(".active").attr("id");
   let isJoined = $(`#${room_id}-msg`).attr("data-joined");
   if (socket.username != user && currRoom != room && isJoined == 1) {
-    notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`, "info");
+    notify(`Room ${room} | ${user}: ${(msg.length >= 20) ? msg.substr(0, 20) + '...' : msg}`);
   }
 }
+
+function identifySender(username, user, sender) {
+  if (username === user && !sender) {
+    return 'self';
+  } else {
+    return 'others'
+  }
+}
+
+
+function getMessageTemplate(sender, class_name, msg) {
+  const fulldatetime = getFullDateTime();
+  const formatted_timestamp = getFormattedTimestamp();
+  const data_timestamp = new Date().getTime();
+
+  const sender_class_name = checkIfBot(sender);
+  const blank_or_bg_primary = blankOrBgPrimary(class_name);
+  const secondary_text_or_blank = secondaryTextOrBlank(class_name);
+  const sender_emoji = emojiOrUser(sender);
+  const primary_or_white = primaryOrWhite(class_name);
+  const formatted_message = msg.replace(/\n/g, '<br>');
+
+  return `<div class="card m-1 w-75 ${sender_class_name} ${blank_or_bg_primary} ${class_name}" data-chat="person1">
+      <div class="card-body">
+        <small class="d-inline-block ${secondary_text_or_blank}">${sender_emoji}</small>
+        <small class="d-inline-block mx-2 message-today ${secondary_text_or_blank}" data-timestamp="${data_timestamp}" title="${fulldatetime}">${formatted_timestamp}</small>
+        <p class="card-text mb-0 ${primary_or_white}">${formatted_message}</p>
+      </div>
+    </div>`;
+}
+
+function getFullDateTime() {
+  return dateFns.format(new Date(), 'MMM DD H:mm:ss');
+}
+
+function getFormattedTimestamp() {
+  return dateFns.format(new Date(), 'H:mm');
+}
+
+function checkIfBot(sender) {
+  return (sender === 'Welcome Bot' ? 'bg-info' : '');
+}
+
+function blankOrBgPrimary(class_name) {
+  return (class_name === 'self' ? '' : 'bg-primary');
+}
+
+function secondaryTextOrBlank(class_name) {
+  return (class_name === 'self' ? 'text-secondary' : '');
+}
+
+function emojiOrUser(sender) {
+  return (sender ? `🤖 ${sender}` : user);
+}
+
+function primaryOrWhite(class_name) {
+  return (class_name === 'self' ? 'text-primary' : 'text-white');
+}
+
 /**
  * Method called to check and update timestamp without month and date
  * @param {object} current_date The current date time when message comes

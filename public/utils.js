@@ -9,7 +9,7 @@ const convertIntoId = (name) => name.replace(/[!"#$%&'()*+,./:;<=>?@[\\\]^{|}~ ]
  */
 const convertIntoList = (arr) => {
   let list = `<ul class='pt-2'>`;
-  for (let i = 0; i < arr.length; i++) {
+  for (let i of arr) {
     let name = arr[i];
     if (name.slice(arr[i].length - 3, arr[i].length) == 'Bot') {
       list = list.concat(`<li><i class="fas fa-robot"></i> ${name}</li>`);
@@ -17,8 +17,7 @@ const convertIntoList = (arr) => {
       list = list.concat(`<li><i class="fas fa-user-circle"></i> ${name}</li>`);
     }
   }
-  list = list += `</ul>`;
-  return list;
+  return list + `</ul>`;
 }
 //sets client username
 const setUsername = () => {

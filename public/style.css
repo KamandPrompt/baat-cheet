@@ -143,11 +143,13 @@ body {
   right: 0;
   background: #fff;
   display: none;
-  width: 140px;
+  width: 300px;
+  height: 300px;
   margin-left: -50%;
   padding: 2px;
   border-color: #000;
   border: solid 1px #000;
+  overflow-y: scroll;
 }
 
 #emobox li img {
@@ -221,12 +223,6 @@ body {
   display: inline-block;
   margin-bottom: -0.25em;
   background-size: contain;
-}
-
-#emobox {
-  height: 300px;
-  width: 300px;
-  overflow-y: scroll;
 }
 
 /* Adding some colors to Bootsrap's colors   */

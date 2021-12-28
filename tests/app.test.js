@@ -58,9 +58,7 @@ describe("App.js", () => {
     });
   });
   it("should test if user exist", (done) => {
-    const socket = io(SERVER);
     const socketTwo = io(SERVER);
-    const client = socket.connect();
     const clienTwo = socketTwo.connect();
     client.on("connect", () => {
       assert.isTrue(client.connected);

@@ -54,13 +54,13 @@ const appendContentInfo = (room_name, online, data_joined) => {
 }
 socket.on('user invalid', (data) => {
   if (data === "This user name is invalid.") {
-    nameError = document.getElementById('nicknameError');
+    const nameError = document.getElementById('nicknameError');
     nameError.innerHTML = data;
   }
 })
 //if server emits user exists, propmt for changing username
 socket.on('user exists', (data) => {
-  nameError = document.getElementById('nicknameError');
+  const nameError = document.getElementById('nicknameError');
   nameError.innerHTML = 'There is already one person with this nickname, try another one.';
 });
 //if server emits user set, display rooms to user
@@ -81,7 +81,7 @@ socket.on('user joined', function (data) {
   $("#lobby-msg .room-info button")[0].innerHTML = data.online + " user(s) online";
   $(".Participants")[0].innerHTML = convertIntoList(data.online_users);
 });
-// Welcomes the user to the app
+// welcomes the user to the app
 socket.on('welcome user', function (data) {
   const {
     user,
@@ -111,7 +111,7 @@ socket.on('user join', (data) => {
 });
 // displays message to users
 socket.on('Display Message', (data) => {
-  displayMessage(socket, data);
+  displayMessage(data, socket);
 });
 // if room exists, then prompt for another room name
 socket.on('room exists', function (data) {
@@ -144,7 +144,6 @@ socket.on('room created other', (data) => {
       online,
       online_users
     } = data;
-    var date = new Date();
     var room_id = convertIntoId(room_name);
     const $userInfo = `
                             <li class='person' data-chat='person1' id='${room_name}' onclick='showRoom(this)'>
@@ -205,11 +204,11 @@ socket.on('user left room', (data) => {
 // updates info about number of users
 socket.on('update info', (rooms) => {
   let room_id;
-  // alert(rooms);
-  for (let i = 0; i < rooms.length; i++) {
-    room_id = convertIntoId(rooms[i].name);
-    $(`#${room_id}-msg .room-info button`)[0].innerHTML = rooms[i].num_users + " user(s) online";
-    $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(rooms[i].users);
+  for (let room of rooms) {
+    const current_room = rooms[room];
+    room_id = convertIntoId(current_room.name);
+    $(`#${room_id}-msg .room-info button`)[0].innerHTML = current_room.num_users + " user(s) online";
+    $(`#${room_id}-msg`).find('.Participants')[0].innerHTML = convertIntoList(current_room.users);
   }
 });
 // updates info about number of users

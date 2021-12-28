@@ -120,3 +120,6 @@ dist
 
 # Adding package-lock.json as this is not expected to be published
 package-lock.json
+
+# Directory with SonarQube files
+.scannerwork/
