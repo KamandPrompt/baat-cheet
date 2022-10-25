@@ -46,7 +46,7 @@ These are some succint steps to set up a development environment:
 4. [Clone your fork](https://help.github.com/articles/cloning-a-repository).
 9. Create a new branch.
 10. Make changes (follow [format rules](#format-rules)).
-11. Run tests usinf `npm run test`, and fix if you see any warning or error.
+11. Run tests using `npm run test`, and fix if you see any warning or error.
 12. Commit your changes.
 13. [Push to your fork](https://help.github.com/articles/pushing-to-a-remote).
 14. [Open a pull request](https://help.github.com/articles/creating-a-pull-request)
