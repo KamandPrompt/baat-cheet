@@ -72,7 +72,7 @@ Further paragraphs come after blank lines.
 
  - Bullet points are okay, too
 
- - Typically a hyphen or asterisk is used for the bullet, preceded
+ - Typically a hyphen or an asterisk is used for the bullet, preceded
    by a single space, with blank lines in between, but conventions
    vary here
 
