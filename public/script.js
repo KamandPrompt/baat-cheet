@@ -1,9 +1,9 @@
-$(document).ready(function () {
+$(document).ready(function() {
   $("#userN").on("keypress", (val) => {
     if (val.which == 13) setUsername();
   });
   // event listener for all message areas to send message on pressing 'enter' and add a newline on pressing 'shift+enter'
-  $(".app-container").on("keyup", '.message-area', function (event) {
+  $(".app-container").on("keyup", '.message-area', function(event) {
     if (event.which == 13 && event.shiftKey) {
       event.preventDefault();
     } else if (event.which == 13) {
@@ -13,17 +13,17 @@ $(document).ready(function () {
   });
   // Handle touch gestures on body
   let touchstartX, touchstartY, touchendX, touchendY;
-  document.body.addEventListener('touchstart', function (event) {
+  document.body.addEventListener('touchstart', function(event) {
     touchstartX = event.changedTouches[0].screenX;
     touchstartY = event.changedTouches[0].screenY;
   }, false);
-  document.body.addEventListener('touchend', function (event) {
+  document.body.addEventListener('touchend', function(event) {
     touchendX = event.changedTouches[0].screenX;
     touchendY = event.changedTouches[0].screenY;
     workOnTouch(Number(touchendY < touchstartY), Number(touchendX > touchstartX), Number(touchendY > touchstartY), Number(touchendX < touchstartX));
   }, false);
   // Prevent new room modal from closing on Enter key
-  $('#roomName').on("keypress", function (e) {
+  $('#roomName').on("keypress", function(e) {
     if (e.which === 13) {
       e.preventDefault();
       submitRoom();
@@ -56,7 +56,7 @@ $(".searchtext").on("keyup", () => search());
 $(".search").click(() => search());
 const search = () => {
   const searchtext = $(".searchtext").val().toLowerCase();
-  $(".card-columns[name='people'] .card").each(function () {
+  $(".card-columns[name='people'] .card").each(function() {
     var st = $(this).find(".card-body > .name").text().toLowerCase();
     var $pt = $.trim(st);
     if ($pt.includes(searchtext)) $(this).show();
@@ -98,13 +98,13 @@ function active(el) {
     el.find('.emobox').css("display", "block");
   }
 }
-$("body").on("click", '.smiley', function () {
+$("body").on("click", '.smiley', function() {
   active($(this));
 });
 
 function writeEmoji(emoji) {
   const textarea = $(`.right.active #${emoji.id}`).parents(".right.active").find(".message-area");
-  textarea.val(textarea.val() + ":" + emoji.id + ":");
+  textarea.val(textarea.val() + ":" + emoji.id + ": ");
   textarea.focus();
 }
 // For sidebar to work on small screens
@@ -132,7 +132,7 @@ function SidebarToggle() {
     closeSidebar();
   } else {
     openSidebar();
-    document.body.addEventListener('click', function (event) {
+    document.body.addEventListener('click', function(event) {
       const sidebar = document.getElementsByClassName('left')[0]; //Ensuring that clicks inside the sidebar(outside lobbies) don't make the sidebar collapse
       const lobbyName = document.getElementsByClassName('person'); //In case user clicks a lobby from the sidebar, the sidebar collapse. This is a list of classes
       const addLobbyPage = document.getElementById('room'); //Ensuring that clicks on page to add lobby names doesn't make the sidebar collapse
@@ -179,7 +179,7 @@ function notify(data) {
     delay: 3000
   });
   $(`#${notficationID}`).toast('show');
-  $(`#${notficationID}`).on('hidden.bs.toast', function () {
+  $(`#${notficationID}`).on('hidden.bs.toast', function() {
     $(`#${notficationID}`).remove();
   });
 }
@@ -249,7 +249,7 @@ function displayMessage(socket = null, data) {
  */
 function updateTimestamps() {
   const ts_el = document.querySelectorAll(".message-today");
-  ts_el.forEach(function (el) {
+  ts_el.forEach(function(el) {
     const ts = el.getAttribute("data-timestamp");
     const sent_date = new Date(parseInt(ts, 10));
     // Sent time is not on today, update innerText to have month and day
